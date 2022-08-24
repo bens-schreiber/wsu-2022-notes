@@ -1,11 +1,12 @@
 # Sentences and Propositions
 - A basic unit of logic is a sentence
 - An expression is a string of symbols
+- A sentence **in logic** is an expression that expresses a proposition.
+- A proposition is a statement that is true or false, although we don't have to know what.
+  
+EX:
+> The earth is 1,000 years old. 
 
-A sentence **in logic** is an expression that expresses a proposition.
-
-A proposition is a statement that is true or false, although we don't have to know what.
-> The earth is 1,000 years old.
 > 2+5=9
 
 # Truth
