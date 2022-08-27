@@ -1,3 +1,44 @@
+Ben Schreiber  
+Fall 2022 Philosophy 201   
+Problem Set 1
+# Contents
+- [Contents](#contents)
+- [Part 1](#part-1)
+    - [1.)](#1)
+    - [2.)](#2)
+    - [3.)](#3)
+    - [4.)](#4)
+    - [5.)](#5)
+    - [6.)](#6)
+    - [7.)](#7)
+    - [8.)](#8)
+    - [9.)](#9)
+    - [10.)](#10)
+- [Part 2](#part-2)
+    - [Argument 1.)](#argument-1)
+    - [Argument 2.)](#argument-2)
+    - [Argument 3.)](#argument-3)
+    - [Argument 4.)](#argument-4)
+    - [Argument 5.)](#argument-5)
+- [Part 3](#part-3)
+    - [1.)](#1-1)
+    - [2.)](#2-1)
+    - [3.)](#3-1)
+    - [4.)](#4-1)
+    - [5.)](#5-1)
+- [Part 4](#part-4)
+    - [1.)](#1-2)
+    - [2.)](#2-2)
+    - [3.)](#3-2)
+    - [4.)](#4-2)
+    - [5.)](#5-2)
+    - [6.)](#6-1)
+    - [7.)](#7-1)
+    - [8.)](#8-1)
+    - [9.)](#9-1)
+    - [10.)](#10-1)
+---
+
 # Part 1
 
 ### 1.)
@@ -142,42 +183,42 @@ OR
 
 # Part 4
 
-#### 1.)
+### 1.)
 
 > All arguments must have a set of premises, but the set can be empty.
 
 False
 
-#### 2.) 
+### 2.) 
 
 > All invalid arguments have false conclusions
 
 False
 
-#### 3.)
+### 3.)
 > All sound arguments are valid
 
 True
 
-#### 4.)
+### 4.)
 
 > A valid argument can have a false conclusion
 
 True
 
-#### 5.)
+### 5.)
 
 > The premises of an argument entail their conclusion
 
 True
 
-#### 6.)
+### 6.)
 
 > A valid argument can have false premises
 
 True
 
-#### 7.)
+### 7.)
 
 > A sound argument can have false premises.
 
