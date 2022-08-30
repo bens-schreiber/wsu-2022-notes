@@ -31,5 +31,3 @@ If X and Y are WFF, then X <-> Y is a WFF
 
 # Rule 6.
 Nothing else is a WFF.
-
-# Main Connectives
