@@ -7,23 +7,20 @@
 */
  
 #define _CRT_SECURE_NO_WARNINGS // necessary to ignore scanf_s () warnings
- 
+#define pi 3.14159 
+
 #include <stdio.h>
 #include <math.h>
 
+void setValue(char valueName, float *value) {
+    printf("Enter the value for %c \n", valueName);
+    scanf("%f", value);
+}
+
 int main(int argc, char const *argv[])
 {
-    int v;
-    int r;
-
-    printf("Enter the voltage (V) \n");
-    scanf("%d", &v);
-
-    printf("Enter the Resistance (R) \n");
-    scanf("%d", &r);
-
-    // can use bit shift; also can use math library
-    printf("%d", (v << 2) / r);
-
+    float radius;
+    setValue('r', &radius);
+    printf("%f", 2 * pi * radius);
     return 0;
 }
