@@ -32,9 +32,17 @@ int main(int argc, char const *argv[])
 
     printf(
         "%f",
-        pow(3 * a, 3) 
-        + pow((0.25)*b, 2) 
+
+        // 3ax^3
+        pow(3 * a, 3)
+
+        // 1/4 * bx^2 
+        + pow((0.25)*b, 2)
+
+        // 10 * cx 
         + (10 * c * x)
+
+        // -5d
         + ((-5) * d)
     );
 
