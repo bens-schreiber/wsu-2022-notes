@@ -18,5 +18,6 @@ void startProblem(const char* problem) {
     printf("\nPress ENTER for the next problem");
     scanf("%c%*c", &a);
     system("clear");
+
     printf("%s\n", problem);
 }
