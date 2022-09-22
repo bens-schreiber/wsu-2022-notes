@@ -48,8 +48,8 @@ double calculate_standard_deviation(double variance)
 double find_max(double number1, double number2, double number3, double number4, double number5)
 {
     double nums[5] = {number1, number2, number3, number4, number5};
-    double max;
-    for(int i = 0; i < 5; i++)
+    double max = number1;
+    for(int i = 1; i < 5; i++)
     {
         max = nums[i] > max ? nums[i] : max;
     }

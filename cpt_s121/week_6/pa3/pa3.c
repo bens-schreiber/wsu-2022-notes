@@ -1,8 +1,8 @@
 #include "defs/defs.h"
-#define EMPTY         \
-    {                 \
-        0, 0, 0, 0, 0 \
-    }
+
+// I would argue that the amount of entries should be put in main
+// instead of in the def header, since defs acts more like a library
+// of functions to read write to a specific kind of file.
 #define AMOUNT_OF_ENTRIES 5
 
 int main(int argc, char const *argv[])
@@ -10,14 +10,17 @@ int main(int argc, char const *argv[])
 
     FILE *input = fopen("in/input.dat", "r"), *output = fopen("out/output.dat", "w");
 
-    double gpas[AMOUNT_OF_ENTRIES] = EMPTY;
-    int standings[AMOUNT_OF_ENTRIES] = EMPTY;
-    double ages[AMOUNT_OF_ENTRIES] = EMPTY;
+    // Not going to make variables for every entry,
+    // that would make me cry. Use array instead.
+    double gpas[AMOUNT_OF_ENTRIES] = { 0 };
+    int standings[AMOUNT_OF_ENTRIES] = { 0 };
+    double ages[AMOUNT_OF_ENTRIES] = { 0 };
 
-    // Initialize the arrays
+    // Again, not going to individually set each value,
+    // that would make me want to quit programming. Iterate instead.
     for (int i = 0; i < AMOUNT_OF_ENTRIES; i++)
     {
-        // Skip line
+        // Skip the student ID line
         read_integer(input);
 
         gpas[i] = read_double(input);
@@ -29,6 +32,8 @@ int main(int argc, char const *argv[])
     fclose(input);
 
     // Calculate sum of gpas
+    // Ideally these function would take in an array, but
+    // I am keeping the function prototype the same as the prompt wrote it as.
     double gpaSum = calculate_sum(
         gpas[0],
         gpas[1],
@@ -77,7 +82,7 @@ int main(int argc, char const *argv[])
     fprintf(output, "\n\n");
 
     // Calculate deviation of gpas
-    double gpaDeviation[AMOUNT_OF_ENTRIES] = EMPTY;
+    double gpaDeviation[AMOUNT_OF_ENTRIES] = { 0 };
     for (int i = 0; i < AMOUNT_OF_ENTRIES; i++)
     {
         gpaDeviation[i] =
@@ -112,6 +117,8 @@ int main(int argc, char const *argv[])
         find_max(gpas[0], gpas[1], gpas[2], gpas[3], gpas[4]));
 
     fclose(output);
+
+    // thanks for grading have a wonderful day
 
     return 0;
 }
