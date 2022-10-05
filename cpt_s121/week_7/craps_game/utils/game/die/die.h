@@ -1,26 +1,22 @@
 #include <stdlib.h>
 
-// A single die
+// A set of die
 typedef struct
 {
-    int side;
-} Die;
+    int die1;
+    int die2;
+} DieSet;
 
-typedef struct
+// Roll a die and set its side value; return the value it rolled
+int droll()
 {
-    Die *die1;
-    Die *die2;
-} Die_Set;
-
-// Roll a die and set its side value
-void droll(Die *die)
-{
-    die->side = rand() % 6 + 1;
+    return rand() % 6 + 1;
 }
 
-// Roll two dice and set both of their side values
-void droll_two(Die_Set *die_set)
+// Roll two dice and set both of their side values; return sum
+int dsroll(DieSet dieSet)
 {
-    droll(die_set->die1);
-    droll(die_set->die2);
+    dieSet.die1 = droll();
+    dieSet.die2 = droll();
+    return dieSet.die1 + dieSet.die2;
 }
