@@ -86,8 +86,8 @@ int doRound(CrapsGame *game)
         return EXIT_GAME;
     }
 
-    // Reset the wager
-    game->playerBalance += game->wager;
+    // Wager lost, reset.
+    game->houseBalance += game->wager;
     game->wager = 0;
     resetWagerMessage();
 
@@ -101,7 +101,7 @@ int crapsGame()
     gameRulesMessage();
 
     // Initialize balance as an arbitrary large number, and display that balance.
-    houseBalanceMessage(INT16_MAX);
+    houseBalanceMessage(10000);
 
     // Wait for confirmation (user input) to continue
     confirmMessage();
@@ -109,12 +109,13 @@ int crapsGame()
     CrapsGame game = {
         .wager = 0,
         .diceSum = 0,
-        .houseBalance = INT16_MAX,
+        .houseBalance = 10000,
         .round = 0,
         .playerBalance = 1000,
         .crapsPoint = 0};
 
     // Ask to place a initial wager.
+    titleMessage(&game);
     placeWager(&game);
     confirmMessage();
 

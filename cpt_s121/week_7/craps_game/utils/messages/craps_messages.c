@@ -109,5 +109,5 @@ void exitMessage()
 
 void resetWagerMessage()
 {
-    printf("No point. Wager returned.\n");
+    printf("No magic dice. Aw nuts. You lost the wager.\n");
 }
