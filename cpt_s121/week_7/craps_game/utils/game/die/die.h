@@ -1,5 +1,8 @@
 #include <stdlib.h>
 
+#ifndef DIE
+#define DIE
+
 // Roll a die and return the value it rolled
 int droll()
 {
@@ -11,3 +14,5 @@ int dsroll()
 {
     return droll() + droll();
 }
+
+#endif

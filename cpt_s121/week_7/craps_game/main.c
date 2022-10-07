@@ -1,9 +1,7 @@
-#include "./utils/game/game_runner.h"
+#include "./utils/game/craps_game.h"
 
 int main(int argc, char const *argv[])
 {
-    play_game(
-        // TODO: Game
-    );
+    while(crapsGame());
     return 0;
 }

@@ -1,3 +1,8 @@
+#include <stdio.h>
+
+#ifndef CRAPS_MESSAGES
+#define CRAPS_MESSAGES
+
 void gameRulesMessage() {
     printf(
         "Welcome to Craps by Benjamin Schreiber, for CS121. "
@@ -56,3 +61,5 @@ void youWinGameMessage() {
 }
 
 void exitMessage();
+
+#endif

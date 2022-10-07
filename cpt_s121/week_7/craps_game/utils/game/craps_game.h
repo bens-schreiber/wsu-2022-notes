@@ -1,5 +1,8 @@
 #include "./die/die.h"
-#include "craps_messages.h"
+#include "../messages/craps_messages.h"
+
+#ifndef CRAPS_GAME
+#define CRAPS_GAME
 
 #define CONTINUE_GAME 1
 #define EXIT_GAME 0
@@ -25,3 +28,5 @@ void addToWager(CrapsGame *game);
 
 
 
+
+#endif

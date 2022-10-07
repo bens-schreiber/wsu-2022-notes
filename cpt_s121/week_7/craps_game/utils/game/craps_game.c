@@ -9,7 +9,7 @@ void placeWager(CrapsGame *game)
 void addToWager(CrapsGame *game)
 {
     int add;
-    addToWagerMessage(&add);
+    addToWagerMessage(add);
     if (add != 0) {
         game->wager += add;
         wagerPlacedMessage(game->wager);
@@ -21,7 +21,7 @@ int doRound(CrapsGame *game)
 
     // Add to the wager if we aren't on the first round
     if (game->round) {
-        addToWager(&game);
+        addToWager(game);
     }
 
     // Roll the dice and display the result
