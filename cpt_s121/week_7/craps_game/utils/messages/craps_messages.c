@@ -21,10 +21,10 @@ void _loadPrintf(char *loadingText, CrapsGame *game)
     char ellipsis[4] = {'\0', '\0', '\0', '\0'};
     while (loadCount--)
     {
-        titleMessage(game);
         printf("%s %s\n", loadingText, ellipsis);
         sleep(1);
         system("clear");
+        titleMessage(game);
 
         // who needs string library functions when you're awesome
         ellipsis[abs(loadCount - 3)] = '.';
