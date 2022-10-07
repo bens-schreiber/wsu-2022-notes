@@ -12,7 +12,7 @@ void loseGame(CrapsGame *game)
 void winGame(CrapsGame *game)
 {
     // Give the money to the player.
-    game->playerBalance += game->wager;
+    game->playerBalance += 2*game->wager;
     game->houseBalance -= game->wager;
     game->wager = 0;
     youWinGameMessage();
