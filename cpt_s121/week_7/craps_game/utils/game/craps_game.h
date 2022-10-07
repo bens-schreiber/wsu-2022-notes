@@ -1,8 +1,8 @@
-#include "./die/die.h"
-#include "../messages/craps_messages.h"
-
 #ifndef CRAPS_GAME
 #define CRAPS_GAME
+
+#include "./die/die.h"
+#include "../messages/craps_messages.h"
 
 #define CONTINUE_GAME 1
 #define EXIT_GAME 0
