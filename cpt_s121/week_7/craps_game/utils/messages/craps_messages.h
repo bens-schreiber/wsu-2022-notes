@@ -38,3 +38,5 @@ void exitMessage();
 void resetWagerMessage();
 
 void anotherGameMessage();
+
+void youLoseBecauseBrokeMessage();

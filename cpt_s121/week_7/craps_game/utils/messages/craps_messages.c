@@ -42,6 +42,7 @@ void gameRulesMessage()
         "If you land a 2, 3, or 12, you lose. "
         "Any other number you roll will become the point. For subsequent rounds, your goal is to roll the point."
         "If you roll a 7 in these rounds, you lose. If you roll the point, you win."
+        "If at any point your balance reaches or is under 0, the program will exit."
         "\n"
         "\n");
 }
@@ -115,4 +116,8 @@ void resetWagerMessage()
 void anotherGameMessage() {
     system("clear");
     printf("Another game of craps!\n\n");
+}
+
+void youLoseBecauseBrokeMessage() {
+    printf("you have no money. leave this establishment immediatly.\n");
 }

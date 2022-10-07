@@ -57,7 +57,7 @@ int doRound(CrapsGame *game)
         case 3:
         case 12:
             winGame(game);
-            return CONTINUE_GAME;
+            return EXIT_GAME;
 
         default:
             pointMessage(game->diceSum);
@@ -90,7 +90,6 @@ int doRound(CrapsGame *game)
     game->houseBalance += game->wager;
     game->wager = 0;
     if (game->playerBalance < 1) {
-        loseGame(game);
         return EXIT_GAME;
     }
 
@@ -135,6 +134,8 @@ int crapsGame(CrapsGame *game)
 
     // Game is over if the player is out of money
     if (game->playerBalance < 1) {
+        youLoseBecauseBrokeMessage();
+        loseGame(game);
         return EXIT_GAME;
     }
 
