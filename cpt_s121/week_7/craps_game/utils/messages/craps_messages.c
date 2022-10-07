@@ -2,12 +2,16 @@
 
 void gameRulesMessage() {
     printf(
+        "\n"
+        "\n"
         "Welcome to Craps by Benjamin Schreiber, for CS121. "
         "Begin the game by placing a wager. You will be able to add to the wager each round. "
         "On round one, if you land a 7 or an 11, you instantly win. "
         "If you land a 2, 3, or 12, you lose. "
         "Any other number you roll will become the point. For subsequent rounds, your goal is to roll the point."
-        "If you roll a 7 in these rounds, you lose. If you roll the point, you win.\n"
+        "If you roll a 7 in these rounds, you lose. If you roll the point, you win."
+        "\n"
+        "\n"
         );
 }
 
