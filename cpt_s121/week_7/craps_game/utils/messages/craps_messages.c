@@ -1,6 +1,38 @@
 #include "craps_messages.h"
 
-void gameRulesMessage() {
+void titleMessage(CrapsGame *game)
+{
+    printf(
+        "# Craps by Benjamin Schreiber\n"
+        "# ROUND: %d\n"
+        "# POINT: %d\n"
+        "# HOUSE BALANCE: $%d\n"
+        "# YOUR BALANCE: $%d\n"
+        "# YOUR WAGER: $%d\n"
+        "\n",
+        game->round, game->crapsPoint, game->houseBalance, game->playerBalance, game->wager);
+}
+
+void _loadPrintf(char *loadingText, CrapsGame *game)
+{
+    int loadCount = 4;
+
+    // I put a buffer char here since random letters would sometimes appear without it
+    char ellipsis[4] = {'\0', '\0', '\0', '\0'};
+    while (loadCount--)
+    {
+        titleMessage(game);
+        printf("%s %s\n", loadingText, ellipsis);
+        sleep(1);
+        system("clear");
+
+        // who needs string library functions when you're awesome
+        ellipsis[abs(loadCount - 3)] = '.';
+    }
+}
+
+void gameRulesMessage()
+{
     printf(
         "\n"
         "\n"
@@ -11,56 +43,71 @@ void gameRulesMessage() {
         "Any other number you roll will become the point. For subsequent rounds, your goal is to roll the point."
         "If you roll a 7 in these rounds, you lose. If you roll the point, you win."
         "\n"
-        "\n"
-        );
+        "\n");
 }
 
-void houseBalanceMessage(int balance) {
+void houseBalanceMessage(int balance)
+{
     printf(
-        "The house balance is %d\n", balance
-    );
+        "The house balance is %d\n", balance);
 }
 
-void confirmMessage() {
+void confirmMessage()
+{
     char a;
     printf("\nPress ENTER to continue.");
     scanf("%c%*c", &a);
     system("clear");
 }
 
-void placeWagerMessage(int *wager) {
-    printf("Place a wager! ");
+void confirmMessageTitle(CrapsGame *game)
+{
+    confirmMessage();
+    titleMessage(game);
+}
+
+void placeWagerMessage(int *wager)
+{
+    printf("Place a wager!\n");
     scanf("%d", wager);
 }
 
-void wagerPlacedMessage(int wager) {
-    printf("The current wager is %d", wager);
+void wagerPlacedMessage(int wager)
+{
+    printf("The current wager is %d\n", wager);
 }
 
-void rollDiceMessage() {
-    printf("Rolling the dice!");
+void rollDiceMessage(CrapsGame *game)
+{
+    _loadPrintf("Rolling the dice!", game);
 }
 
-void showDiceMessage(int diceSum) {
-    printf("You rolled a: %d", diceSum);
+void showDiceMessage(int diceSum)
+{
+    printf("You rolled a: %d\n", diceSum);
 }
 
-void youLoseGameMessage() {
-    printf("you lost craps, dude... :(");
+void youLoseGameMessage()
+{
+    printf("you lost craps, dude... :(\n");
 }
 
-void pointMessage(int point) {
-    printf("The point is: %d", point);
+void pointMessage(int point)
+{
+    printf("The point is: %d\nWager added back to your balance. \n", point);
 }
 
-void addToWagerMessage(int wager) {
-    printf("Adding %d to your wager", wager);
+void youWinGameMessage()
+{
+    printf("Holy friggin craps you won!\n");
 }
 
-void youWinGameMessage() {
-    printf("Holy friggin craps you won!");
+void exitMessage()
+{
+    printf("game ova\n");
 }
 
-void exitMessage() {
-    printf("game ova");
+void resetWagerMessage()
+{
+    printf("No point. Wager returned.\n");
 }

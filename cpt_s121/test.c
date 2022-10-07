@@ -1,43 +1,19 @@
 #include <stdio.h>
-#include <math.h>
-
-// use the 6k +- 1 formula to find prime numbers
-int isPrime(int num)
-{
-    if (num == 2 || num == 3)
-    {
-        return 1; // prime
-    }
-
-    if (num % 2 == 0 || num % 3 == 0)
-    {
-        return 0; // not prime
-    }
-
-    // 4 has already been covered by num % 2, start with 5
-    for (int i = 5; i * i <= num; i += 6)
-    {
-        if (num % i == 0 || num % (i + 2) == 0)
-        {
-            return 0; // not prime
-        }
-    }
-
-    return 1; // prime
-}
+#include <stdlib.h>
+#include <unistd.h>
 
 int main(int argc, char const *argv[])
 {
-    int input;
-    printf("Enter an integer number: ");
-    scanf("%d", &input);
-    
-    int res = isPrime(input);
-    if (res) {
-        printf("prime");
-    } else {
-        printf("not prime");
+    int loadCount = 4;
+    char ellipsis[3] = "   ";
+    while (loadCount--) {
+        printf("BENJAMIN SCHREIBER\n");
+        printf("%s%s %d\n", "LOADING", ellipsis, loadCount);
+
+        // who needs string library functions when you're awesome
+        ellipsis[abs(loadCount - 3)] = '.';
     }
+
 
     return 0;
 }

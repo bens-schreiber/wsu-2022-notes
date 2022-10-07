@@ -1,8 +1,13 @@
-#ifndef CRAPS_MESSAGES
-#define CRAPS_MESSAGES
+#pragma once
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include "../game/craps_struct.h"
+
+void titleMessage(CrapsGame *game);
+
+void _loadPrintf(char* loadingText, CrapsGame *game);
 
 void gameRulesMessage();
 
@@ -10,11 +15,13 @@ void houseBalanceMessage(int balance);
 
 void confirmMessage();
 
+void confirmMessageTitle(CrapsGame *game);
+
 void placeWagerMessage(int *wager);
 
 void wagerPlacedMessage(int wager);
 
-void rollDiceMessage();
+void rollDiceMessage(CrapsGame *game);
 
 void showDiceMessage(int diceSum);
 
@@ -28,4 +35,4 @@ void youWinGameMessage();
 
 void exitMessage();
 
-#endif
+void resetWagerMessage();

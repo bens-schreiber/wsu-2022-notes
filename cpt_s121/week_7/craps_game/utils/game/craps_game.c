@@ -1,56 +1,74 @@
 #include "./craps_game.h"
 
+void loseGame(CrapsGame *game)
+{
+    // Give the money to the house.
+    game->playerBalance -= game->wager;
+    game->houseBalance += game->wager;
+    game->wager = 0;
+    youLoseGameMessage();
+}
+
+void winGame(CrapsGame *game)
+{
+    // Give the money to the player.
+    game->playerBalance += game->wager;
+    game->houseBalance -= game->wager;
+    game->wager = 0;
+    youWinGameMessage();
+}
+
 void placeWager(CrapsGame *game)
 {
     placeWagerMessage(&game->wager);
     wagerPlacedMessage(game->wager);
-}
-
-void addToWager(CrapsGame *game)
-{
-    int add;
-    addToWagerMessage(add);
-    if (add != 0) {
-        game->wager += add;
-        wagerPlacedMessage(game->wager);
-    }
+    game->playerBalance -= game->wager;
 }
 
 int doRound(CrapsGame *game)
 {
 
     // Add to the wager if we aren't on the first round
-    if (game->round) {
-        addToWager(game);
+    if (game->round)
+    {
+        placeWager(game);
+        confirmMessageTitle(game);
     }
 
     // Roll the dice and display the result
-    rollDiceMessage();
+    rollDiceMessage(game);
     game->diceSum = dsroll();
     showDiceMessage(game->diceSum);
 
     // If we are on round 1
+    // Roll a 7 or 11, lose the game.
+    // Roll a 2, 3, or 12, win the game.
+    // Any other roll, proceed to the next round.
     if (!game->round)
     {
         switch (game->diceSum)
         {
         case 7:
         case 11:
-            youWinGameMessage();
-            game->playerBalance += game->wager;
+            loseGame(game);
             return EXIT_GAME;
 
         case 2:
         case 3:
         case 12:
-            youLoseGameMessage();
-            game->playerBalance -= game->wager;
-            game->houseBalance += game->wager;
+            winGame(game);
             return CONTINUE_GAME;
 
         default:
             pointMessage(game->diceSum);
+
+            // Set the point, AKA the goal of the next round of rolls.
             game->crapsPoint = game->diceSum;
+
+            // Reset the wager
+            game->playerBalance += game->wager;
+            game->wager = 0;
+
             return CONTINUE_GAME;
         }
     }
@@ -58,15 +76,20 @@ int doRound(CrapsGame *game)
     // Normal round
     if (game->diceSum == game->crapsPoint)
     {
-        youWinGameMessage();
+        winGame(game);
         return EXIT_GAME;
     }
 
     if (game->diceSum == 7)
     {
-        youLoseGameMessage();
+        loseGame(game);
         return EXIT_GAME;
     }
+
+    // Reset the wager
+    game->playerBalance += game->wager;
+    game->wager = 0;
+    resetWagerMessage();
 
     return CONTINUE_GAME;
 }
@@ -91,13 +114,16 @@ int crapsGame()
         .playerBalance = 1000,
         .crapsPoint = 0};
 
-
     // Ask to place a initial wager.
     placeWager(&game);
+    confirmMessage();
 
     // Begin the game.
-    int round = 0;
-    while (doRound(&game));
+    while (doRound(&game))
+    {
+        game.round++;
+        confirmMessageTitle(&game);
+    }
 
     exitMessage();
 
