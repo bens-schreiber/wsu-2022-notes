@@ -89,45 +89,58 @@ int doRound(CrapsGame *game)
     // Wager lost, reset.
     game->houseBalance += game->wager;
     game->wager = 0;
+    if (game->playerBalance < 1) {
+        loseGame(game);
+        return EXIT_GAME;
+    }
+
     resetWagerMessage();
 
     return CONTINUE_GAME;
 }
 
-int crapsGame()
+int crapsGame(CrapsGame *game)
 {
+    // Since the CrapsGame struct is maintained in memory throughout programs life,
+    // this may or may not be the first time the user is playing the game.
+    // Check the round to see if it is the first time. Reset values if it isn't,
+    // display rules if it is.
+    if (game->round > 0)
+    {
+        game->round = 0;
+        game->crapsPoint = 0;
+        anotherGameMessage();
+    }
+    else
+    {
+        gameRulesMessage();
+        // Display the balance
+        houseBalanceMessage(game->houseBalance);
 
-    // Display the rules of how the game is played.
-    gameRulesMessage();
-
-    // Initialize balance as an arbitrary large number, and display that balance.
-    houseBalanceMessage(10000);
-
-    // Wait for confirmation (user input) to continue
-    confirmMessage();
-
-    CrapsGame game = {
-        .wager = 0,
-        .diceSum = 0,
-        .houseBalance = 10000,
-        .round = 0,
-        .playerBalance = 1000,
-        .crapsPoint = 0};
+        // Wait for confirmation (user input) to continue
+        confirmMessage();
+    }
 
     // Ask to place a initial wager.
-    titleMessage(&game);
-    placeWager(&game);
+    titleMessage(game);
+    placeWager(game);
     confirmMessage();
 
     // Begin the game.
-    while (doRound(&game))
+    while (doRound(game))
     {
-        game.round++;
-        confirmMessageTitle(&game);
+        game->round++;
+        confirmMessageTitle(game);
+    }
+
+    // Game is over if the player is out of money
+    if (game->playerBalance < 1) {
+        return EXIT_GAME;
     }
 
     exitMessage();
+    confirmMessage();
 
-    // TODO: play again
-    return 0;
+    // TODO: exit
+    return CONTINUE_GAME;
 }

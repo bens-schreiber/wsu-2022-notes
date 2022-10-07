@@ -7,7 +7,7 @@
 
 void titleMessage(CrapsGame *game);
 
-void _loadPrintf(char* loadingText, CrapsGame *game);
+void _loadPrintf(char *loadingText, CrapsGame *game);
 
 void gameRulesMessage();
 
@@ -36,3 +36,5 @@ void youWinGameMessage();
 void exitMessage();
 
 void resetWagerMessage();
+
+void anotherGameMessage();

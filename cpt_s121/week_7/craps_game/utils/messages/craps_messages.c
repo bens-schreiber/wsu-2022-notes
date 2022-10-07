@@ -111,3 +111,8 @@ void resetWagerMessage()
 {
     printf("No magic dice. Aw nuts. You lost the wager.\n");
 }
+
+void anotherGameMessage() {
+    system("clear");
+    printf("Another game of craps!\n\n");
+}
