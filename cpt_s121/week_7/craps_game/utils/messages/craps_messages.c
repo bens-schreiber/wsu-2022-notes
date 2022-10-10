@@ -40,8 +40,8 @@ void gameRulesMessage()
         "Begin the game by placing a wager. You will be able to add to the wager each round. "
         "On round one, if you land a 7 or an 11, you instantly win. "
         "If you land a 2, 3, or 12, you lose. "
-        "Any other number you roll will become the point. For subsequent rounds, your goal is to roll the point."
-        "If you roll a 7 in these rounds, you lose. If you roll the point, you win."
+        "Any other number you roll will become the point. For subsequent rounds, your goal is to roll the point. "
+        "If you roll a 7 in these rounds, you lose. If you roll the point, you win. "
         "If at any point your balance reaches or is under 0, the program will exit.");
 }
 
