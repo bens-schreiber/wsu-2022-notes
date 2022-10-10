@@ -48,7 +48,7 @@ void gameRulesMessage()
 void houseBalanceMessage(int balance)
 {
     printf(
-        "The house balance is %d", balance);
+        "\nThe house balance is %d", balance);
 }
 
 void confirmMessage()
