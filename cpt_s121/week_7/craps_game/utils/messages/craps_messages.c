@@ -42,18 +42,18 @@ void gameRulesMessage()
         "If you land a 2, 3, or 12, you lose. "
         "Any other number you roll will become the point. For subsequent rounds, your goal is to roll the point. "
         "If you roll a 7 in these rounds, you lose. If you roll the point, you win. "
-        "If at any point your balance reaches or is under 0, the program will exit.");
+        "If at any point your balance reaches or is under 0, the program will exit.\n\n");
 }
 
 void houseBalanceMessage(int balance)
 {
     printf(
-        "\nThe house balance is %d", balance);
+        "The house balance is %d\n", balance);
 }
 
 void confirmMessage()
 {
-    printf("\n\nPress ENTER to continue!");
+    printf("\nPress ENTER to continue!\n");
     char input = 0;
     fflush(stdin);
     getchar();
@@ -68,13 +68,13 @@ void confirmMessageTitle(CrapsGame *game)
 
 void placeWagerMessage(int *wager)
 {
-    printf("\nPlace a wager: ");
+    printf("Place a wager: \n");
     scanf("%d", wager);
 }
 
 void wagerPlacedMessage(int wager)
 {
-    printf("\nThe current wager is %d", wager);
+    printf("The current wager is %d\n", wager);
 }
 
 void rollDiceMessage(CrapsGame *game)
@@ -86,32 +86,32 @@ void rollDiceMessage(CrapsGame *game)
 
 void showDiceMessage(int diceSum)
 {
-    printf("\nYou rolled a: %d", diceSum);
+    printf("You rolled a: %d\n", diceSum);
 }
 
 void youLoseGameMessage()
 {
-    printf("\nyou lost craps, dude... :(");
+    printf("you lost craps, dude... :(\n");
 }
 
 void pointMessage(int point)
 {
-    printf("\nThe point is: %d\nWager added back to your balance.", point);
+    printf("The point is: %d\nWager added back to your balance.\n", point);
 }
 
 void youWinGameMessage()
 {
-    printf("\nHoly friggin craps you won!");
+    printf("Holy friggin craps you won!\n");
 }
 
 void exitMessage()
 {
-    printf("\ngame ova");
+    printf("game ova\n");
 }
 
 void resetWagerMessage()
 {
-    printf("\nNo magic dice. Aw nuts. You lost the wager.");
+    printf("No magic dice. Aw nuts. You lost the wager.\n");
 }
 
 void anotherGameMessage()
@@ -122,5 +122,5 @@ void anotherGameMessage()
 
 void youLoseBecauseBrokeMessage()
 {
-    printf("\nyou have no money. leave this establishment immediatly.");
+    printf("you have no money. leave this establishment immediatly.\n");
 }
