@@ -8,13 +8,13 @@ void titleMessage(CrapsGame *game)
         "# POINT: %d\n"
         "# HOUSE BALANCE: $%d\n"
         "# YOUR BALANCE: $%d\n"
-        "# YOUR WAGER: $%d\n"
-        "\n",
+        "# YOUR WAGER: $%d\n",
         game->round, game->crapsPoint, game->houseBalance, game->playerBalance, game->wager);
 }
 
 void _loadPrintf(char *loadingText, CrapsGame *game)
 {
+
     int loadCount = 4;
 
     // I put a buffer char here since random letters would sometimes appear without it
@@ -42,22 +42,21 @@ void gameRulesMessage()
         "If you land a 2, 3, or 12, you lose. "
         "Any other number you roll will become the point. For subsequent rounds, your goal is to roll the point."
         "If you roll a 7 in these rounds, you lose. If you roll the point, you win."
-        "If at any point your balance reaches or is under 0, the program will exit."
-        "\n"
-        "\n");
+        "If at any point your balance reaches or is under 0, the program will exit.");
 }
 
 void houseBalanceMessage(int balance)
 {
     printf(
-        "The house balance is %d\n", balance);
+        "The house balance is %d", balance);
 }
 
 void confirmMessage()
 {
-    char a;
-    printf("\nPress ENTER to continue.");
-    scanf("%c%*c", &a);
+    printf("\n\nPress ENTER to continue!");
+    char input = 0;
+    fflush(stdin);
+    getchar();
     system("clear");
 }
 
@@ -69,55 +68,59 @@ void confirmMessageTitle(CrapsGame *game)
 
 void placeWagerMessage(int *wager)
 {
-    printf("Place a wager!\n");
+    printf("\nPlace a wager: ");
     scanf("%d", wager);
 }
 
 void wagerPlacedMessage(int wager)
 {
-    printf("The current wager is %d\n", wager);
+    printf("\nThe current wager is %d", wager);
 }
 
 void rollDiceMessage(CrapsGame *game)
 {
-    _loadPrintf("Rolling the dice!", game);
+    system("clear");
+    titleMessage(game);
+    _loadPrintf("\nRolling the dice!", game);
 }
 
 void showDiceMessage(int diceSum)
 {
-    printf("You rolled a: %d\n", diceSum);
+    printf("\nYou rolled a: %d", diceSum);
 }
 
 void youLoseGameMessage()
 {
-    printf("you lost craps, dude... :(\n");
+    printf("\nyou lost craps, dude... :(");
 }
 
 void pointMessage(int point)
 {
-    printf("The point is: %d\nWager added back to your balance. \n", point);
+    printf("\nThe point is: %d\nWager added back to your balance.", point);
 }
 
 void youWinGameMessage()
 {
-    printf("Holy friggin craps you won!\n");
+    printf("\nHoly friggin craps you won!");
 }
 
 void exitMessage()
 {
-    printf("game ova\n");
+    printf("\ngame ova");
 }
 
 void resetWagerMessage()
 {
-    printf("No magic dice. Aw nuts. You lost the wager.\n");
+    printf("\nNo magic dice. Aw nuts. You lost the wager.");
 }
 
-void anotherGameMessage() {
+void anotherGameMessage()
+{
     system("clear");
     printf("Another game of craps!\n\n");
 }
 
-void youLoseBecauseBrokeMessage() {
-    printf("you have no money. leave this establishment immediatly.\n");
+void youLoseBecauseBrokeMessage()
+{
+    printf("\nyou have no money. leave this establishment immediatly.");
 }

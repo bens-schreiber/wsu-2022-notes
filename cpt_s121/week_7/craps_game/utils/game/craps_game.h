@@ -15,3 +15,7 @@ int doRound(CrapsGame *game);
 void placeWager(CrapsGame *game);
 
 void addToWager(CrapsGame *game);
+
+void winGame(CrapsGame *game);
+
+void loseGame(CrapsGame *game);

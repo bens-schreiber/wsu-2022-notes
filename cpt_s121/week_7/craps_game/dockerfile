@@ -1,0 +1,11 @@
+FROM alpine:3.16
+
+RUN apk add --no-cache gcc musl-dev
+
+COPY . /craps_game/
+
+WORKDIR /craps_game/
+
+RUN gcc -o game main.c ./utils/game/craps_game.c ./utils/messages/craps_messages.c ./utils/game/die/die.c
+
+CMD ./game

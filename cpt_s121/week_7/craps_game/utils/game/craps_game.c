@@ -21,7 +21,6 @@ void winGame(CrapsGame *game)
 void placeWager(CrapsGame *game)
 {
     placeWagerMessage(&game->wager);
-    wagerPlacedMessage(game->wager);
     game->playerBalance -= game->wager;
 }
 
@@ -32,7 +31,6 @@ int doRound(CrapsGame *game)
     if (game->round)
     {
         placeWager(game);
-        confirmMessageTitle(game);
     }
 
     // Roll the dice and display the result
@@ -123,7 +121,6 @@ int crapsGame(CrapsGame *game)
     // Ask to place a initial wager.
     titleMessage(game);
     placeWager(game);
-    confirmMessage();
 
     // Begin the game.
     while (doRound(game))
