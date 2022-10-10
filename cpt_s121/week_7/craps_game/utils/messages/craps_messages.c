@@ -1,6 +1,6 @@
 #include "craps_messages.h"
 
-void titleMessage(CrapsGame *game)
+void scoreboardMessage(CrapsGame *game)
 {
     printf(
         "# Craps by Benjamin Schreiber\n"
@@ -24,7 +24,7 @@ void _loadPrintf(char *loadingText, CrapsGame *game)
         printf("%s %s\n", loadingText, ellipsis);
         sleep(1);
         system("clear");
-        titleMessage(game);
+        scoreboardMessage(game);
 
         // who needs string library functions when you're awesome
         ellipsis[abs(loadCount - 3)] = '.';
@@ -51,7 +51,7 @@ void houseBalanceMessage(int balance)
         "The house balance is %d\n", balance);
 }
 
-void confirmMessage()
+void awaitInput()
 {
     printf("\nPress ENTER to continue!\n");
     char input = 0;
@@ -60,16 +60,16 @@ void confirmMessage()
     system("clear");
 }
 
-void confirmMessageTitle(CrapsGame *game)
+void awaitScoreboard(CrapsGame *game)
 {
-    confirmMessage();
-    titleMessage(game);
+    awaitInput();
+    scoreboardMessage(game);
 }
 
-void placeWagerMessage(int *wager)
+void placeWagerMessage(CrapsGame *game)
 {
     printf("\nPlace a wager: \n");
-    scanf("%d", wager);
+    scanf("%d", &game->wager);
 }
 
 void wagerPlacedMessage(int wager)
@@ -80,7 +80,7 @@ void wagerPlacedMessage(int wager)
 void rollDiceMessage(CrapsGame *game)
 {
     system("clear");
-    titleMessage(game);
+    scoreboardMessage(game);
     _loadPrintf("\nRolling the dice!", game);
 }
 
@@ -96,7 +96,7 @@ void youLoseGameMessage()
 
 void pointMessage(int point)
 {
-    printf("The point is: %d\nWager added back to your balance.\n", point);
+    printf("The point is: %d\n", point);
 }
 
 void youWinGameMessage()
@@ -109,12 +109,12 @@ void exitMessage()
     printf("game ova\n");
 }
 
-void resetWagerMessage()
+void wagerLostMessage()
 {
     printf("No magic dice. Aw nuts. You lost the wager.\n");
 }
 
-void anotherGameMessage()
+void nextGameMessage()
 {
     system("clear");
     printf("Another game of craps!\n\n");

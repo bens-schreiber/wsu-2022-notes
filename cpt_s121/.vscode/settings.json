@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "cstdio": "c",
-        "craps_game.h": "c"
+        "craps_game.h": "c",
+        "craps_struct.h": "c"
     }
 }
