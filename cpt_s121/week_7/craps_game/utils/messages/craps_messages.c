@@ -68,7 +68,7 @@ void confirmMessageTitle(CrapsGame *game)
 
 void placeWagerMessage(int *wager)
 {
-    printf("Place a wager: \n");
+    printf("\nPlace a wager: \n");
     scanf("%d", wager);
 }
 
@@ -86,12 +86,12 @@ void rollDiceMessage(CrapsGame *game)
 
 void showDiceMessage(int diceSum)
 {
-    printf("You rolled a: %d\n", diceSum);
+    printf("\nYou rolled a: %d\n", diceSum);
 }
 
 void youLoseGameMessage()
 {
-    printf("you lost craps, dude... :(\n");
+    printf("\nyou lost craps, dude... :(\n");
 }
 
 void pointMessage(int point)
