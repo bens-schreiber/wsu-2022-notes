@@ -1,5 +1,6 @@
 #pragma once
 #include "../dice/dice.h"
+#define YAHTZEE_ROUNDS 13
 
 typedef struct
 {
