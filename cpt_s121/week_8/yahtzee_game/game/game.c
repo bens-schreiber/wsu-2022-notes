@@ -1,4 +1,5 @@
 #include "game.h"
-void yahtzeeGame() {
+
+void startYahtzeeGame() {
     
 }
