@@ -6,7 +6,6 @@ void _yahtzeeDieRoll(YahtzeeDie *die) {
     }
 }
 
-// Roll 5 yahtzee dice
 void yahtzeeDiceRoll(YahtzeeDie dice[5]) {
     for (int i = 0; i < 5; i++) {
         _yahtzeeDieRoll(&dice[i]);
