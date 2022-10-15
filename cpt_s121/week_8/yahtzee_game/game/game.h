@@ -29,3 +29,5 @@ typedef enum
 
 // starts a game of yahtzee
 void startYahtzeeGame();
+
+void yahtzeeRound(YahtzeeGame *game);
