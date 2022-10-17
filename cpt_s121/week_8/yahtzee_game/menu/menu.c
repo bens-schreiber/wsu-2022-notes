@@ -2,10 +2,11 @@
 
 int displayMenu()
 {
+    // Clear screen and display menu
     system("clear");
     displayMenuMessage();
 
-    switch (_awaitMenuInput())
+    switch (awaitMenuInput())
     {
         case 1:
             displayGameRulesMessage();
@@ -18,11 +19,4 @@ int displayMenu()
     }
 
     return 1;
-}
-
-int _awaitMenuInput()
-{
-    int input = 0;
-    scanf("%d", &input);
-    return input;
 }

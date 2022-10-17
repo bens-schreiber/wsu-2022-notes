@@ -4,12 +4,12 @@
 void displayMenuMessage()
 {
     printf(
-        "########################################\n"
-        "Welcome to Yahtzee by Benjamin Schreiber\n"
-        "Enter 1 to view the rules\n"
-        "Enter 2 to start the game\n"
-        "Enter 3 to exit\n"
-        "########################################\n");
+        "##################################################\n\n"
+        "   Welcome to Yahtzee by Benjamin Schreiber\n"
+        "   Enter 1 to view the rules\n"
+        "   Enter 2 to start the game\n"
+        "   Enter 3 to exit\n\n"
+        "##################################################\n");
 }
 
 // Game rules
@@ -154,4 +154,11 @@ void awaitInput()
     fflush(stdin);
     getchar();
     system("clear");
+}
+
+int awaitMenuInput()
+{
+    int input = 0;
+    scanf("%d", &input);
+    return input;
 }

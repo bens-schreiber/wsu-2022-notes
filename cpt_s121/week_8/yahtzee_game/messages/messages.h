@@ -31,6 +31,7 @@ void invalidYahtzeeDiceInput();
 // you win!!!
 void displayPlayerWonMessage(int player);
 
+// clears the screen and then displays the TITLE
 void displayClearAndTitleMessage();
 
 // Y or N response
@@ -43,4 +44,11 @@ void awaitYahtzeeRollOptionInput(int *input);
 // get a number 1-5 for the dice, 0 to exit
 void awaitNumberInput(int *input);
 
+// press any key to continue
 void awaitInput();
+
+// Waits for menu option input
+// 1 - print rules
+// 2 - start game
+// 3 - exit
+int awaitMenuInput();
