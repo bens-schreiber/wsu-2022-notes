@@ -1,20 +1,24 @@
 #pragma once
 #include "../messages/messages.h"
 #include "yahtzeegamestruct.h"
-#define YAHTZEE_ROUNDS 13
-#define YAHTZEE_MAX_ROLLS 3
-#define YAHTZEE_PLAYERS 2
-#define YAHTZEE_SCORECARD 13
+#include "constants.h"
 
-// starts a game of yahtzee
+
+// Begins the game of yahtzee. Main loop of YAHTZEE_ROUNDS here.
 void yahtzeeGameStart();
 
 // Does a single round of yahtzee
-// [player] is 1 for player 1, or 2 for player 2.
+// [game] holds the current games values
+// [player] determines the index of the game->players array to modify the scorecard at.
 void yahtzeeGameRound(YahtzeeGame *game, int player);
 
+// Determines who won the game based off the highest sum.
+// [game] holds the current games values
 void yahtzeeGameDetermineWinner(YahtzeeGame *game);
 
+// Awaits player input to chose what points from the generated valid scorecard.
+// [game] holds the current games values
+// [player] determines the index of the game->players array to modify the scorecard at.
 void _yahtzeeGameChoosePoints(YahtzeeGame *game, int player);
 
 // Assemble a score card with all valid options given the dice roll.

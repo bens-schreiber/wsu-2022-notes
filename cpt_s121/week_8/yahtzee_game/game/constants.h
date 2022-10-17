@@ -1,0 +1,5 @@
+#pragma once
+#define YAHTZEE_ROUNDS 13
+#define YAHTZEE_MAX_ROLLS 3
+#define YAHTZEE_PLAYERS 2
+#define YAHTZEE_SCORECARD 13

@@ -1,13 +1,23 @@
 #pragma once
 #include "../dice/dice.h"
+#include "constants.h"
+
+// Main struct for storing game values.
 typedef struct
 {
+
+    // A set of 5 dice
     YahtzeeDie dice[5];
-    int players[2][13];
+
+    // Array of players
+    int players[YAHTZEE_PLAYERS][13];
+
+    // Round of the game
     int round;
 
 } YahtzeeGame;
 
+// Stores index positions of the YahtzeeScoreCard
 typedef enum
 {
     SUM_OF_ONES,

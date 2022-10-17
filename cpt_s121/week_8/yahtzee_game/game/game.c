@@ -4,54 +4,78 @@ void yahtzeeGameStart()
 {
     system("clear");
     displayStartGameMessage();
-    YahtzeeGame game = {
-        .players = {}
-    };
+
+    // Initialize a new game
+    YahtzeeGame game = {};
+
+    // Play YAHTZEE_ROUNDS amount of rounds
     while (game.round++ < YAHTZEE_ROUNDS)
     {
+
+        // For each player, do a turn.
         for (char i = 0; i < YAHTZEE_PLAYERS; i++) {
             yahtzeeGameRound(&game, i);
         }
     }
+
+    // Output the game winner
     yahtzeeGameDetermineWinner(&game);
 }
 
 void yahtzeeGameDetermineWinner(YahtzeeGame *game)
 {
+
+    // A struct to make determining the winner easier
     typedef struct
     {
         int sum;
         char player;
-    } PlayerSum;
+    } Winner;
 
-    PlayerSum highest = {.sum = 0, .player = 0};
+    // Assume the winner is player 0
+    Winner highest = {.sum = 0, .player = 0};
+
+    // Compare the sum of each player to the highesst
     int sum = 0;
     for (char player = 0; player < YAHTZEE_PLAYERS; player++)
     {
+        
+        // Tally the total for the player
         for (char score = 0; score < YAHTZEE_SCORECARD; score++)
         {
             sum += game->players[player][score];
         }
+
+        // If the sum is larger than the highest, this player is the highest
         if (sum > highest.sum)
         {
             highest.sum = sum;
             highest.player = player;
         }
+
+        // Reset sum
         sum = 0;
     }
 
+    // Output who won
     displayPlayerWonMessage(highest.player);
     awaitInput();
 }
 
 void yahtzeeGameRound(YahtzeeGame *game, int player)
 {
+    // Reset the dice "keepValue" values from the previous round.
     yahtzeeDiceReset(game->dice);
+
+    // Display the scoreboard
     displayScoreboardMessage(game, player);
     awaitInput();
 
+    // Do YAHTZEE_MAX_ROLLS amount of rolls (at maximum)
     for (char i = 0; i < YAHTZEE_MAX_ROLLS; i++)
     {
+
+        // Title message
         displayClearAndTitleMessage();
 
         // Roll the dice, show player the roll
@@ -82,6 +106,7 @@ void yahtzeeGameRound(YahtzeeGame *game, int player)
             } while (1);
         }
 
+        // Break out of loop if user doesn't want to roll again
         if (!awaitYorNInput("Roll again?"))
         {
             break;
@@ -94,11 +119,17 @@ void yahtzeeGameRound(YahtzeeGame *game, int player)
     // Show the player their score
     displayScoreboardMessage(game, player);
     awaitInput();
+
+    game->round++;
 }
 
 void _yahtzeeGameChoosePoints(YahtzeeGame *game, int player)
 {
+
+    // Generate a valid score card
     int *scoreCardOpt = _yahtzeeScoreValidOptions(game->dice);
+
+    // Get player input. Loop incase the input is invalid
     int input = 0;
     displayRollOptions(player, scoreCardOpt);
     do
@@ -106,7 +137,7 @@ void _yahtzeeGameChoosePoints(YahtzeeGame *game, int player)
         awaitYahtzeeRollOptionInput(&input);
     } while (input < 1 || input > YAHTZEE_SCORECARD || game->players[player][input - 1] > 0);
 
-    printf("%d", scoreCardOpt[input - 1]);
+    // Set the scorecard value
     game->players[player][input - 1] = scoreCardOpt[input - 1];
     free(scoreCardOpt);
 }
@@ -183,6 +214,7 @@ int *_yahtzeeScoreValidOptions(YahtzeeDie dice[YAHTZEE_DIE_COUNT])
         straight++;
     }
 
+    // Chance section is just the sum
     scoreCardOpt[CHANCE] = diceSum;
 
     return scoreCardOpt;
