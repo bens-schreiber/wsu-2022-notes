@@ -29,6 +29,13 @@ void displayStartGameMessage()
 void displayScoreboardMessage(YahtzeeGame *game, int player)
 {
     int *scoreCard = game->players[player];
+
+    // calculate the total
+    int total = 0;
+    for (char i = 0; i < 13; i++) {
+        total += scoreCard[i];
+    }
+
     printf(
         TITLE
         "### PLAYER %d's SCORE CARD ###\n"
@@ -44,8 +51,9 @@ void displayScoreboardMessage(YahtzeeGame *game, int player)
         "# Small Straight: %d\n"
         "# Large Straight: %d\n"
         "# Yahtzee: %d\n"
-        "# Chance: %d\n",
-        player, scoreCard[SUM_OF_ONES], scoreCard[SUM_OF_TWOS], scoreCard[SUM_OF_THREES], scoreCard[SUM_OF_FOURS], scoreCard[SUM_OF_FIVES], scoreCard[SUM_OF_SIXES], scoreCard[THREE_OF_A_KIND], scoreCard[FOUR_OF_A_KIND], scoreCard[FULL_HOUSE], scoreCard[SMALL_STRAIGHT], scoreCard[LARGE_STRAIGHT], scoreCard[YAHTZEE], scoreCard[CHANCE]);
+        "# Chance: %d\n"
+        "# YOUR TOTAL: %d\n",
+        player, scoreCard[SUM_OF_ONES], scoreCard[SUM_OF_TWOS], scoreCard[SUM_OF_THREES], scoreCard[SUM_OF_FOURS], scoreCard[SUM_OF_FIVES], scoreCard[SUM_OF_SIXES], scoreCard[THREE_OF_A_KIND], scoreCard[FOUR_OF_A_KIND], scoreCard[FULL_HOUSE], scoreCard[SMALL_STRAIGHT], scoreCard[LARGE_STRAIGHT], scoreCard[YAHTZEE], scoreCard[CHANCE], total);
 }
 
 // Roll dice

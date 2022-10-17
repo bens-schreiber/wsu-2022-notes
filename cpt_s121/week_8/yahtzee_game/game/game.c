@@ -111,10 +111,6 @@ void _yahtzeeGameChoosePoints(YahtzeeGame *game, int player)
     free(scoreCardOpt);
 }
 
-// Assemble a score card with all valid options given the dice roll.
-// This is done in linear time, O(2n) where n is the number of dice
-// Return a pointer to the score card array. Indexes should be accessed using the
-// ScoreCard enum values.
 int *_yahtzeeScoreValidOptions(YahtzeeDie dice[YAHTZEE_DIE_COUNT])
 {
     // Initialize a frequency table, and dice sum.
@@ -187,11 +183,11 @@ int *_yahtzeeScoreValidOptions(YahtzeeDie dice[YAHTZEE_DIE_COUNT])
         straight++;
     }
 
+    scoreCardOpt[CHANCE] = diceSum;
+
     return scoreCardOpt;
 }
 
-// Check a scoreCard for 3 of a kind, 4 of a kind, and yahtzee.
-// Switch case won't work here as we need to use the greater than operator
 void _yahtzeeScoreDetermineFrequencyScore(int frequency, int score, int diceSum, int scoreCard[13])
 {
     // Check for three of a kind
