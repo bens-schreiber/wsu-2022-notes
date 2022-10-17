@@ -1,0 +1,11 @@
+FROM alpine:3.16
+
+RUN apk add --no-cache gcc musl-dev
+
+COPY . /yahtzee_game/
+
+WORKDIR /yahtzee_game/
+
+RUN gcc main.c ./game/game.c dice/dice.c menu/menu.c messages/messages.c 
+
+CMD ./a.out
