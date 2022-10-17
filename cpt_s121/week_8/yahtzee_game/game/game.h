@@ -1,12 +1,15 @@
 #pragma once
 #include "../dice/dice.h"
+#include "../messages/messages.h"
 #define YAHTZEE_ROUNDS 13
+#define YAHTZEE_MAX_ROLLS 3
 
 typedef struct
 {
     YahtzeeDie dice[5];
     int playerOneScoreCard[13];
     int playerTwoScoreCard[13];
+    int round;
 
 } YahtzeeGame;
 
@@ -28,6 +31,12 @@ typedef enum
 } YahtzeeScore;
 
 // starts a game of yahtzee
-void startYahtzeeGame();
+void yahtzeeGameStart();
 
-void yahtzeeRound(YahtzeeGame *game);
+// Does a single round of yahtzee
+// [player] is 1 for player 1, or 2 for player 2.
+void yahtzeeGameRound(YahtzeeGame *game, int player);
+
+int *_yahtzeeScoreFillOptions(YahtzeeDie dice[YAHTZEE_DIE_COUNT]);
+
+

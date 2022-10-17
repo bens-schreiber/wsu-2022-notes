@@ -1,14 +1,131 @@
 #include "game.h"
 
-void startYahtzeeGame() {
-    YahtzeeGame game = {
-        .playerOneScoreCard = {0},
-        .playerTwoScoreCard = {0},
-        .dice = {0}
-    };
+void yahtzeeGameStart()
+{
+    displayStartGame();
+    YahtzeeGame game = {0};
+    while (game.round++ < YAHTZEE_ROUNDS)
+    {
+        yahtzeeGameRound(&game, 1);
+        yahtzeeGameRound(&game, 2);
+    }
+}
 
-    for (int i = 0; i < YAHTZEE_ROUNDS; i++) {
-        yahtzeeRound(&game, 1);
-        yahtzeeRound(&game, 2);
+void yahtzeeGameRound(YahtzeeGame *game, int player)
+{
+    displayScoreboardMessage(game);
+
+    for (char i = 0; i < YAHTZEE_MAX_ROLLS; i++)
+    {
+        displayRollingDiceMessage(i);
+        yahtzeeDiceRoll(game->dice);
+        displayDiceMessage(game);
+
+        if (awaitYorNInput("Use this roll combination?"))
+        {
+            displayRollOptions(game);
+        }
+    }
+}
+
+// Assemble a score card with all valid options given the dice roll.
+// This is done in linear time, O(2n) where n is the number of dice
+// Return a pointer to the score card array. Indexes should be accessed using the
+// ScoreCard enum values.
+int *_yahtzeeScoreValidOptions(YahtzeeDie dice[YAHTZEE_DIE_COUNT])
+{
+    // Initialize a frequency table, and dice sum.
+    // Frequency table determines how many times a value appears.
+    // Dice sum is used in calculating the score card.
+    // Each value will be mapped to dice.value - 1. Account for this in future use.
+    int frequencyTable[6] = {};
+    int diceSum = 0;
+    for (char i = 0; i < YAHTZEE_DIE_COUNT; i++)
+    {
+        frequencyTable[dice[i].value - 1]++;
+        diceSum += dice[i].value;
+    }
+
+    // Find the valid options one could choose from the score card.
+    // Iterate through the frequencyTable to fill score card values
+    // With the frequency table, we don't need to sort to find a straight.
+    // Simply increment [straight] each time a frequencyTable value isn't 0 
+    // consecutively until a straight is found. Reset if it is 0.
+    int scoreCardOpt[13] = {};
+    int straight = 0;
+    for (char i = 0; i < YAHTZEE_DIE_COUNT; i++)
+    {
+        // if the value is 0 we don't care
+        if (!frequencyTable[i])
+        {
+            // Reset the straight counter
+            straight = 0;
+            continue;
+        }
+
+        // Initialize the 1s through 6s in the scoreCard
+        // score = frequency * dice score
+        int score = frequencyTable[i] * (i + 1);
+        scoreCardOpt[i] = score;
+
+        // Determine 3OAK, 4OAK, Yahtzee
+        _yahtzeeScoreDetermineFrequencyScore(
+            frequencyTable[i],
+            score,
+            diceSum,
+            scoreCardOpt);
+
+        // Wanted to be able to do this in constant time, found a way. Fun algorithm.
+        // Check full house.
+        // First, see if we have a frequency at 3.
+        // A full house only happens if we have 3 of a die, and 2 of a die.
+        // Subtract the score from diceSum.
+        // EX: Dice: [3,3,3,2,2]; freqTable: [0,2,3,0,0,0] diceSum: 13; score: 9; diceSum - score = 4.
+        // Then, divide this value by two. We are checking to see if two die made up this value.
+        // EX: (diceSum - score) / 2 is 2.
+        // Then, check the position in the frequency table for that value to see if there is a two.
+        // EX: freqTable[(diceSum - score / 2) - 1] == 2
+        if (frequencyTable[i] == 3 && (frequencyTable[((diceSum - score) / 2) - 1] == 2))
+        {
+            scoreCardOpt[FULL_HOUSE] = 25;
+        }
+
+        // Check for straights
+        if (straight > 2)
+        {
+            scoreCardOpt[SMALL_STRAIGHT] = 30;
+        }
+
+        if (straight > 3)
+        {
+            scoreCardOpt[LARGE_STRAIGHT] = 40;
+        }
+
+        straight++;
+    }
+}
+
+// Check a scoreCard for 3 of a kind, 4 of a kind, and yahtzee.
+// Switch case won't work here as we need to use the greater than operator
+void _yahtzeeScoreDetermineFrequencyScore(int frequency, int score, int diceSum, int scoreCard[13])
+{
+    // Check for three of a kind
+    if (frequency > 2)
+    {
+        scoreCard[THREE_OF_A_KIND] =
+            score + diceSum;
+    }
+
+    // Check for four of a kind
+    if (frequency > 3)
+    {
+        scoreCard[FOUR_OF_A_KIND] =
+            score + diceSum;
+    }
+
+    // Check for Yahtzee
+    if (frequency > 4)
+    {
+        scoreCard[YAHTZEE] = 50;
     }
 }

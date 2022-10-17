@@ -1,14 +1,14 @@
 # pragma once
 # include <stdlib.h>
+#define YAHTZEE_DIE_COUNT 5
 
-// love saving me bits and bytes :)
-typedef union {
-    unsigned char roll;
-    unsigned char rollAgain;
+typedef struct {
+    unsigned char value;
+    unsigned char keepValue;
 } YahtzeeDie;
 
 // Roll a singular yahtzee die.
 void _yahtzeeDieRoll(YahtzeeDie *die);
 
 // Roll 5 yahtzee dice
-void yahtzeeDiceRoll(YahtzeeDie dice[5]);
+void yahtzeeDiceRoll(YahtzeeDie dice[YAHTZEE_DIE_COUNT]);
