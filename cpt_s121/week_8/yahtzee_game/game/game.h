@@ -1,7 +1,7 @@
 #pragma once
 #include "../messages/messages.h"
 #include "yahtzeegamestruct.h"
-#define YAHTZEE_ROUNDS 13
+#define YAHTZEE_ROUNDS 1
 #define YAHTZEE_MAX_ROLLS 3
 #define YAHTZEE_PLAYERS 2
 #define YAHTZEE_SCORECARD 13
@@ -14,6 +14,8 @@ void yahtzeeGameStart();
 void yahtzeeGameRound(YahtzeeGame *game, int player);
 
 void yahtzeeGameDetermineWinner(YahtzeeGame *game);
+
+void _yahtzeeGameChoosePoints(YahtzeeGame *game, int player);
 
 int *_yahtzeeScoreValidOptions(YahtzeeDie dice[YAHTZEE_DIE_COUNT]);
 

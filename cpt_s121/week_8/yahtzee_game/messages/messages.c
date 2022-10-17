@@ -15,7 +15,7 @@ void displayMenuMessage()
 // Game rules
 void displayGameRulesMessage()
 {
-    printf("the rules are simple: YACHT-ZIE!\n");
+    printf("\nthe rules are simple: YACHT-ZIE!\n");
     awaitInput();
 }
 
@@ -30,8 +30,8 @@ void displayScoreboardMessage(YahtzeeGame *game, int player)
 {
     int *scoreCard = game->players[player];
     printf(
-        "YAHTZEE By Benjamin Schreiber\n\n"
-        "### YOUR SCORE CARD ###\n"
+        TITLE
+        "### PLAYER %d's SCORE CARD ###\n"
         "# Ones: %d\n"
         "# Twos: %d\n"
         "# Threes: %d\n"
@@ -45,69 +45,51 @@ void displayScoreboardMessage(YahtzeeGame *game, int player)
         "# Large Straight: %d\n"
         "# Yahtzee: %d\n"
         "# Chance: %d\n",
-        scoreCard[SUM_OF_ONES], scoreCard[SUM_OF_TWOS], scoreCard[SUM_OF_THREES], scoreCard[SUM_OF_FOURS], scoreCard[SUM_OF_FIVES], scoreCard[SUM_OF_SIXES], scoreCard[THREE_OF_A_KIND], scoreCard[FOUR_OF_A_KIND], scoreCard[FULL_HOUSE], scoreCard[SMALL_STRAIGHT], scoreCard[LARGE_STRAIGHT], scoreCard[YAHTZEE], scoreCard[CHANCE]);
+        player, scoreCard[SUM_OF_ONES], scoreCard[SUM_OF_TWOS], scoreCard[SUM_OF_THREES], scoreCard[SUM_OF_FOURS], scoreCard[SUM_OF_FIVES], scoreCard[SUM_OF_SIXES], scoreCard[THREE_OF_A_KIND], scoreCard[FOUR_OF_A_KIND], scoreCard[FULL_HOUSE], scoreCard[SMALL_STRAIGHT], scoreCard[LARGE_STRAIGHT], scoreCard[YAHTZEE], scoreCard[CHANCE]);
 }
 
 // Roll dice
-// [firstRoll] if not on first roll, display a slightly different message
-void displayRollingDiceMessage(int firstRoll)
+void displayRollingDiceMessage(int round)
 {
-    if (firstRoll)
-    {
-        printf("Rolling the dice!\n");
-        return;
-    }
-    printf("Rolling the dice again!\n");
+    printf("Rolling the dice! Round: %d\n", round);
 }
 
 // Display the dice values
 void displayDiceMessage(YahtzeeGame *game)
 {
     printf(
-        "YOUR ROLL!\n"
-        " _\n"
-        "[%d] - 1\n"
-        " _\n\n"
-        " _\n"
-        "[%d] - 2\n"
-        " _\n\n"
-        " _\n"
-        "[%d] - 3\n"
-        " _\n\n"
-        " _\n"
-        "[%d] - 4\n"
-        " _\n\n"
-        " _\n"
-        "[%d] - 5\n"
-        " _\n\n",
+        "\n1. [%d]\n"
+        "2. [%d]\n"
+        "3. [%d]\n"
+        "4. [%d]\n"
+        "5. [%d]\n\n",
         game->dice[0].value, game->dice[1].value, game->dice[2].value, game->dice[3].value, game->dice[4].value);
 }
 
 // Options after dice roll
-void displayRollOptions(YahtzeeGame *game, int player, int *scoreCardOpt)
+void displayRollOptions(int player, int *scoreCard)
 {
-    int *scoreCard = game->players[player];
     printf(
         "YAHTZEE By Benjamin Schreiber\n\n"
         "### YOUR VALID OPTIONS CARD ###\n"
-        "# Ones: %d\n"
-        "# Twos: %d\n"
-        "# Threes: %d\n"
-        "# Fours: %d\n"
-        "# Fives: %d\n"
-        "# Sixes: %d\n"
-        "# Three of a kind: %d\n"
-        "# Four of a kind: %d\n"
-        "# Full House: %d\n"
-        "# Small Straight: %d\n"
-        "# Large Straight: %d\n"
-        "# Yahtzee: %d\n"
-        "# Chance: %d\n",
+        "# 1. Ones: %d\n"
+        "# 2. Twos: %d\n"
+        "# 3. Threes: %d\n"
+        "# 4. Fours: %d\n"
+        "# 5. Fives: %d\n"
+        "# 6. Sixes: %d\n"
+        "# 7. Three of a kind: %d\n"
+        "# 8. Four of a kind: %d\n"
+        "# 9. Full House: %d\n"
+        "# 10. Small Straight: %d\n"
+        "# 11. Large Straight: %d\n"
+        "# 12. Yahtzee: %d\n"
+        "# 13. Chance: %d\n",
         scoreCard[SUM_OF_ONES], scoreCard[SUM_OF_TWOS], scoreCard[SUM_OF_THREES], scoreCard[SUM_OF_FOURS], scoreCard[SUM_OF_FIVES], scoreCard[SUM_OF_SIXES], scoreCard[THREE_OF_A_KIND], scoreCard[FOUR_OF_A_KIND], scoreCard[FULL_HOUSE], scoreCard[SMALL_STRAIGHT], scoreCard[LARGE_STRAIGHT], scoreCard[YAHTZEE], scoreCard[CHANCE]);
 }
 
 // yahtzee dice input should be between 1 and 13
-void invalidYahtzeeDiceInput() 
+void invalidYahtzeeDiceInput()
 {
     printf("Pick something that like you can do man\n");
 }
@@ -115,31 +97,39 @@ void invalidYahtzeeDiceInput()
 // you win!!!
 void displayPlayerWonMessage(int player)
 {
-    printf("you win a yacht! (zee)");
+    printf("player numba %d!!! you win a yacht! (zee)", player);
+}
+
+void displayClearAndTitleMessage() {
+    system("clear");
+    printf(TITLE);
 }
 
 // Y or N response
 // Return 1 if y 0 if n
 int awaitYorNInput(char *message)
 {
+    printf("%s\n", message);
     char c = '\0';
-    do {
-        printf("%s\n\n Enter Y or N\n", message);
+    do
+    {
+        printf("Enter Y or N\n");
+        fflush(stdin);
         scanf("%c", &c);
-    } while (c != 'Y' || c != 'N' || c != 'y' || c != 'n');
-    if (c == 'Y' || c == 'y') {
+    } while (c != 'Y' && c != 'N' && c != 'y' && c != 'n');
+
+    if (c == 'Y' || c == 'y')
+    {
         return 1;
     }
     return 0;
 }
 
 // user input selecting one of the roll options
-int awaitYahtzeeRollOptionInput()
+void awaitYahtzeeRollOptionInput(int *input)
 {
-    int input = 0;
     printf("Enter a number 1-13\n");
-    scanf("%d", &input);
-    return input;
+    scanf("%d", input);
 }
 
 // get a number 1-5 for the dice, 0 to exit

@@ -2,23 +2,28 @@
 
 void yahtzeeGameStart()
 {
+    system("clear");
     displayStartGameMessage();
-    YahtzeeGame game = {0};
+    YahtzeeGame game = {
+        .players = {}
+    };
     while (game.round++ < YAHTZEE_ROUNDS)
     {
-        yahtzeeGameRound(&game, 1);
-        yahtzeeGameRound(&game, 2);
+        for (char i = 0; i < YAHTZEE_PLAYERS; i++) {
+            yahtzeeGameRound(&game, i);
+        }
     }
     yahtzeeGameDetermineWinner(&game);
 }
 
 void yahtzeeGameDetermineWinner(YahtzeeGame *game)
 {
-    typedef struct{
+    typedef struct
+    {
         int sum;
         char player;
     } PlayerSum;
-    
+
     PlayerSum highest = {.sum = 0, .player = 0};
     int sum = 0;
     for (char player = 0; player < YAHTZEE_PLAYERS; player++)
@@ -30,12 +35,13 @@ void yahtzeeGameDetermineWinner(YahtzeeGame *game)
         if (sum > highest.sum)
         {
             highest.sum = sum;
-            highest.player = player + 1;
+            highest.player = player;
         }
         sum = 0;
     }
 
     displayPlayerWonMessage(highest.player);
+    awaitInput();
 }
 
 void yahtzeeGameRound(YahtzeeGame *game, int player)
@@ -46,6 +52,7 @@ void yahtzeeGameRound(YahtzeeGame *game, int player)
 
     for (char i = 0; i < YAHTZEE_MAX_ROLLS; i++)
     {
+        displayClearAndTitleMessage();
 
         // Roll the dice, show player the roll
         displayRollingDiceMessage(i);
@@ -53,40 +60,54 @@ void yahtzeeGameRound(YahtzeeGame *game, int player)
         displayDiceMessage(game);
 
         // See which dice the player wants to keep.
-        int input = 0;
-        do
+        if (awaitYorNInput("Do you want to keep any dice?"))
         {
-            awaitNumberInput(&input);
-            if (input != 0)
+            int input = 0;
+            do
             {
-                game->dice[input].keepValue = 1;
-            }
-        } while (input);
+                while (input < 1 || input > 6)
+                {
+                    awaitNumberInput(&input);
+                }
 
-        if (awaitYorNInput("Use this roll combination?"))
+                game->dice[input - 1].keepValue = 1;
+
+                if (!awaitYorNInput("Do you want to keep more dice?"))
+                {
+                    break;
+                }
+
+                input = 0;
+
+            } while (1);
+        }
+
+        if (!awaitYorNInput("Roll again?"))
         {
             break;
         }
     }
 
-    int invalidInput = 1;
+    // Prompt the player to choose their points
+    _yahtzeeGameChoosePoints(game, player);
+
+    // Show the player their score
+    displayScoreboardMessage(game, player);
+    awaitInput();
+}
+
+void _yahtzeeGameChoosePoints(YahtzeeGame *game, int player)
+{
     int *scoreCardOpt = _yahtzeeScoreValidOptions(game->dice);
     int input = 0;
+    displayRollOptions(player, scoreCardOpt);
     do
     {
-        displayRollOptions(game, player, scoreCardOpt);
-        awaitNumberInput(&input);
+        awaitYahtzeeRollOptionInput(&input);
+    } while (input < 1 || input > YAHTZEE_SCORECARD || game->players[player][input - 1] > 0);
 
-        // Check if the input is valid.
-        if (input < 1 || input > YAHTZEE_SCORECARD || game->players[player][input - 1] > 0)
-        {
-            invalidYahtzeeDiceInput();
-            continue;
-        }
-
-        game->players[player][input] = scoreCardOpt[input - 1];
-
-    } while (invalidInput);
+    printf("%d", scoreCardOpt[input - 1]);
+    game->players[player][input - 1] = scoreCardOpt[input - 1];
     free(scoreCardOpt);
 }
 
@@ -115,7 +136,7 @@ int *_yahtzeeScoreValidOptions(YahtzeeDie dice[YAHTZEE_DIE_COUNT])
     // consecutively until a straight is found. Reset if it is 0.
     int *scoreCardOpt = malloc(sizeof(int) * YAHTZEE_SCORECARD);
     int straight = 0;
-    for (char i = 0; i < YAHTZEE_DIE_COUNT; i++)
+    for (char i = 0; i < 6; i++)
     {
         // if the value is 0 we don't care
         if (!frequencyTable[i])

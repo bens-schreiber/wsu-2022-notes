@@ -10,7 +10,7 @@ void _yahtzeeDieRoll(YahtzeeDie *die)
 
 void yahtzeeDiceRoll(YahtzeeDie dice[5])
 {
-    for (int i = 0; i < YAHTZEE_DIE_COUNT - 1; i++)
+    for (int i = 0; i < YAHTZEE_DIE_COUNT; i++)
     {
         _yahtzeeDieRoll(&dice[i]);
     }
