@@ -14,6 +14,14 @@ void yahtzeeDiceRoll(YahtzeeDie dice[5])
     {
         _yahtzeeDieRoll(&dice[i]);
     }
+
+    // RIG DICE VALUES HERE!!!
+    // dice[0].value = 1;
+    // dice[1].value = 2;
+    // dice[2].value = 3;
+    // dice[3].value = 4;
+    // dice[4].value = 5;
+
 }
 
 void yahtzeeDiceReset(YahtzeeDie dice[YAHTZEE_DIE_COUNT])
