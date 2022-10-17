@@ -23,7 +23,6 @@ int displayMenu()
 int _awaitMenuInput()
 {
     int input = 0;
-    printf("Enter an option (1, 2, 3)\n");
     scanf("%d", &input);
     return input;
 }

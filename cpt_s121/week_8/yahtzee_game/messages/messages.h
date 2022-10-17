@@ -38,3 +38,5 @@ int awaitYahtzeeRollOptionInput();
 
 // get a number 1-5 for the dice, 0 to exit
 int awaitNumberInput(int *input);
+
+void awaitInput();
