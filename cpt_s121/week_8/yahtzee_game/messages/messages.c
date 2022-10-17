@@ -38,7 +38,7 @@ void displayScoreboardMessage(YahtzeeGame *game, int player)
 
     printf(
         TITLE
-        "### PLAYER %d's SCORE CARD ###\n"
+        "### PLAYER %d's SCORE CARD on ROUND %d ###\n"
         "# Ones: %d\n"
         "# Twos: %d\n"
         "# Threes: %d\n"
@@ -53,7 +53,7 @@ void displayScoreboardMessage(YahtzeeGame *game, int player)
         "# Yahtzee: %d\n"
         "# Chance: %d\n"
         "# YOUR TOTAL: %d\n",
-        player, scoreCard[SUM_OF_ONES], scoreCard[SUM_OF_TWOS], scoreCard[SUM_OF_THREES], scoreCard[SUM_OF_FOURS], scoreCard[SUM_OF_FIVES], scoreCard[SUM_OF_SIXES], scoreCard[THREE_OF_A_KIND], scoreCard[FOUR_OF_A_KIND], scoreCard[FULL_HOUSE], scoreCard[SMALL_STRAIGHT], scoreCard[LARGE_STRAIGHT], scoreCard[YAHTZEE], scoreCard[CHANCE], total);
+        player, game->round, scoreCard[SUM_OF_ONES], scoreCard[SUM_OF_TWOS], scoreCard[SUM_OF_THREES], scoreCard[SUM_OF_FOURS], scoreCard[SUM_OF_FIVES], scoreCard[SUM_OF_SIXES], scoreCard[THREE_OF_A_KIND], scoreCard[FOUR_OF_A_KIND], scoreCard[FULL_HOUSE], scoreCard[SMALL_STRAIGHT], scoreCard[LARGE_STRAIGHT], scoreCard[YAHTZEE], scoreCard[CHANCE], total);
 }
 
 // Roll dice
@@ -79,7 +79,7 @@ void displayRollOptions(int player, int *scoreCard)
 {
     printf(
         "YAHTZEE By Benjamin Schreiber\n\n"
-        "### YOUR VALID OPTIONS CARD ###\n"
+        "### PLAYER %d's VALID SCORE CARD OPTIONS ###\n"
         "# 1. Ones: %d\n"
         "# 2. Twos: %d\n"
         "# 3. Threes: %d\n"
@@ -93,7 +93,7 @@ void displayRollOptions(int player, int *scoreCard)
         "# 11. Large Straight: %d\n"
         "# 12. Yahtzee: %d\n"
         "# 13. Chance: %d\n",
-        scoreCard[SUM_OF_ONES], scoreCard[SUM_OF_TWOS], scoreCard[SUM_OF_THREES], scoreCard[SUM_OF_FOURS], scoreCard[SUM_OF_FIVES], scoreCard[SUM_OF_SIXES], scoreCard[THREE_OF_A_KIND], scoreCard[FOUR_OF_A_KIND], scoreCard[FULL_HOUSE], scoreCard[SMALL_STRAIGHT], scoreCard[LARGE_STRAIGHT], scoreCard[YAHTZEE], scoreCard[CHANCE]);
+        player, scoreCard[SUM_OF_ONES], scoreCard[SUM_OF_TWOS], scoreCard[SUM_OF_THREES], scoreCard[SUM_OF_FOURS], scoreCard[SUM_OF_FIVES], scoreCard[SUM_OF_SIXES], scoreCard[THREE_OF_A_KIND], scoreCard[FOUR_OF_A_KIND], scoreCard[FULL_HOUSE], scoreCard[SMALL_STRAIGHT], scoreCard[LARGE_STRAIGHT], scoreCard[YAHTZEE], scoreCard[CHANCE]);
 }
 
 // yahtzee dice input should be between 1 and 13
