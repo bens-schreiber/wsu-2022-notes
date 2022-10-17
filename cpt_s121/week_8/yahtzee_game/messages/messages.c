@@ -16,6 +16,7 @@ void displayMenuMessage()
 void displayGameRulesMessage()
 {
     printf("the rules are simple: YACHT-ZIE!\n");
+    awaitInput();
 }
 
 // Game intro
