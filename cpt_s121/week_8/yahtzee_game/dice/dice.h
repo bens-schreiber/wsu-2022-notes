@@ -12,3 +12,5 @@ void _yahtzeeDieRoll(YahtzeeDie *die);
 
 // Roll 5 yahtzee dice
 void yahtzeeDiceRoll(YahtzeeDie dice[YAHTZEE_DIE_COUNT]);
+
+void yahtzeeDiceReset(YahtzeeDie dice[YAHTZEE_DIE_COUNT]);

@@ -3,12 +3,13 @@
 #include "../messages/messages.h"
 #define YAHTZEE_ROUNDS 13
 #define YAHTZEE_MAX_ROLLS 3
+#define YAHTZEE_PLAYERS 2
+#define YAHTZEE_SCORECARD 13
 
 typedef struct
 {
     YahtzeeDie dice[5];
-    int playerOneScoreCard[13];
-    int playerTwoScoreCard[13];
+    int players[2][13];
     int round;
 
 } YahtzeeGame;
@@ -37,6 +38,4 @@ void yahtzeeGameStart();
 // [player] is 1 for player 1, or 2 for player 2.
 void yahtzeeGameRound(YahtzeeGame *game, int player);
 
-int *_yahtzeeScoreFillOptions(YahtzeeDie dice[YAHTZEE_DIE_COUNT]);
-
-
+void yahtzeeGameDetermineWinner(YahtzeeGame *game);

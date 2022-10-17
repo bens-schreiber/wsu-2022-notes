@@ -9,23 +9,83 @@ void yahtzeeGameStart()
         yahtzeeGameRound(&game, 1);
         yahtzeeGameRound(&game, 2);
     }
+    yahtzeeGameDetermineWinner(&game);
+}
+
+void yahtzeeGameDetermineWinner(YahtzeeGame *game)
+{
+    typedef struct{
+        int sum;
+        char player;
+    } PlayerSum;
+    
+    PlayerSum highest = {.sum = 0, .player = 0};
+    int sum = 0;
+    for (char player = 0; player < YAHTZEE_PLAYERS; player++)
+    {
+        for (char score = 0; score < YAHTZEE_SCORECARD; score++)
+        {
+            sum += game->players[player][score];
+        }
+        if (sum > highest.sum)
+        {
+            highest.sum = sum;
+            highest.player = player + 1;
+        }
+        sum = 0;
+    }
+
+    displayPlayerWonMessage(highest.player);
 }
 
 void yahtzeeGameRound(YahtzeeGame *game, int player)
 {
-    displayScoreboardMessage(game);
+    yahtzeeDiceReset(game->dice);
+    displayScoreboardMessage(game, player);
 
     for (char i = 0; i < YAHTZEE_MAX_ROLLS; i++)
     {
+
+        // Roll the dice, show player the roll
         displayRollingDiceMessage(i);
         yahtzeeDiceRoll(game->dice);
         displayDiceMessage(game);
 
+        // See which dice the player wants to keep.
+        int input = 0;
+        do
+        {
+            awaitNumberInput(&input);
+            if (input != 0)
+            {
+                game->dice[input].keepValue = 1;
+            }
+        } while (input);
+
         if (awaitYorNInput("Use this roll combination?"))
         {
-            displayRollOptions(game);
+            break;
         }
     }
+
+    int invalidInput = 1;
+    int scoreCardOpt[YAHTZEE_SCORECARD] = _yahtzeeScoreValidOptions(game->dice);
+    int input = 0;
+    do
+    {
+        displayRollOptions(game, player, scoreCardOpt);
+        awaitNumberInput(&input);
+
+        // Check if the input is valid.
+        if (input < 1 || input > YAHTZEE_SCORECARD || game->players[player][input - 1] > 0)
+        {
+            invalidYahtzeeDiceInput();
+            continue;
+        }
+
+        game->players[player][input] = scoreCardOpt[input - 1];
+
+    } while (invalidInput);
 }
 
 // Assemble a score card with all valid options given the dice roll.
@@ -49,9 +109,9 @@ int *_yahtzeeScoreValidOptions(YahtzeeDie dice[YAHTZEE_DIE_COUNT])
     // Find the valid options one could choose from the score card.
     // Iterate through the frequencyTable to fill score card values
     // With the frequency table, we don't need to sort to find a straight.
-    // Simply increment [straight] each time a frequencyTable value isn't 0 
+    // Simply increment [straight] each time a frequencyTable value isn't 0
     // consecutively until a straight is found. Reset if it is 0.
-    int scoreCardOpt[13] = {};
+    int scoreCardOpt[YAHTZEE_SCORECARD] = {};
     int straight = 0;
     for (char i = 0; i < YAHTZEE_DIE_COUNT; i++)
     {
