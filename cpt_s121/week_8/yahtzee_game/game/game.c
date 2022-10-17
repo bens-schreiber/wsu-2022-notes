@@ -2,7 +2,7 @@
 
 void yahtzeeGameStart()
 {
-    displayStartGame();
+    displayStartGameMessage();
     YahtzeeGame game = {0};
     while (game.round++ < YAHTZEE_ROUNDS)
     {
@@ -42,6 +42,7 @@ void yahtzeeGameRound(YahtzeeGame *game, int player)
 {
     yahtzeeDiceReset(game->dice);
     displayScoreboardMessage(game, player);
+    awaitInput();
 
     for (char i = 0; i < YAHTZEE_MAX_ROLLS; i++)
     {
@@ -69,7 +70,7 @@ void yahtzeeGameRound(YahtzeeGame *game, int player)
     }
 
     int invalidInput = 1;
-    int scoreCardOpt[YAHTZEE_SCORECARD] = _yahtzeeScoreValidOptions(game->dice);
+    int *scoreCardOpt = _yahtzeeScoreValidOptions(game->dice);
     int input = 0;
     do
     {
@@ -86,6 +87,7 @@ void yahtzeeGameRound(YahtzeeGame *game, int player)
         game->players[player][input] = scoreCardOpt[input - 1];
 
     } while (invalidInput);
+    free(scoreCardOpt);
 }
 
 // Assemble a score card with all valid options given the dice roll.
@@ -111,7 +113,7 @@ int *_yahtzeeScoreValidOptions(YahtzeeDie dice[YAHTZEE_DIE_COUNT])
     // With the frequency table, we don't need to sort to find a straight.
     // Simply increment [straight] each time a frequencyTable value isn't 0
     // consecutively until a straight is found. Reset if it is 0.
-    int scoreCardOpt[YAHTZEE_SCORECARD] = {};
+    int *scoreCardOpt = malloc(sizeof(int) * YAHTZEE_SCORECARD);
     int straight = 0;
     for (char i = 0; i < YAHTZEE_DIE_COUNT; i++)
     {
@@ -163,6 +165,8 @@ int *_yahtzeeScoreValidOptions(YahtzeeDie dice[YAHTZEE_DIE_COUNT])
 
         straight++;
     }
+
+    return scoreCardOpt;
 }
 
 // Check a scoreCard for 3 of a kind, 4 of a kind, and yahtzee.

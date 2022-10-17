@@ -8,10 +8,10 @@ int displayMenu()
     switch (_awaitMenuInput())
     {
         case 1:
-            displayGameRules();
+            displayGameRulesMessage();
             break;
         case 2:
-            yahtzeeGame();
+            yahtzeeGameStart();
             break;
         case 3:
             return 0;   // EXIT

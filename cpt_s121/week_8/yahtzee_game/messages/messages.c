@@ -6,8 +6,8 @@ void displayMenuMessage()
     printf(
         "########################################\n"
         "Welcome to Yahtzee by Benjamin Schreiber\n"
-        "Enter 1 to view the rules\n",
-        "Enter 2 to start the game\n",
+        "Enter 1 to view the rules\n"
+        "Enter 2 to start the game\n"
         "Enter 3 to exit\n"
         "########################################\n");
 }
@@ -79,7 +79,7 @@ void displayDiceMessage(YahtzeeGame *game)
         " _\n"
         "[%d] - 5\n"
         " _\n\n",
-        game->dice[0], game->dice[1], game->dice[2], game->dice[3], game->dice[4]);
+        game->dice[0].value, game->dice[1].value, game->dice[2].value, game->dice[3].value, game->dice[4].value);
 }
 
 // Options after dice roll
@@ -121,7 +121,7 @@ void displayPlayerWonMessage(int player)
 // Return 1 if y 0 if n
 int awaitYorNInput(char *message)
 {
-    char c = "\0";
+    char c = '\0';
     do {
         printf("%s\n\n Enter Y or N\n", message);
         scanf("%c", &c);
@@ -142,10 +142,17 @@ int awaitYahtzeeRollOptionInput()
 }
 
 // get a number 1-5 for the dice, 0 to exit
-int awaitNumberInput(int *input)
+void awaitNumberInput(int *input)
 {
-    int input = 0;
     printf("Enter a number 1-5\n");
-    scanf("%d", &input);
-    return input;
+    scanf("%d", input);
+}
+
+void awaitInput()
+{
+    printf("\nPress ENTER to continue!\n");
+    char input = 0;
+    fflush(stdin);
+    getchar();
+    system("clear");
 }

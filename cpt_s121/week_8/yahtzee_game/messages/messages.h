@@ -1,5 +1,6 @@
-#include "../game/game.h"
+#include "../game/yahtzeegamestruct.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 // Menu options
 void displayMenuMessage();
@@ -37,6 +38,6 @@ int awaitYorNInput(char *message);
 int awaitYahtzeeRollOptionInput();
 
 // get a number 1-5 for the dice, 0 to exit
-int awaitNumberInput(int *input);
+void awaitNumberInput(int *input);
 
 void awaitInput();
