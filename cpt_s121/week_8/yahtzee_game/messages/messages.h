@@ -23,8 +23,10 @@ void displayDiceMessage(YahtzeeGame *game);
 // Options after dice roll
 void displayRollOptions(YahtzeeGame *game, int player, int *scoreCardOpt);
 
+// yahtzee dice input should be between 1 and 13
 void invalidYahtzeeDiceInput();
 
+// you win!!!
 void displayPlayerWonMessage(int player);
 
 // Y or N response
