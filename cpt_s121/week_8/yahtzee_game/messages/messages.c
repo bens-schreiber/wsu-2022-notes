@@ -15,7 +15,18 @@ void displayMenuMessage()
 // Game rules
 void displayGameRulesMessage()
 {
-    printf("\nthe rules are simple: YACHT-ZIE!\n");
+    printf(
+        "\nthese are the rules of the yacht Z\n"
+        "there are 13 rounds (you can change this in game/constants.h\n"
+        "there are 2 players (you can change this in game/constants.h)\n"
+        "each player has 5 dice (you can change this in dice/dice.h)\n"
+        "roll the dice. you may keep any die to remain the same for the remainder of the rolls.\n"
+        "each player gets 3 rolls maximum.\n"
+        "from the valid score options, choose an option. you may only score in each category once.\n"
+        "at the end of the rounds, a winner is determined from the TOTAL section\n"
+        "if you win the game you get a yacht for free. now go play lil yachty\n"
+
+    );
     awaitInput();
 }
 
@@ -66,34 +77,54 @@ void displayRollingDiceMessage(int round)
 void displayDiceMessage(YahtzeeGame *game)
 {
     printf(
-        "\n1. [%d]\n"
-        "2. [%d]\n"
-        "3. [%d]\n"
-        "4. [%d]\n"
-        "5. [%d]\n\n",
-        game->dice[0].value, game->dice[1].value, game->dice[2].value, game->dice[3].value, game->dice[4].value);
+        "\n1. [%d] keep: %s\n"
+        "2. [%d] keep: %s\n"
+        "3. [%d] keep: %s\n"
+        "4. [%d] keep: %s\n"
+        "5. [%d] keep: %s\n\n",
+        game->dice[0].value, game->dice[0].keepValue ? "YES" : "NO", 
+        game->dice[1].value, game->dice[1].keepValue ? "YES" : "NO",  
+        game->dice[2].value, game->dice[2].keepValue ? "YES" : "NO", 
+        game->dice[3].value, game->dice[3].keepValue ? "YES" : "NO", 
+        game->dice[4].value, game->dice[4].keepValue ? "YES" : "NO");
 }
 
 // Options after dice roll
-void displayRollOptions(int player, int *scoreCard)
+void displayRollOptions(YahtzeeGame *game, int player, int *validScoreCard)
 {
+    int *pScoreCard = game->players[player];
     printf(
-        "YAHTZEE By Benjamin Schreiber\n\n"
+        TITLE
+        "REMINDER: If no valid roll occured OR the scorecard area is already set, the area will be +0\n\n"
         "### PLAYER %d's VALID SCORE CARD OPTIONS ###\n"
-        "# 1. Ones: %d\n"
-        "# 2. Twos: %d\n"
-        "# 3. Threes: %d\n"
-        "# 4. Fours: %d\n"
-        "# 5. Fives: %d\n"
-        "# 6. Sixes: %d\n"
-        "# 7. Three of a kind: %d\n"
-        "# 8. Four of a kind: %d\n"
-        "# 9. Full House: %d\n"
-        "# 10. Small Straight: %d\n"
-        "# 11. Large Straight: %d\n"
-        "# 12. Yahtzee: %d\n"
-        "# 13. Chance: %d\n",
-        player, scoreCard[SUM_OF_ONES], scoreCard[SUM_OF_TWOS], scoreCard[SUM_OF_THREES], scoreCard[SUM_OF_FOURS], scoreCard[SUM_OF_FIVES], scoreCard[SUM_OF_SIXES], scoreCard[THREE_OF_A_KIND], scoreCard[FOUR_OF_A_KIND], scoreCard[FULL_HOUSE], scoreCard[SMALL_STRAIGHT], scoreCard[LARGE_STRAIGHT], scoreCard[YAHTZEE], scoreCard[CHANCE]);
+        "# 1. Ones: %d (+%d)\n"
+        "# 2. Twos: %d (+%d)\n"
+        "# 3. Threes: %d (+%d)\n"
+        "# 4. Fours: %d (+%d)\n"
+        "# 5. Fives: %d (+%d)\n"
+        "# 6. Sixes: %d (+%d)\n"
+        "# 7. Three of a kind: %d (+%d)\n"
+        "# 8. Four of a kind: %d (+%d)\n"
+        "# 9. Full House: %d (+%d)\n"
+        "# 10. Small Straight: %d (+%d)\n"
+        "# 11. Large Straight: %d (+%d)\n"
+        "# 12. Yahtzee: %d (+%d)\n"
+        "# 13. Chance: %d (+%d)\n",
+        player, 
+        pScoreCard[SUM_OF_ONES], !pScoreCard[SUM_OF_ONES] ? validScoreCard[SUM_OF_ONES] : 0, 
+        pScoreCard[SUM_OF_TWOS], !pScoreCard[SUM_OF_TWOS] ? validScoreCard[SUM_OF_TWOS] : 0, 
+        pScoreCard[SUM_OF_THREES], !pScoreCard[SUM_OF_THREES] ? validScoreCard[SUM_OF_THREES] : 0, 
+        pScoreCard[SUM_OF_FOURS], !pScoreCard[SUM_OF_FOURS] ? validScoreCard[SUM_OF_FOURS] : 0, 
+        pScoreCard[SUM_OF_FIVES], !pScoreCard[SUM_OF_FIVES] ? validScoreCard[SUM_OF_FIVES] : 0, 
+        pScoreCard[SUM_OF_SIXES], !pScoreCard[SUM_OF_SIXES] ? validScoreCard[SUM_OF_SIXES] : 0, 
+        pScoreCard[THREE_OF_A_KIND], !pScoreCard[THREE_OF_A_KIND] ? validScoreCard[THREE_OF_A_KIND] : 0, 
+        pScoreCard[FOUR_OF_A_KIND], !pScoreCard[FOUR_OF_A_KIND] ? validScoreCard[FOUR_OF_A_KIND] : 0, 
+        pScoreCard[FULL_HOUSE], !pScoreCard[FULL_HOUSE] ? validScoreCard[FULL_HOUSE] : 0, 
+        pScoreCard[SMALL_STRAIGHT], !pScoreCard[SMALL_STRAIGHT] ? validScoreCard[SMALL_STRAIGHT] : 0, 
+        pScoreCard[LARGE_STRAIGHT], !pScoreCard[LARGE_STRAIGHT] ? validScoreCard[LARGE_STRAIGHT] : 0,  
+        pScoreCard[YAHTZEE], !pScoreCard[YAHTZEE] ? validScoreCard[YAHTZEE] : 0, 
+        pScoreCard[CHANCE], !pScoreCard[CHANCE] ? validScoreCard[CHANCE] : 0
+        );
 }
 
 // yahtzee dice input should be between 1 and 13

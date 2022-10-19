@@ -23,7 +23,7 @@ void displayRollingDiceMessage(int firstRoll);
 void displayDiceMessage(YahtzeeGame *game);
 
 // Options after dice roll
-void displayRollOptions(int player, int *scoreCardOpt);
+void displayRollOptions(YahtzeeGame *game, int player, int *validScoreCard);
 
 // yahtzee dice input should be between 1 and 13
 void invalidYahtzeeDiceInput();

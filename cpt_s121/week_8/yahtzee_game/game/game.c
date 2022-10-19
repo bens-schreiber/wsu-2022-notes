@@ -131,7 +131,7 @@ void _yahtzeeGameChoosePoints(YahtzeeGame *game, int player)
 
     // Get player input. Loop incase the input is invalid
     int input = 0;
-    displayRollOptions(player, scoreCardOpt);
+    displayRollOptions(game, player, scoreCardOpt);
     do
     {
         awaitYahtzeeRollOptionInput(&input);
