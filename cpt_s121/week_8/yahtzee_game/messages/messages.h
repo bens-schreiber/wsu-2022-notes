@@ -13,7 +13,7 @@ void displayGameRulesMessage();
 void displayStartGameMessage();
 
 // Game scoreboard
-void displayScoreboardMessage(YahtzeeGame *game, int player);
+void displayScoreboardMessage(YahtzeeGame *game);
 
 // Roll dice
 // [firstRoll] if not on first roll, display a slightly different message
@@ -23,7 +23,7 @@ void displayRollingDiceMessage(int firstRoll);
 void displayDiceMessage(YahtzeeGame *game);
 
 // Options after dice roll
-void displayRollOptions(YahtzeeGame *game, int player, int *validScoreCard);
+void displayRollOptions(YahtzeeGame *game, int *validScoreCard);
 
 // yahtzee dice input should be between 1 and 13
 void invalidYahtzeeDiceInput();

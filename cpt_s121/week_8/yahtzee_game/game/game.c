@@ -9,12 +9,13 @@ void yahtzeeGameStart()
     YahtzeeGame game = {};
 
     // Play YAHTZEE_ROUNDS amount of rounds
-    while (game.round++ < YAHTZEE_ROUNDS)
+    while (game.round< YAHTZEE_ROUNDS)
     {
 
         // For each player, do a turn.
         for (char i = 0; i < YAHTZEE_PLAYERS; i++) {
-            yahtzeeGameRound(&game, i);
+            yahtzeeGameRound(&game);
+            game.round++;
         }
     }
 
@@ -62,13 +63,15 @@ void yahtzeeGameDetermineWinner(YahtzeeGame *game)
     awaitInput();
 }
 
-void yahtzeeGameRound(YahtzeeGame *game, int player)
+void yahtzeeGameRound(YahtzeeGame *game)
 {
+    int player = game->round % YAHTZEE_PLAYERS;
+
     // Reset the dice "keepValue" values from the previous round.
     yahtzeeDiceReset(game->dice);
 
     // Display the scoreboard
-    displayScoreboardMessage(game, player);
+    displayScoreboardMessage(game);
     awaitInput();
 
     // Do YAHTZEE_MAX_ROLLS amount of rolls (at maximum)
@@ -114,24 +117,23 @@ void yahtzeeGameRound(YahtzeeGame *game, int player)
     }
 
     // Prompt the player to choose their points
-    _yahtzeeGameChoosePoints(game, player);
+    _yahtzeeGameChoosePoints(game);
 
     // Show the player their score
-    displayScoreboardMessage(game, player);
+    displayScoreboardMessage(game);
     awaitInput();
-
-    game->round++;
 }
 
-void _yahtzeeGameChoosePoints(YahtzeeGame *game, int player)
+void _yahtzeeGameChoosePoints(YahtzeeGame *game)
 {
+    int player = game->round % YAHTZEE_PLAYERS;
 
     // Generate a valid score card
     int *scoreCardOpt = _yahtzeeScoreValidOptions(game->dice);
 
     // Get player input. Loop incase the input is invalid
     int input = 0;
-    displayRollOptions(game, player, scoreCardOpt);
+    displayRollOptions(game, scoreCardOpt);
     do
     {
         awaitYahtzeeRollOptionInput(&input);

@@ -10,7 +10,7 @@ void yahtzeeGameStart();
 // Does a single round of yahtzee
 // [game] holds the current games values
 // [player] determines the index of the game->players array to modify the scorecard at.
-void yahtzeeGameRound(YahtzeeGame *game, int player);
+void yahtzeeGameRound(YahtzeeGame *game);
 
 // Determines who won the game based off the highest sum.
 // [game] holds the current games values
@@ -19,7 +19,7 @@ void yahtzeeGameDetermineWinner(YahtzeeGame *game);
 // Awaits player input to chose what points from the generated valid scorecard.
 // [game] holds the current games values
 // [player] determines the index of the game->players array to modify the scorecard at.
-void _yahtzeeGameChoosePoints(YahtzeeGame *game, int player);
+void _yahtzeeGameChoosePoints(YahtzeeGame *game);
 
 // Assemble a score card with all valid options given the dice roll.
 // This is done in linear time, O(2n) where n is the number of dice

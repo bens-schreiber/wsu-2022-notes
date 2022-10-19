@@ -37,8 +37,9 @@ void displayStartGameMessage()
 }
 
 // Game scoreboard
-void displayScoreboardMessage(YahtzeeGame *game, int player)
+void displayScoreboardMessage(YahtzeeGame *game)
 {
+    int player = game->round % YAHTZEE_PLAYERS;
     int *scoreCard = game->players[player];
 
     // calculate the total
@@ -90,8 +91,9 @@ void displayDiceMessage(YahtzeeGame *game)
 }
 
 // Options after dice roll
-void displayRollOptions(YahtzeeGame *game, int player, int *validScoreCard)
+void displayRollOptions(YahtzeeGame *game, int *validScoreCard)
 {
+    int player = game->round % YAHTZEE_PLAYERS;
     int *pScoreCard = game->players[player];
     printf(
         TITLE
