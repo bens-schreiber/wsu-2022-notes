@@ -58,8 +58,29 @@ int remove_whitespace(char *string, int size)
     return count;
 }
 
+typedef struct node {
+    int data;
+    struct node *next;
+} node_t;
+
 int main(int argc, char const *argv[])
 {
-    printf("%d", count_alphas("abc123", 0));
+
+    // initialize values
+    node_t *head = malloc(sizeof(node_t));
+    node_t *iterator = head;
+    for (char i = 1; i < 5; i++) {
+        iterator->next = malloc(sizeof(node_t));
+        iterator = iterator->next;
+        iterator->data = i;
+    }
+
+    iterator = head;
+
+    do {
+        printf("%d", iterator->data);
+    } while (iterator = iterator->next);
+
+
     return 0;
 }
