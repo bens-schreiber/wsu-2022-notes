@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
-
 // swap a with b
 void swap(int *a, int *b)
 {
@@ -63,24 +62,47 @@ typedef struct node {
     struct node *next;
 } node_t;
 
-int main(int argc, char const *argv[])
-{
+void reverse_matrix(int rows, int columns, int matrix[rows][columns]) {
 
-    // initialize values
-    node_t *head = malloc(sizeof(node_t));
-    node_t *iterator = head;
-    for (char i = 1; i < 5; i++) {
-        iterator->next = malloc(sizeof(node_t));
-        iterator = iterator->next;
-        iterator->data = i;
-    }
+    // reversing something with 0 or 1 rows is as simple as this
+    if (rows < 2) return;
 
-    iterator = head;
+    // we will swap index a with index b
+    // rowA is the first row
+    // rowB is the last row
+    int *rowA = matrix[0];
+    int *rowB = matrix[rows - 1];
 
     do {
-        printf("%d", iterator->data);
-    } while (iterator = iterator->next);
+        for (int col = 0; col < columns; col++) {
+            swap(&rowA[col], &rowB[col]);
+        }
+    } while ((rowA += columns) <= (rowB -= columns));
+}
 
 
-    return 0;
+int main(int argc, char const *argv[])
+{
+    const int ROWS = 2;
+    const int COLS = 5;
+
+    int arr[ROWS][COLS] = {{1,2,3,4,5}, {6,7,8,9,10}};
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
+            printf("%d ", arr[i][j]);
+        }
+        printf("\n");
+    }
+
+    reverse_matrix(ROWS, COLS, arr);
+
+    printf("\n");
+
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
+            printf("%d ", arr[i][j]);
+        }
+        printf("\n");
+    }
+
 }
