@@ -64,12 +64,8 @@ typedef struct node {
 
 void reverse_matrix(int rows, int columns, int matrix[rows][columns]) {
 
-    // reversing something with 0 or 1 rows is as simple as this
     if (rows < 2) return;
 
-    // we will swap index a with index b
-    // rowA is the first row
-    // rowB is the last row
     int *rowA = matrix[0];
     int *rowB = matrix[rows - 1];
 
@@ -80,29 +76,12 @@ void reverse_matrix(int rows, int columns, int matrix[rows][columns]) {
     } while ((rowA += columns) <= (rowB -= columns));
 }
 
+int hash_two_uint8s(unsigned char x, unsigned char y) {
+    return (( x*137 ) + y) % 256;
+}
+
 
 int main(int argc, char const *argv[])
 {
-    const int ROWS = 2;
-    const int COLS = 5;
-
-    int arr[ROWS][COLS] = {{1,2,3,4,5}, {6,7,8,9,10}};
-    for (int i = 0; i < ROWS; i++) {
-        for (int j = 0; j < COLS; j++) {
-            printf("%d ", arr[i][j]);
-        }
-        printf("\n");
-    }
-
-    reverse_matrix(ROWS, COLS, arr);
-
-    printf("\n");
-
-    for (int i = 0; i < ROWS; i++) {
-        for (int j = 0; j < COLS; j++) {
-            printf("%d ", arr[i][j]);
-        }
-        printf("\n");
-    }
-
+    printf("%d", hash_two_uint8s(12,13));
 }
