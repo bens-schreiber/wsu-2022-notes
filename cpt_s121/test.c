@@ -77,7 +77,7 @@ void reverse_matrix(int rows, int columns, int matrix[rows][columns]) {
 }
 
 int hash_two_uint8s(unsigned char x, unsigned char y) {
-    return (( x*137 ) + y) % 256;
+    return (( x*137 ) + y) % 100;
 }
 
 
