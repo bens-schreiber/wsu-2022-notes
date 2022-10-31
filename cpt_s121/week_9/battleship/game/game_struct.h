@@ -23,18 +23,15 @@ typedef struct
     unsigned char round;
 } BattleShipGame;
 
-// Initializes both players with default values / blank.
-void _battleShipGameInitialize(BattleShipGame *game);
-
-// Initializes the game.gameBoard and player.shipMap as default values / blank
-void _battleShipGameBoardInitialize(BattleShipGame *game);
+// Initializes all valeus of BattleShipGame
+BattleShipGame *battleShipGame();
 
 // Fill the shipMap and gameBoard with SHIPS_PER_PLAYER ships
 void _battleShipGamePlaceShips(BattleShipGame *game);
 
 // Begins a game of battleship
 // Loops round until the sum of all battleship sizes in consants.h is reached in a Player.score
-void battleShipGameStart();
+void battleShipGameStart(BattleShipGame *game);
 
 // Does a single round of the game for the player
 void _battleShipGameDoPlayerRound(BattleShipGame *game);
