@@ -3,9 +3,10 @@
 #include "../board/board_struct.h"
 #include "battleship_struct.h"
 
+// A player contains the hash of where their ships are
+// and the score relative to how many ships they hit
 typedef struct
 {
-    GameBoard *gameBoard;
     BattleShip *shipMap[BOARD_ROWS * BOARD_COLUMNS];
     unsigned char score;
 } BattleShipPlayer;
@@ -14,18 +15,19 @@ typedef struct
 // for the BattleshipGamn.shipMap indexes
 unsigned char _battleShipPlayerHashCoordinate(const Coordinate *coordinate);
 
-// Initializes the player.gameBoard and player.shipMap as default values / blank
-void _battleShipPlayerInitialize(BattleShipPlayer *player);
-
 typedef struct
 {
-    BattleShipPlayer *playerOne;
-    BattleShipPlayer *playerTwo;
+    BattleShipPlayer *player;
+    BattleShipPlayer *computer;
+    GameBoard *gameBoard;
     unsigned char round;
 } BattleShipGame;
 
 // Initializes both players with default values / blank.
 void _battleShipGameInitialize(BattleShipGame *game);
+
+// Initializes the game.gameBoard and player.shipMap as default values / blank
+void _battleShipGameBoardInitialize(BattleShipGame *game);
 
 // Fill the shipMap and gameBoard with SHIPS_PER_PLAYER ships
 void _battleShipGamePlaceShips(BattleShipGame *game);
@@ -34,8 +36,11 @@ void _battleShipGamePlaceShips(BattleShipGame *game);
 // Loops round until the sum of all battleship sizes in consants.h is reached in a Player.score
 void battleShipGameStart();
 
-// Does a single round of the game
-void _battleShipGameDoRound(BattleShipGame *game);
+// Does a single round of the game for the player
+void _battleShipGameDoPlayerRound(BattleShipGame *game);
+
+// Does a single round for the computer
+void _battleShipGameDoComputerRound(BattleShipGame *game);
 
 typedef enum
 {

@@ -1,16 +1,42 @@
 #pragma once
+#include "./game/battleship_struct.h"
+
 #define BOARD_ROWS 10
 #define BOARD_COLUMNS 10
 #define SHIPS_PER_PLAYER 5
-#define PLAYERS 2 // this shouldn't ever be changed or i'll come to your house and fight you
 
-// ship sizes and also points
-// winning score is determined by the sum of these
-#define CARRIER_SIZE 5
-#define BATTLESHIP_SIZE 4
-#define CRUISER_SIZE 3
-#define SUBMARINE_SIZE 3
-#define DESTROYER_SIZE 2
+
+// Different battleship possibilities
+#define BATTLE_SHIP_CARRIER(player) \
+    (BattleShip) { .hitPoints = 5, .graphic = '#', .name = "CARRIER", .player = player }
+
+#define BATTLE_SHIP_BATTLESHIP(player) \
+    (BattleShip) {                     \
+        .hitPoints = 4,                \
+        .graphic = '@',                \
+        .name = "BATTLESHIP",          \
+        .player = player }             \
+
+#define BATTLE_SHIP_CRUISER(player) \
+    (BattleShip) {                  \
+        .hitPoints = 3,             \
+        .graphic = '%',             \
+        .name = "CRUISER",          \
+        .player = player }          \
+
+#define BATTLE_SHIP_SUBMARINE(player) \
+    (BattleShip) {                    \
+        .hitPoints = 3,               \
+        .graphic = '$',               \
+        .name = "SUBMARINE",          \
+        .player = player }            \
+
+#define BATTLE_SHIP_DESTROYER(player) \
+    (BattleShip) {                    \
+    .hitPoints = 2,                   \
+    .graphic = '#',                   \
+    .name = "DESTROYER",              \
+    .player = player }                \
 
 typedef struct
 {
