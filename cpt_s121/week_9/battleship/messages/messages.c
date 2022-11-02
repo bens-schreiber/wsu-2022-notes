@@ -28,16 +28,17 @@ void awaitInput()
     system("clear");
 }
 
-unsigned char getIntOrCharInput(const char *inputMessage)
+int getIntInput(const char *inputMessage)
 {
-    unsigned char input;
-    scanf(inputMessage, &input);
+    int input = 0;
+    printf("%s", inputMessage);
+    scanf("%d", &input);
     return input;
 }
 
 void printGameBoard(GameBoard *gameBoard)
 {
-    char *board = gameBoard->board[BOARD_ROWS - 1][BOARD_COLUMNS - 1];
+    char *board = &gameBoard->board[BOARD_ROWS - 1][BOARD_COLUMNS - 1];
     unsigned char i = 0;
     do
     {
@@ -48,33 +49,6 @@ void printGameBoard(GameBoard *gameBoard)
         }
         printf("%c", (*board));
     } while (board--);
-}
-
-void printBattleshipPlacement(BattleShipGame *game, BattleShip *ship[SHIPS_PER_PLAYER]) {
-    printGameBoard(game->gameBoard);
-    while (ship++ < &ship[SHIPS_PER_PLAYER]) {
-        printf("%s: ", (**ship).name);
-        for (int i = 0; i < (**ship).hitPoints; i++) {
-            printf("%c", (**ship).graphic);
-        }
-        printf("\n");
-    }
-}
-
-void printInvalidArgument() {
-    printf("Invalid argument.");
-}
-
-void printShipMissed(BattleShipGame *game) {
-    printf("MISS!\n");
-}
-
-void printShipHit(BattleShipGame *game) {
-    printf("HIT!\n");
-}
-
-void printShipSank(BattleShipGame *game) {
-    printf("SHIP SANK!");
 }
 
 void printComputerWins() {

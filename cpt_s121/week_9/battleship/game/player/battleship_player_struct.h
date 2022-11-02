@@ -2,7 +2,9 @@
 #include "../ship/battleship_struct.h"
 #include "../../utils.h"
 #include "../../board/board_struct.h"
+#include "../../messages/messages.h"
 #include <time.h>
+#include <string.h>
 #include <stdlib.h>
 
 // A player contains the locations of their ships

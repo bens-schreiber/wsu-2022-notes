@@ -13,10 +13,10 @@ BattleShipGame *battleShipGame()
 void battleShipGameStart(BattleShipGame *game)
 {
     // Ask the player to place their ships
-    battleShipPlayerPlaceShips(game);
+    battleShipPlayerPlaceShips(game->player);
 
     // Generate computer ships
-    battleShipPlayerGenerateShips(game);
+    battleShipPlayerGenerateShips(game->computer);
 
     while (1)
     {
@@ -49,7 +49,7 @@ void _battleShipGameDoPlayerRound(BattleShipGame *game)
         copyBoard = *game->gameBoard;
         char input;
         unsigned char x = 0, y = 0;
-        while ((input = getIntOrCharInput("") != 'Y'))
+        while ((input = getIntInput("") != 'Y'))
         {
             switch (input)
             {
@@ -120,7 +120,7 @@ AttackResult battleShipGameAttack(BattleShipGame *game, Coordinate coordinate)
     {
         gameBoardPlaceValue(game->gameBoard, 'X', coordinate);
     }
-    
+
     BattleShip *ship = p->shipMap[coordinate.Y][coordinate.X];
     if (ship)
     {
@@ -134,4 +134,38 @@ AttackResult battleShipGameAttack(BattleShipGame *game, Coordinate coordinate)
         return HIT;
     }
     return MISS;
+}
+
+void printBattleshipPlacement(BattleShipGame *game, BattleShip *ship[SHIPS_PER_PLAYER])
+{
+    printGameBoard(game->gameBoard);
+    while (ship++ < &ship[SHIPS_PER_PLAYER])
+    {
+        printf("%s: ", (**ship).name);
+        for (int i = 0; i < (**ship).hitPoints; i++)
+        {
+            printf("%c", (**ship).graphic);
+        }
+        printf("\n");
+    }
+}
+
+void printInvalidArgument()
+{
+    printf("Invalid argument.");
+}
+
+void printShipMissed(BattleShipGame *game)
+{
+    printf("MISS!\n");
+}
+
+void printShipHit(BattleShipGame *game)
+{
+    printf("HIT!\n");
+}
+
+void printShipSank(BattleShipGame *game)
+{
+    printf("SHIP SANK!");
 }

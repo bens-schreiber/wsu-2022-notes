@@ -1,4 +1,4 @@
 #pragma once
 
-// Displays the starting menu. Returns -1 to exit the menu.
+// Displays the starting menu. Returns 0 to exit
 int displayMenu();

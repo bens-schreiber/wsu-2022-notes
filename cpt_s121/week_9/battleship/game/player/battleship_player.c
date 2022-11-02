@@ -19,14 +19,13 @@ void battleShipPlayerPlaceShips(BattleShipPlayer *player)
         copyBoard = gameBoard;
 
         // Display instructions and print the board
-        printShipPlacementInstructions(&ships[i]);
         printGameBoard(&gameBoard);
 
         // W A S D, Y to confirm, F for flip
         char input;
         unsigned char shiftX = 0, shiftY = 0;
         Axis axis = VERTICAL;
-        while ((input = getIntOrCharInput("")))
+        while ((input = getIntInput("")))
         {
             // User is attempting to place ship.
             // The ship at this point could be colliding with another
