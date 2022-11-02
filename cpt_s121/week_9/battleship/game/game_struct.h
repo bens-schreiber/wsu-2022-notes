@@ -2,18 +2,15 @@
 #include "../utils.h"
 #include "../board/board_struct.h"
 #include "battleship_struct.h"
+#include "../messages/messages.h"
 
-// A player contains the hash of where their ships are
+// A player contains the locations of their ships
 // and the score relative to how many ships they hit
 typedef struct
 {
-    BattleShip *shipMap[BOARD_ROWS * BOARD_COLUMNS];
+    BattleShip *shipMap[BOARD_ROWS][BOARD_COLUMNS];
     unsigned char score;
 } BattleShipPlayer;
-
-// Hashes a coordiante (x,y) into (( x*137 ) + y) % (BOARD_ROWS * BOARD_COLUMNS)
-// for the BattleshipGamn.shipMap indexes
-unsigned char _battleShipPlayerHashCoordinate(const Coordinate *coordinate);
 
 typedef struct
 {

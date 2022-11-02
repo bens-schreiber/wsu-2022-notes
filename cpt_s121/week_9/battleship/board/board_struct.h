@@ -15,4 +15,4 @@ int gameBoardPlaceValue(GameBoard *gameBoard, char value, const Coordinate coord
 
 // Place an array of characters beginning at a coordinate facing (placing in) a direction
 // returns 1 if successful 0 if unsuccessful (values applied to the gameboard in directon can be out of bounds)
-int gameBoardPlaceValues(GameBoard *gameBoard, char *values, const int valueAmount, const Coordinate coordinate, const Direction direction);
+int gameBoardPlaceValues(GameBoard *gameBoard, char value, const int valueAmount, const Coordinate coordinate, const Axis direction);

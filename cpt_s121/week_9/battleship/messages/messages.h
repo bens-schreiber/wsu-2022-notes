@@ -22,6 +22,11 @@ void printGameBoard(GameBoard *gameBoard);
 // Prints the game board and remaining ships in the ship array
 void printBattleshipPlacement(BattleShipGame *game, BattleShip *ship[SHIPS_PER_PLAYER]);
 
+void printInvalidArgument();
+
+// enter the coordinates x and y for your ship
+void printShipPlacementInstructions(const BattleShip *ship);
+
 // prints the score, and what ships are remaining
 void printScoreBoard(BattleShipGame *game);
 
