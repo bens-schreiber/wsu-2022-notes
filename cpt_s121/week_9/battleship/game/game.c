@@ -92,7 +92,7 @@ void _battleShipGamePlaceShips(BattleShipGame *game)
                 shiftY--;
                 break;
             case 'F':
-                axis = axis == VERTICAL ? HORITZONTAL : VERTICAL;
+                axis = !axis;
             }
 
             // Place the new ship position onto the copyBoard
