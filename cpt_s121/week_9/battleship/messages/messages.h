@@ -39,4 +39,6 @@ void printShipHit(BattleShipGame *game);
 
 void printShipSank(BattleShipGame *game);
 
-void printGameWon(int winner);
+void printComputerWins();
+
+void printPlayerWins();
