@@ -1,6 +1,7 @@
+#include "menu/menu.h"
+
 int main(int argc, char const *argv[])
 {
-    /* code */
-    // remember to free battleship game memory
+    while(displayMenu());
     return 0;
 }

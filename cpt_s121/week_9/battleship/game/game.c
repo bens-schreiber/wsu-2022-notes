@@ -120,12 +120,15 @@ AttackResult battleShipGameAttack(BattleShipGame *game, Coordinate coordinate)
     {
         gameBoardPlaceValue(game->gameBoard, 'X', coordinate);
     }
-    if (p->shipMap[coordinate.Y][coordinate.X])
+    
+    BattleShip *ship = p->shipMap[coordinate.Y][coordinate.X];
+    if (ship)
     {
-        p->shipMap[coordinate.Y][coordinate.X]->hitPoints--;
+        ship->hitPoints--;
         p->score++;
-        if (p->shipMap[coordinate.Y][coordinate.X]->hitPoints == 0)
+        if (ship->hitPoints == 0)
         {
+            free(ship);
             return SANK;
         }
         return HIT;
