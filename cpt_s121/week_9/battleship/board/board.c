@@ -21,6 +21,12 @@ int gameBoardPlaceValues(GameBoard *gameBoard, char value, const int valueAmount
     unsigned char x = coordinate.X, y = coordinate.Y;
     for (int i = 0; i < valueAmount; i++)
     {
+
+        gameBoardPlaceValue(
+            gameBoard,
+            value,
+            (Coordinate){x, y});
+            
         if (axis == HORITZONTAL)
         {
             x++;
@@ -29,11 +35,6 @@ int gameBoardPlaceValues(GameBoard *gameBoard, char value, const int valueAmount
         {
             y++;
         }
-
-        gameBoardPlaceValue(
-            gameBoard,
-            value,
-            (Coordinate){x, y});
     }
 
     return 1;

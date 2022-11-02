@@ -16,6 +16,8 @@ void awaitInput();
 // returns the input
 int getIntInput(const char *inputMessage);
 
+char getCharInput(const char *inputMessage);
+
 // Prints the game board
 void printGameBoard(GameBoard *gameBoard);
 

@@ -8,17 +8,13 @@ int displayMenu()
     system("clear");
     printMenu();
 
-    BattleShipGame *game;
-
     switch (getIntInput(""))
     {
     case 1:
         printRules();
         break;
     case 2:
-        game = battleShipGame();
-        battleShipGameStart(game);
-        free(game);
+        battleShipGameStart();
         break;
     case 3:
         return 0; // EXIT

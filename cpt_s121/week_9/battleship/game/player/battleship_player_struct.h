@@ -16,7 +16,7 @@ typedef struct
 } BattleShipPlayer;
 
 // Fill shipMap with SHIPS_PER_PLAYER ships
-void battleShipPlayerPlaceShips(BattleShipPlayer *player);
+void battleShipPlayerPlaceShips(BattleShipPlayer *player, BattleShip *ships);
 
 // Fill shipMap with SHIPS_PER_PLAYER ships
-void battleShipPlayerGenerateShips(BattleShipPlayer *player);
+void battleShipPlayerGenerateShips(BattleShipPlayer *player, BattleShip *ships);

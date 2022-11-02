@@ -13,12 +13,10 @@ typedef struct
     unsigned char round;
 } BattleShipGame;
 
-// Initializes all valeus of BattleShipGame
-BattleShipGame *battleShipGame();
 
 // Begins a game of battleship
 // Loops round until the sum of all battleship sizes in consants.h is reached in a Player.score
-void battleShipGameStart(BattleShipGame *game);
+void battleShipGameStart();
 
 // Does a single round of the game for the player
 void _battleShipGameDoPlayerRound(BattleShipGame *game);

@@ -44,6 +44,6 @@ typedef struct
     (BattleShip)              \
     {                         \
         .hitPoints = 2,       \
-        .graphic = '#',       \
+        .graphic = '=',       \
         .name = "DESTROYER",  \
     }

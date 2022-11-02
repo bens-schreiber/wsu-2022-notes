@@ -43,19 +43,22 @@ int getIntInput(const char *inputMessage)
     return input;
 }
 
+char getCharInput(const char *inputMessage) {
+    char input = '\0';
+    printf("%s", inputMessage);
+    scanf("%c", &input);
+    return input;
+}
+
 void printGameBoard(GameBoard *gameBoard)
 {
-    char *board = &gameBoard->board[BOARD_ROWS - 1][BOARD_COLUMNS - 1];
-    unsigned char i = 0;
-    do
-    {
-        if (i++ == BOARD_COLUMNS)
-        {
-            i = 0;
-            printf("\n");
+    system("clear");
+    for (int row = 0; row < BOARD_ROWS; row++) {
+        for (int col = 0; col < BOARD_COLUMNS; col++) {
+            printf("%c", gameBoard->board[row][col]);
         }
-        printf("%c", (*board));
-    } while (board--);
+        printf("\n");
+    }
 }
 
 void printComputerWins()

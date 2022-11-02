@@ -1,40 +1,46 @@
 #include "./game_struct.h"
 
-BattleShipGame *battleShipGame()
+void battleShipGameStart()
 {
     BattleShipGame *game = malloc(sizeof(BattleShipGame));
-    game->round = 0;
-    game->player->score = 0;
-    game->computer->score = 0;
+    *game = (BattleShipGame) {
+        .round = 0,
+        .player = &(BattleShipPlayer) {.score = 0, .shipMap = {{}}},
+        .computer = &(BattleShipPlayer) {.score = 0, .shipMap = {{}}},
+        .gameBoard = &(GameBoard) {}
+    };
     gameBoardInitialize(game->gameBoard);
-    return game;
-}
 
-void battleShipGameStart(BattleShipGame *game)
-{
+    // // define array of battleships on heap (ships mem will be freed at the end of the game)
+    // // mem copy in the ship array defined in utils.h
+    BattleShip *ships = malloc(sizeof(BattleShip) * SHIPS_PER_PLAYER);
+    memcpy(ships, (BattleShip[])SHIPS, sizeof(BattleShip) * SHIPS_PER_PLAYER);
+
     // Ask the player to place their ships
-    battleShipPlayerPlaceShips(game->player);
+    battleShipPlayerPlaceShips(game->player, ships);
 
-    // Generate computer ships
-    battleShipPlayerGenerateShips(game->computer);
+    // // Generate computer ships
+    // battleShipPlayerGenerateShips(game->computer);
 
-    while (1)
-    {
-        _battleShipGameDoPlayerRound(game);
-        if (game->player->score == WINNING_SCORE)
-        {
-            printPlayerWins();
-            break;
-        }
+    // while (1)
+    // {
+    //     _battleShipGameDoPlayerRound(game);
+    //     if (game->player->score == WINNING_SCORE)
+    //     {
+    //         printPlayerWins();
+    //         break;
+    //     }
 
-        _battleShipGameDoComputerRound(game);
+    //     _battleShipGameDoComputerRound(game);
 
-        if (game->computer->score == WINNING_SCORE)
-        {
-            printComputerWins();
-            break;
-        }
-    }
+    //     if (game->computer->score == WINNING_SCORE)
+    //     {
+    //         printComputerWins();
+    //         break;
+    //     }
+    // }
+
+    free(game);
 }
 
 // Does a single round of the game for the player

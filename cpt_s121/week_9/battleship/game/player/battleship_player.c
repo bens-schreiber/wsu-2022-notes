@@ -1,104 +1,112 @@
 #include "battleship_player_struct.h"
 
-void battleShipPlayerPlaceShips(BattleShipPlayer *player)
+void battleShipPlayerPlaceShips(BattleShipPlayer *player, BattleShip *ships)
 {
     // Create a game board to display the ship placement in
-    GameBoard gameBoard = {0};
-    gameBoardInitialize(&gameBoard);
+    GameBoard *gameBoard = malloc(sizeof(GameBoard));
+    GameBoard *copyBoard = malloc(sizeof(GameBoard));
 
-    // define array of battleships on heap (ships mem will be freed at the end of the game)
-    // mem copy in the ship array defined in utils.h
-    BattleShip *ships = malloc(sizeof(BattleShip) * SHIPS_PER_PLAYER);
-    memcpy(ships, (BattleShip[])SHIPS, sizeof(BattleShip) * SHIPS_PER_PLAYER);
-
-    GameBoard copyBoard;
+    gameBoardInitialize(gameBoard);
     // for SHIPS_PER_PLAYER
-    for (int i = 0; i < SHIPS_PER_PLAYER; i++)
+    for (int shipIndex = 0; shipIndex < SHIPS_PER_PLAYER; shipIndex++)
     {
-        // Use a copy of the game board for each animation
-        copyBoard = gameBoard;
-
         // Display instructions and print the board
-        printGameBoard(&gameBoard);
+        printGameBoard(gameBoard);
 
         // W A S D, Y to confirm, F for flip
         char input;
-        unsigned char shiftX = 0, shiftY = 0;
+        unsigned char x = 0, y = 0;
         Axis axis = VERTICAL;
-        while ((input = getIntInput("")))
+        while ((input = getCharInput("")))
         {
+
             // User is attempting to place ship.
             // The ship at this point could be colliding with another
             // Check for collision before putting the ship into the shipMap
-            if (input == 'Y')
+            if (input == 'Y' || input == 'y')
             {
                 // incase of a collision, we can't directly use shiftX or shiftY
                 // copy into shipX and shipY for traversal of the array
-                unsigned char shipX = shiftX, shipY = shiftY;
+                unsigned char shipX = x, shipY = y;
 
                 // check for collisions
-                for (int i = ships[i].hitPoints; i >= 0; i--)
+                for (char i = ships[shipIndex].hitPoints; i > 0; i--)
                 {
                     // Check if the shipMap has a value where any values of a ship are
-                    if (player->shipMap[axis == VERTICAL ? shipY-- : shipY][axis == HORITZONTAL ? shipX-- : shipX])
+                    if (player->shipMap[axis == VERTICAL ? shipY++ : shipY][axis == HORITZONTAL ? shipX++ : shipX])
                         goto ignoreKey;
                 }
 
                 // put ships in shipmap
-                for (int i = ships[i].hitPoints; i >= 0; i--)
+                for (char i = ships[shipIndex].hitPoints; i > 0; i--)
                 {
-                    player->shipMap[axis == VERTICAL ? shiftY-- : shiftY][axis == HORITZONTAL ? shiftX-- : shiftX] = &ships[i];
+                    player->shipMap[axis == VERTICAL ? y++ : y][axis == HORITZONTAL ? x++ : x] = &ships[shipIndex];
                 }
 
                 // Ship placed
                 // Put the copyboard into the game board to save ship placement
-                gameBoard = copyBoard;
+                *gameBoard = *copyBoard;
                 break;
             }
+
+            *copyBoard = *gameBoard;
 
             // Handle WASD F input
             // Ignore the key if out of bounds
             switch (input)
             {
-            case 'W':
-                if (shiftY + 1 > BOARD_ROWS)
-                    goto ignoreKey;
-                shiftY++;
-                break;
+            case 's':
             case 'S':
-                if (shiftY - 1 < BOARD_ROWS)
+                if ((axis == VERTICAL && y + ships[shipIndex].hitPoints == BOARD_ROWS) || y == BOARD_ROWS - 1)
                     goto ignoreKey;
-                shiftX--;
+                y++;
                 break;
+
+            case 'w':
+            case 'W':
+                if (y == 0)
+                    goto ignoreKey;
+                y--;
+                break;
+
+            case 'd':
             case 'D':
-                if (shiftX + 1 > BOARD_COLUMNS)
+                if ((axis == HORITZONTAL && x + ships[shipIndex].hitPoints == BOARD_COLUMNS) || x == BOARD_COLUMNS - 1)
                     goto ignoreKey;
-                shiftY++;
+                x++;
                 break;
+
+            case 'a':
             case 'A':
-                if (shiftX - 1 < BOARD_COLUMNS)
+                if (x == 0)
                     goto ignoreKey;
-                shiftY--;
+                x--;
                 break;
+
+            case 'f':
             case 'F':
+                if (axis == VERTICAL && x + ships[shipIndex].hitPoints > BOARD_COLUMNS || axis == HORITZONTAL && y + ships[shipIndex].hitPoints > BOARD_ROWS)
+                    goto ignoreKey;
                 axis = !axis;
             }
 
             // Place the new ship position onto the copyBoard
             gameBoardPlaceValues(
-                &copyBoard,
-                ships[i].graphic,
-                ships[i].hitPoints,
-                (Coordinate){shiftX, shiftY},
+                copyBoard,
+                ships[shipIndex].graphic,
+                ships[shipIndex].hitPoints,
+                (Coordinate){x, y},
                 axis);
 
             // Print the copy board
-            printGameBoard(&copyBoard);
+            printGameBoard(copyBoard);
 
         // skips while from within a switch
         ignoreKey:;
         }
     }
+    free(gameBoard);
+    free(copyBoard);
 }
 
 void _searchAndPlaceHorizontal(BattleShipPlayer *player, BattleShip *ship, unsigned char validCoordinates[BOARD_ROWS][BOARD_COLUMNS])
@@ -177,12 +185,8 @@ void _searchAndPlaceVertical(BattleShipPlayer *player, BattleShip *ship, unsigne
     }
 }
 
-void battleShipPlayerGenerateShips(BattleShipPlayer *player)
+void battleShipPlayerGenerateShips(BattleShipPlayer *player, BattleShip *ships)
 {
-    // define array of battleships on heap (ships mem will be freed at the end of the game)
-    // mem copy in the ship array defined in utils.h
-    BattleShip *ships = malloc(sizeof(BattleShip) * SHIPS_PER_PLAYER);
-    memcpy(ships, (BattleShip[])SHIPS, sizeof(BattleShip) * SHIPS_PER_PLAYER);
 
     // Any coordinate that is 0 is valid to place on
     unsigned char validCoordinates[BOARD_ROWS][BOARD_COLUMNS] = {0};
