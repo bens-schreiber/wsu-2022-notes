@@ -1,16 +1,9 @@
 #pragma once
 #include "../utils.h"
 #include "../board/board_struct.h"
-#include "battleship_struct.h"
+#include "./player/battleship_player_struct.h"
+#include "./ship/battleship_struct.h"
 #include "../messages/messages.h"
-
-// A player contains the locations of their ships
-// and the score relative to how many ships they hit
-typedef struct
-{
-    BattleShip *shipMap[BOARD_ROWS][BOARD_COLUMNS];
-    unsigned char score;
-} BattleShipPlayer;
 
 typedef struct
 {
@@ -22,9 +15,6 @@ typedef struct
 
 // Initializes all valeus of BattleShipGame
 BattleShipGame *battleShipGame();
-
-// Fill the shipMap and gameBoard with SHIPS_PER_PLAYER ships
-void _battleShipGamePlaceShips(BattleShipGame *game);
 
 // Begins a game of battleship
 // Loops round until the sum of all battleship sizes in consants.h is reached in a Player.score

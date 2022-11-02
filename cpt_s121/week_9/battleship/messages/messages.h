@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "../board/board_struct.h"
 #include "../game/game_struct.h"
-#include "../game/battleship_struct.h"
+#include "../game/ship/battleship_struct.h"
 
 void printMenu();
 

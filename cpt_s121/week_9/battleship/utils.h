@@ -1,5 +1,5 @@
 #pragma once
-#include "./game/battleship_struct.h"
+#include "./game/ship/battleship_struct.h"
 
 // max val 16 x 16 (uint8 range)
 #define BOARD_ROWS 10
