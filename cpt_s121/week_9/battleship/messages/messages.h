@@ -24,14 +24,8 @@ void printBattleshipPlacement(BattleShipGame *game, BattleShip *ship[SHIPS_PER_P
 
 void printInvalidArgument();
 
-// enter the coordinates x and y for your ship
-void printShipPlacementInstructions(const BattleShip *ship);
-
 // prints the score, and what ships are remaining
 void printScoreBoard(BattleShipGame *game);
-
-// returns coordinates
-Coordinate getCoordinates();
 
 void printShipMissed(BattleShipGame *game);
 
