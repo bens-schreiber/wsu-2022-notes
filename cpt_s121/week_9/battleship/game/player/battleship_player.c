@@ -1,6 +1,6 @@
 #include "battleship_player_struct.h"
 
-void _battleShipPlayerPlaceShips(BattleShipGame *game)
+void battleShipPlayerPlaceShips(BattleShipPlayer *player)
 {
     // Create a game board to display the ship placement in
     GameBoard gameBoard = {0};
@@ -41,14 +41,14 @@ void _battleShipPlayerPlaceShips(BattleShipGame *game)
                 for (int i = ships[i].hitPoints; i >= 0; i--)
                 {
                     // Check if the shipMap has a value where any values of a ship are
-                    if (game->player->shipMap[axis == VERTICAL ? shipY-- : shipY][axis == HORITZONTAL ? shipX-- : shipX])
+                    if (player->shipMap[axis == VERTICAL ? shipY-- : shipY][axis == HORITZONTAL ? shipX-- : shipX])
                         goto ignoreKey;
                 }
 
                 // put ships in shipmap
                 for (int i = ships[i].hitPoints; i >= 0; i--)
                 {
-                    game->player->shipMap[axis == VERTICAL ? shiftY-- : shiftY][axis == HORITZONTAL ? shiftX-- : shiftX] = &ships[i];
+                    player->shipMap[axis == VERTICAL ? shiftY-- : shiftY][axis == HORITZONTAL ? shiftX-- : shiftX] = &ships[i];
                 }
 
                 // Ship placed
@@ -102,6 +102,95 @@ void _battleShipPlayerPlaceShips(BattleShipGame *game)
     }
 }
 
-void _battleShipPlayerGenerateShips(BattleShipGame *game) {
-    
+void _searchAndPlaceHorizontal(BattleShipPlayer *player, BattleShip *ship, unsigned char validCoordinates[BOARD_ROWS][BOARD_COLUMNS])
+{
+    // traverse for horizontal placement
+    unsigned char rIter = rand() % SHIP_PLACEMENT_SALT + 1;
+    unsigned char valid = 0;
+    for (unsigned char row = 0; row < BOARD_ROWS; row++)
+    {
+        for (unsigned char col = 0; col < BOARD_COLUMNS; col++)
+        {
+            if (!validCoordinates[row][col])
+            {
+                valid++;
+            }
+            else
+            {
+                valid = 0;
+            }
+
+            if (valid == ship->hitPoints - 1)
+            {
+                rIter--;
+            }
+            if (!rIter)
+            {
+                // put ships in shipmap; mark invalid coords
+                for (int i = ship->hitPoints; i >= 0; i--)
+                {
+                    player->shipMap[row][col] = ship;
+                    validCoordinates[row][col] = 1;
+                    col--;
+                }
+                return;
+            }
+        }
+        valid = 0;
+    }
+}
+
+void _searchAndPlaceVertical(BattleShipPlayer *player, BattleShip *ship, unsigned char validCoordinates[BOARD_ROWS][BOARD_COLUMNS])
+{
+    // traverse for horizontal placement
+    unsigned char rIter = rand() % SHIP_PLACEMENT_SALT + 1;
+    unsigned char valid = 0;
+    for (unsigned char col = 0; col < BOARD_COLUMNS; col++)
+    {
+        for (unsigned char row = 0; row < BOARD_ROWS; row++)
+        {
+            if (!validCoordinates[row][col])
+            {
+                valid++;
+            }
+            else
+            {
+                valid = 0;
+            }
+
+            if (valid == ship->hitPoints - 1)
+            {
+                rIter--;
+            }
+            if (!rIter)
+            {
+                // put ships in shipmap; mark invalid coords
+                for (int i = ship->hitPoints; i >= 0; i--)
+                {
+                    player->shipMap[row][col] = ship;
+                    validCoordinates[row][col] = 1;
+                    row--;
+                }
+                return;
+            }
+        }
+        valid = 0;
+    }
+}
+
+void battleShipPlayerGenerateShips(BattleShipPlayer *player)
+{
+    // define array of battleships on heap (ships mem will be freed at the end of the game)
+    // mem copy in the ship array defined in utils.h
+    BattleShip *ships = malloc(sizeof(BattleShip) * SHIPS_PER_PLAYER);
+    memcpy(ships, (BattleShip[])SHIPS, sizeof(BattleShip) * SHIPS_PER_PLAYER);
+
+    // Any coordinate that is 0 is valid to place on
+    unsigned char validCoordinates[BOARD_ROWS][BOARD_COLUMNS] = {0};
+
+    srand(time(NULL));
+    for (int i = 0; i < SHIPS_PER_PLAYER; i++)
+    {
+        rand() + 1 ? _searchAndPlaceHorizontal(player, &ships[i], validCoordinates) : _searchAndPlaceVertical(player, &ships[i], validCoordinates);
+    }
 }

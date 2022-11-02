@@ -1,8 +1,9 @@
 #pragma once
 #include "../ship/battleship_struct.h"
-#include "../game_struct.h"
 #include "../../utils.h"
 #include "../../board/board_struct.h"
+#include <time.h>
+#include <stdlib.h>
 
 // A player contains the locations of their ships
 // and the score relative to how many ships they hit
@@ -13,7 +14,7 @@ typedef struct
 } BattleShipPlayer;
 
 // Fill shipMap with SHIPS_PER_PLAYER ships
-void battleShipPlayerPlaceShips(BattleShipGame *game);
+void battleShipPlayerPlaceShips(BattleShipPlayer *player);
 
 // Fill shipMap with SHIPS_PER_PLAYER ships
-void battleShipPlayerGenerateShips(BattleShipGame *game);
+void battleShipPlayerGenerateShips(BattleShipPlayer *player);

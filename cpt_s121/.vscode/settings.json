@@ -3,6 +3,7 @@
         "cstdio": "c",
         "craps_game.h": "c",
         "craps_struct.h": "c",
-        "battleship_struct.h": "c"
+        "battleship_struct.h": "c",
+        "stdlib.h": "c"
     }
 }
