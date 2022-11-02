@@ -3,10 +3,17 @@
 void printMenu()
 {
     printf(
+        "\n"
         TITLE
+        "###########################\n"
+        "\n"
         "1.) Read rules\n"
         "2.) Start game\n"
-        "3.) Exit\n");
+        "3.) Exit\n"
+        "\n"
+        "###########################\n"
+        "\n"
+        );
 }
 
 void printRules()
@@ -51,10 +58,12 @@ void printGameBoard(GameBoard *gameBoard)
     } while (board--);
 }
 
-void printComputerWins() {
+void printComputerWins()
+{
     printf("The computer won the game");
 }
 
-void printPlayerWins() {
+void printPlayerWins()
+{
     printf("You won the game!");
 }
