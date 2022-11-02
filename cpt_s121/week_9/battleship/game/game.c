@@ -3,24 +3,18 @@
 void battleShipGameStart()
 {
     BattleShipGame *game = malloc(sizeof(BattleShipGame));
-    *game = (BattleShipGame) {
+    *game = (BattleShipGame){
         .round = 0,
-        .player = &(BattleShipPlayer) {.score = 0, .shipMap = {{}}},
-        .computer = &(BattleShipPlayer) {.score = 0, .shipMap = {{}}},
-        .gameBoard = &(GameBoard) {}
-    };
+        .player = &(BattleShipPlayer){.score = 0, .shipMap = {{}}, .ships = SHIPS},
+        .computer = &(BattleShipPlayer){.score = 0, .shipMap = {{}}, .ships = SHIPS},
+        .gameBoard = &(GameBoard){}};
     gameBoardInitialize(game->gameBoard);
 
-    // // define array of battleships on heap (ships mem will be freed at the end of the game)
-    // // mem copy in the ship array defined in utils.h
-    BattleShip *ships = malloc(sizeof(BattleShip) * SHIPS_PER_PLAYER);
-    memcpy(ships, (BattleShip[])SHIPS, sizeof(BattleShip) * SHIPS_PER_PLAYER);
+    // Place player ships
+    battleShipPlayerPlaceShips(game->player);
 
-    // Ask the player to place their ships
-    battleShipPlayerPlaceShips(game->player, ships);
-
-    // // Generate computer ships
-    // battleShipPlayerGenerateShips(game->computer);
+    // Generate computer ships
+    battleShipPlayerGenerateShips(game->computer);
 
     // while (1)
     // {

@@ -11,12 +11,13 @@
 // and the score relative to how many ships they hit
 typedef struct
 {
+    BattleShip ships[SHIPS_PER_PLAYER];
     BattleShip *shipMap[BOARD_ROWS][BOARD_COLUMNS];
     unsigned char score;
 } BattleShipPlayer;
 
 // Fill shipMap with SHIPS_PER_PLAYER ships
-void battleShipPlayerPlaceShips(BattleShipPlayer *player, BattleShip *ships);
+void battleShipPlayerPlaceShips(BattleShipPlayer *player);
 
 // Fill shipMap with SHIPS_PER_PLAYER ships
-void battleShipPlayerGenerateShips(BattleShipPlayer *player, BattleShip *ships);
+void battleShipPlayerGenerateShips(BattleShipPlayer *player);
