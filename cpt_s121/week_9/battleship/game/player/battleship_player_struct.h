@@ -13,6 +13,7 @@ typedef struct
 {
     BattleShip ships[SHIPS_PER_PLAYER];
     BattleShip *shipMap[BOARD_ROWS][BOARD_COLUMNS];
+    GameBoard *gameBoard;
     unsigned char score;
 } BattleShipPlayer;
 

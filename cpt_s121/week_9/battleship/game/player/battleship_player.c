@@ -105,7 +105,7 @@ void battleShipPlayerPlaceShips(BattleShipPlayer *player)
         ignoreKey:;
         }
     }
-    free(placementBoard);
+    *player->gameBoard = *placementBoard;
     free(copyBoard);
 }
 

@@ -5,9 +5,8 @@ void battleShipGameStart()
     BattleShipGame *game = malloc(sizeof(BattleShipGame));
     *game = (BattleShipGame){
         .round = 0,
-        .player = &(BattleShipPlayer){.score = 0, .shipMap = {{}}, .ships = SHIPS},
-        .computer = &(BattleShipPlayer){.score = 0, .shipMap = {{}}, .ships = SHIPS},
-        .gameBoard = &(GameBoard){}};
+        .player = &(BattleShipPlayer){.score = 0, .shipMap = {{}}, .ships = SHIPS, .gameBoard = &(GameBoard) {}},
+        .computer = &(BattleShipPlayer){.score = 0, .shipMap = {{}}, .ships = SHIPS, .gameBoard = &(GameBoard) {}}};
 
     // Place player ships
     battleShipPlayerPlaceShips(game->player);
@@ -15,7 +14,8 @@ void battleShipGameStart()
     // Generate computer ships
     battleShipPlayerGenerateShips(game->computer);
 
-    gameBoardInitialize(game->gameBoard);
+    // Computer game board will stay blank until attacks are launched,
+    gameBoardInitialize(game->computer->gameBoard);
 
     while (1)
     {
@@ -50,7 +50,7 @@ void _battleShipGameDoPlayerRound(BattleShipGame *game)
     unsigned char x = 0, y = 0;
     GameBoard *copyBoard = malloc(sizeof(GameBoard));
     gameBoardPlaceValue(copyBoard, 'O', (Coordinate){x, y});
-    printGameBoard(game->gameBoard, "Select a tile to attack! (X: HIT) (M: MISS) (O: CURSOR)");
+    printGameBoard(game->computer->gameBoard, "Select a tile to attack! (X: HIT) (M: MISS) (O: CURSOR)");
     while ((input = getCharInput("")))
     {
         if (input == 'Y' || input == 'y')
@@ -58,7 +58,7 @@ void _battleShipGameDoPlayerRound(BattleShipGame *game)
             break;
         }
 
-        *copyBoard = *game->gameBoard;
+        *copyBoard = *game->computer->gameBoard;
 
         switch (input)
         {
@@ -98,19 +98,19 @@ void _battleShipGameDoPlayerRound(BattleShipGame *game)
     switch (battleShipGameAttack(game, (Coordinate){x, y}))
     {
     case MISS:
-        gameBoardPlaceValue(game->gameBoard, 'M', (Coordinate){x, y});
+        gameBoardPlaceValue(game->computer->gameBoard, 'M', (Coordinate){x, y});
         break;
     case HIT:
-        gameBoardPlaceValue(game->gameBoard, 'X', (Coordinate){x, y});
+        gameBoardPlaceValue(game->computer->gameBoard, 'X', (Coordinate){x, y});
         break;
     case SANK:
-        gameBoardPlaceValue(game->gameBoard, 'X', (Coordinate){x, y});
-        printGameBoard(game->gameBoard, "Attack Launched (X: HIT) (M: MISS) (O: CURSOR)");
-        printShipSank(game, (Coordinate){x,y});
+        gameBoardPlaceValue(game->computer->gameBoard, 'X', (Coordinate){x, y});
+        printGameBoard(game->computer->gameBoard, "Attack Launched (X: HIT) (M: MISS) (O: CURSOR)");
+        printShipSank(game, (Coordinate){x, y});
         return;
     }
 
-    printGameBoard(game->gameBoard, "Attack Launched (X: HIT) (M: MISS) (O: CURSOR)");
+    printGameBoard(game->computer->gameBoard, "Attack Launched (X: HIT) (M: MISS) (O: CURSOR)");
 }
 
 // TODO: this can be sophisticated

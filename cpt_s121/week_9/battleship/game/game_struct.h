@@ -9,7 +9,6 @@ typedef struct
 {
     BattleShipPlayer *player;
     BattleShipPlayer *computer;
-    GameBoard *gameBoard;
     unsigned char round;
 } BattleShipGame;
 
