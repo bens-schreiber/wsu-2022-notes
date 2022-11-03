@@ -5,8 +5,8 @@ void battleShipGameStart()
     BattleShipGame *game = malloc(sizeof(BattleShipGame));
     *game = (BattleShipGame){
         .round = 0,
-        .player = &(BattleShipPlayer){.score = 0, .shipMap = {{}}, .ships = SHIPS, .gameBoard = &(GameBoard) {}},
-        .computer = &(BattleShipPlayer){.score = 0, .shipMap = {{}}, .ships = SHIPS, .gameBoard = &(GameBoard) {}}};
+        .player = &(BattleShipPlayer){.score = 0, .shipMap = {{}}, .ships = SHIPS, .gameBoard = &(GameBoard){}},
+        .computer = &(BattleShipPlayer){.score = 0, .shipMap = {{}}, .ships = SHIPS, .gameBoard = &(GameBoard){}}};
 
     // Place player ships
     battleShipPlayerPlaceShips(game->player);
@@ -37,6 +37,7 @@ void battleShipGameStart()
         }
 
         awaitInput();
+        game->round++;
     }
 
     free(game);
@@ -116,10 +117,26 @@ void _battleShipGameDoPlayerRound(BattleShipGame *game)
 // TODO: this can be sophisticated
 void _battleShipGameDoComputerRound(BattleShipGame *game)
 {
-    battleShipGameAttack(
-        game, (Coordinate){
-                  rand() % BOARD_COLUMNS,
-                  rand() % BOARD_ROWS});
+    Coordinate coordinate = (Coordinate){
+        rand() % BOARD_COLUMNS,
+        rand() % BOARD_ROWS};
+
+    switch (battleShipGameAttack(game, coordinate))
+    {
+    case MISS:
+        gameBoardPlaceValue(game->player->gameBoard, 'M', coordinate);
+        break;
+    case HIT:
+        gameBoardPlaceValue(game->player->gameBoard, 'X', coordinate);
+        break;
+    case SANK:
+        gameBoardPlaceValue(game->player->gameBoard, 'X', coordinate);
+        printGameBoard(game->player->gameBoard, "Computer Attack");
+        printShipSank(game, coordinate);
+        return;
+    }
+
+    printGameBoard(game->player->gameBoard, "Computer Attack");
 }
 
 AttackResult battleShipGameAttack(BattleShipGame *game, Coordinate coordinate)
@@ -138,11 +155,6 @@ AttackResult battleShipGameAttack(BattleShipGame *game, Coordinate coordinate)
         return HIT;
     }
     return MISS;
-}
-
-void printInvalidArgument()
-{
-    printf("Invalid argument.");
 }
 
 void printShipSank(BattleShipGame *game, Coordinate coordinate)
