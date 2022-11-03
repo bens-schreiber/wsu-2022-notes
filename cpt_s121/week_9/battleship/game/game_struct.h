@@ -40,4 +40,4 @@ AttackResult battleShipGameAttack(BattleShipGame *game, Coordinate coordinate);
 // prints the score, and what ships are remaining
 void printScoreBoard(BattleShipGame *game);
 
-void printShipSank(BattleShipGame *game);
+void printShipSank(BattleShipGame *game, Coordinate coordinate);

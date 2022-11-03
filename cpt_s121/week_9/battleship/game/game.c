@@ -105,11 +105,12 @@ void _battleShipGameDoPlayerRound(BattleShipGame *game)
         break;
     case SANK:
         gameBoardPlaceValue(game->gameBoard, 'X', (Coordinate){x, y});
-        printShipSank(game);
-        break;
+        printGameBoard(game->gameBoard, "Attack Launched (X: HIT) (M: MISS) (O: CURSOR)");
+        printShipSank(game, (Coordinate){x,y});
+        return;
     }
 
-    printGameBoard(game->gameBoard, "Attack Results! (X: HIT) (M: MISS) (O: CURSOR)");
+    printGameBoard(game->gameBoard, "Attack Launched (X: HIT) (M: MISS) (O: CURSOR)");
 }
 
 // TODO: this can be sophisticated
@@ -144,7 +145,9 @@ void printInvalidArgument()
     printf("Invalid argument.");
 }
 
-void printShipSank(BattleShipGame *game)
+void printShipSank(BattleShipGame *game, Coordinate coordinate)
 {
-    printf("SHIP SANK!");
+    const char *ship = game->player->shipMap[coordinate.Y][coordinate.X]->name;
+    printf("\n\n");
+    printf("HOLY MOLY! YOU SUNK A %s!\n", ship);
 }
