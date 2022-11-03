@@ -37,14 +37,7 @@ AttackResult battleShipGameAttack(BattleShipGame *game, Coordinate coordinate);
 
 // MESSAGES
 
-// Prints the game board and remaining ships in the ship array
-void printBattleshipPlacement(BattleShipGame *game, BattleShip *ship[SHIPS_PER_PLAYER]);
-
 // prints the score, and what ships are remaining
 void printScoreBoard(BattleShipGame *game);
-
-void printShipMissed(BattleShipGame *game);
-
-void printShipHit(BattleShipGame *game);
 
 void printShipSank(BattleShipGame *game);

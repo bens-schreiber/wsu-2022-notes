@@ -3,15 +3,15 @@
 void battleShipPlayerPlaceShips(BattleShipPlayer *player)
 {
     // Create a game board to display the ship placement in
-    GameBoard *gameBoard = malloc(sizeof(GameBoard));
+    GameBoard *placementBoard = malloc(sizeof(GameBoard));
     GameBoard *copyBoard = malloc(sizeof(GameBoard));
 
-    gameBoardInitialize(gameBoard);
+    gameBoardInitialize(placementBoard);
     // for SHIPS_PER_PLAYER
     for (int shipIndex = 0; shipIndex < SHIPS_PER_PLAYER; shipIndex++)
     {
         // Display instructions and print the board
-        printGameBoard(gameBoard);
+        printGameBoard(placementBoard, "Use W A S D to move the ship, F to flip, Y to place!");
 
         // W A S D, Y to confirm, F for flip
         char input;
@@ -45,11 +45,11 @@ void battleShipPlayerPlaceShips(BattleShipPlayer *player)
 
                 // Ship placed
                 // Put the copyboard into the game board to save ship placement
-                *gameBoard = *copyBoard;
+                *placementBoard = *copyBoard;
                 break;
             }
 
-            *copyBoard = *gameBoard;
+            *copyBoard = *placementBoard;
 
             // Handle WASD F input
             // Ignore the key if out of bounds
@@ -99,13 +99,13 @@ void battleShipPlayerPlaceShips(BattleShipPlayer *player)
                 axis);
 
             // Print the copy board
-            printGameBoard(copyBoard);
+            printGameBoard(copyBoard, "Use W A S D to move the ship, F to flip, Y to place!");
 
         // skips while from within a switch
         ignoreKey:;
         }
     }
-    free(gameBoard);
+    free(placementBoard);
     free(copyBoard);
 }
 

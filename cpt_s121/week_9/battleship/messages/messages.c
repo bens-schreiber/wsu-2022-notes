@@ -50,15 +50,29 @@ char getCharInput(const char *inputMessage) {
     return input;
 }
 
-void printGameBoard(GameBoard *gameBoard)
+void printGameBoard(GameBoard *gameBoard, const char *titleMessage)
 {
     system("clear");
+
+    printf(TITLE);
+    printf("%s\n\n", titleMessage);
+
+    char bottomChars[BOARD_COLUMNS] = {};
+    char bottomCharLetter = 'A';
     for (int row = 0; row < BOARD_ROWS; row++) {
+        printf("%d   ", row);
         for (int col = 0; col < BOARD_COLUMNS; col++) {
-            printf("%c", gameBoard->board[row][col]);
+            printf("%c ", gameBoard->board[row][col]);
         }
         printf("\n");
+        bottomChars[row] = bottomCharLetter++;
     }
+    
+    printf("\n    ");
+    for (int i = 0; i < BOARD_COLUMNS; i++) {
+        printf("%c ", bottomChars[i]);
+    }
+    printf("\n");
 }
 
 void printComputerWins()

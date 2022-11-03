@@ -8,7 +8,6 @@ void battleShipGameStart()
         .player = &(BattleShipPlayer){.score = 0, .shipMap = {{}}, .ships = SHIPS},
         .computer = &(BattleShipPlayer){.score = 0, .shipMap = {{}}, .ships = SHIPS},
         .gameBoard = &(GameBoard){}};
-    gameBoardInitialize(game->gameBoard);
 
     // Place player ships
     battleShipPlayerPlaceShips(game->player);
@@ -16,23 +15,29 @@ void battleShipGameStart()
     // Generate computer ships
     battleShipPlayerGenerateShips(game->computer);
 
-    // while (1)
-    // {
-    //     _battleShipGameDoPlayerRound(game);
-    //     if (game->player->score == WINNING_SCORE)
-    //     {
-    //         printPlayerWins();
-    //         break;
-    //     }
+    gameBoardInitialize(game->gameBoard);
 
-    //     _battleShipGameDoComputerRound(game);
+    while (1)
+    {
+        _battleShipGameDoPlayerRound(game);
+        if (game->player->score == WINNING_SCORE)
+        {
+            printPlayerWins();
+            break;
+        }
 
-    //     if (game->computer->score == WINNING_SCORE)
-    //     {
-    //         printComputerWins();
-    //         break;
-    //     }
-    // }
+        awaitInput();
+
+        _battleShipGameDoComputerRound(game);
+
+        if (game->computer->score == WINNING_SCORE)
+        {
+            printComputerWins();
+            break;
+        }
+
+        awaitInput();
+    }
 
     free(game);
 }
@@ -40,86 +45,85 @@ void battleShipGameStart()
 // Does a single round of the game for the player
 void _battleShipGameDoPlayerRound(BattleShipGame *game)
 {
-    printGameBoard(game->gameBoard);
-
     // Player tile selection with WASD
-    GameBoard copyBoard;
-    while (1)
+    char input;
+    unsigned char x = 0, y = 0;
+    GameBoard *copyBoard = malloc(sizeof(GameBoard));
+    gameBoardPlaceValue(copyBoard, 'O', (Coordinate){x, y});
+    printGameBoard(game->gameBoard, "Select a tile to attack! (X: HIT) (M: MISS) (O: CURSOR)");
+    while ((input = getCharInput("")))
     {
-        copyBoard = *game->gameBoard;
-        char input;
-        unsigned char x = 0, y = 0;
-        while ((input = getIntInput("") != 'Y'))
+        if (input == 'Y' || input == 'y')
         {
-            switch (input)
-            {
-            case 'W':
-                if (y + 1 > BOARD_ROWS)
-                    goto ignoreKey;
-                y++;
-                break;
-            case 'S':
-                if (y - 1 < BOARD_ROWS)
-                    goto ignoreKey;
-                y--;
-                break;
-            case 'D':
-                if (x + 1 > BOARD_COLUMNS)
-                    goto ignoreKey;
-                x++;
-                break;
-            case 'A':
-                if (x - 1 < BOARD_COLUMNS)
-                    goto ignoreKey;
-                x--;
-                break;
-            }
-
-        ignoreKey:;
+            break;
         }
 
-        switch (battleShipGameAttack(game, (Coordinate){x, y}))
+        *copyBoard = *game->gameBoard;
+
+        switch (input)
         {
-        case MISS:
-            printShipMissed(game);
+        case 's':
+        case 'S':
+            if (y == BOARD_ROWS - 1)
+                break;
+            y++;
             break;
-        case HIT:
-            printShipHit(game);
+
+        case 'w':
+        case 'W':
+            if (y == 0)
+                break;
+            y--;
             break;
-        case SANK:
-            printShipSank(game);
+
+        case 'd':
+        case 'D':
+            if (x == BOARD_COLUMNS - 1)
+                break;
+            x++;
+            break;
+
+        case 'a':
+        case 'A':
+            if (x == 0)
+                break;
+            x--;
             break;
         }
+
+        gameBoardPlaceValue(copyBoard, 'O', (Coordinate){x, y});
+        printGameBoard(copyBoard, "Select a tile to attack! (X: HIT) (M: MISS) (O: CURSOR)");
     }
+
+    switch (battleShipGameAttack(game, (Coordinate){x, y}))
+    {
+    case MISS:
+        gameBoardPlaceValue(game->gameBoard, 'M', (Coordinate){x, y});
+        break;
+    case HIT:
+        gameBoardPlaceValue(game->gameBoard, 'X', (Coordinate){x, y});
+        break;
+    case SANK:
+        gameBoardPlaceValue(game->gameBoard, 'X', (Coordinate){x, y});
+        printShipSank(game);
+        break;
+    }
+
+    printGameBoard(game->gameBoard, "Attack Results! (X: HIT) (M: MISS) (O: CURSOR)");
 }
 
 // TODO: this can be sophisticated
 void _battleShipGameDoComputerRound(BattleShipGame *game)
 {
-    switch (battleShipGameAttack(
+    battleShipGameAttack(
         game, (Coordinate){
                   rand() % BOARD_COLUMNS,
-                  rand() % BOARD_ROWS}))
-    {
-    case MISS:
-        printShipMissed(game);
-        break;
-    case HIT:
-        printShipHit(game);
-        break;
-    case SANK:
-        printShipSank(game);
-        break;
-    };
+                  rand() % BOARD_ROWS});
 }
 
 AttackResult battleShipGameAttack(BattleShipGame *game, Coordinate coordinate)
 {
     BattleShipPlayer *p = game->round % 2 ? game->player : game->computer;
-    if (p != game->computer)
-    {
-        gameBoardPlaceValue(game->gameBoard, 'X', coordinate);
-    }
 
     BattleShip *ship = p->shipMap[coordinate.Y][coordinate.X];
     if (ship)
@@ -128,7 +132,6 @@ AttackResult battleShipGameAttack(BattleShipGame *game, Coordinate coordinate)
         p->score++;
         if (ship->hitPoints == 0)
         {
-            free(ship);
             return SANK;
         }
         return HIT;
@@ -136,33 +139,9 @@ AttackResult battleShipGameAttack(BattleShipGame *game, Coordinate coordinate)
     return MISS;
 }
 
-void printBattleshipPlacement(BattleShipGame *game, BattleShip *ship[SHIPS_PER_PLAYER])
-{
-    printGameBoard(game->gameBoard);
-    while (ship++ < &ship[SHIPS_PER_PLAYER])
-    {
-        printf("%s: ", (**ship).name);
-        for (int i = 0; i < (**ship).hitPoints; i++)
-        {
-            printf("%c", (**ship).graphic);
-        }
-        printf("\n");
-    }
-}
-
 void printInvalidArgument()
 {
     printf("Invalid argument.");
-}
-
-void printShipMissed(BattleShipGame *game)
-{
-    printf("MISS!\n");
-}
-
-void printShipHit(BattleShipGame *game)
-{
-    printf("HIT!\n");
 }
 
 void printShipSank(BattleShipGame *game)

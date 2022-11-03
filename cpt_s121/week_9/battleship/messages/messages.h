@@ -19,7 +19,7 @@ int getIntInput(const char *inputMessage);
 char getCharInput(const char *inputMessage);
 
 // Prints the game board
-void printGameBoard(GameBoard *gameBoard);
+void printGameBoard(GameBoard *gameBoard, const char *titleMessage);
 
 void printInvalidArgument();
 
