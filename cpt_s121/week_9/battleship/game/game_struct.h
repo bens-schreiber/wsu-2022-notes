@@ -32,9 +32,10 @@ typedef enum
 
 // Fires an attack to a coordinate
 // Returns an AttackResult (MISS, HIT, SANK)
-AttackResult battleShipGameAttack(BattleShipPlayer *player, Coordinate coordinate);
+AttackResult battleShipGameAttack(BattleShipPlayer *attack, BattleShipPlayer *player, Coordinate coordinate);
 
-void _processAttackResult(AttackResult attackResult, BattleShipPlayer *player, Coordinate coordinate);
+// 1 if sank 0 otherwise
+unsigned char _processAttackResult(AttackResult attackResult, BattleShipPlayer *player, Coordinate coordinate);
 
 // MESSAGES
 

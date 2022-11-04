@@ -105,10 +105,14 @@ void _battleShipGameDoPlayerRound(BattleShipGame *game)
     }
 
     // Attack the computer with the given coordinates
-    _processAttackResult(battleShipGameAttack(game->computer, (Coordinate){x, y}), game->computer, (Coordinate){x,y});
+    unsigned char sank = _processAttackResult(battleShipGameAttack(game->computer, game->player, (Coordinate){x, y}), game->computer, (Coordinate){x, y});
 
     // Print the board with the attack
     printGameBoard(game->computer->gameBoard, ATTACK_LAUNCHED);
+    if (sank)
+    {
+        printShipSank(game->computer, (Coordinate){x, y});
+    }
 }
 
 // TODO: this can be sophisticated
@@ -118,43 +122,60 @@ void _battleShipGameDoComputerRound(BattleShipGame *game)
         rand() % BOARD_COLUMNS,
         rand() % BOARD_ROWS};
 
-    _processAttackResult(battleShipGameAttack(game->player, coordinate), game->player, coordinate);
+    unsigned char sank = _processAttackResult(battleShipGameAttack(game->player, game->computer, coordinate), game->player, coordinate);
 
     printGameBoard(game->player->gameBoard, "Computer Attack");
+    if (sank)
+    {
+        printShipSank(game->player, coordinate);
+    }
 }
 
-AttackResult battleShipGameAttack(BattleShipPlayer *player, Coordinate coordinate)
+AttackResult battleShipGameAttack(BattleShipPlayer *attack, BattleShipPlayer *player, Coordinate coordinate)
 {
 
-    BattleShip *ship = player->shipMap[coordinate.Y][coordinate.X];
+    BattleShip *ship = attack->shipMap[coordinate.Y][coordinate.X];
+
     if (ship)
     {
+
+        // Already been hit here, just return hit again
+        if (attack->gameBoard->board[coordinate.Y][coordinate.X] == 'X')
+        {
+            return HIT;
+        }
+
+        // If it is already 0, don't do anything
+        if (ship->hitPoints == 0)
+        {
+            return HIT;
+        }
+
         ship->hitPoints--;
         player->score++;
         if (ship->hitPoints == 0)
         {
             return SANK;
         }
-        player->shipMap[coordinate.Y][coordinate.X] = NULL;
         return HIT;
     }
     return MISS;
 }
 
-void _processAttackResult(AttackResult attackResult, BattleShipPlayer *player, Coordinate coordinate)
+unsigned char _processAttackResult(AttackResult attackResult, BattleShipPlayer *player, Coordinate coordinate)
 {
     switch (attackResult)
     {
     case MISS:
         gameBoardPlaceValue(player->gameBoard, 'M', coordinate);
-        break;
+        return 0;
     case HIT:
         gameBoardPlaceValue(player->gameBoard, 'X', coordinate);
-        break;
+        return 0;
     case SANK:
         gameBoardPlaceValue(player->gameBoard, 'X', coordinate);
-        printShipSank(player, coordinate);
-        return;
+        return 1;
+        awaitInput();
     }
 }
 
