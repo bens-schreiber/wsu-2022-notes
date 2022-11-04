@@ -1,7 +1,7 @@
 #pragma once
 #include "./game/ship/battleship_struct.h"
 
-// max val 16 x 16 (uint8 range)
+// max val 15 x 15 (uint8 range but 256,256 is saved for NULL)
 // display gets wonky over 10 though
 #define BOARD_ROWS 10
 #define BOARD_COLUMNS 10
@@ -25,8 +25,8 @@
 
 typedef struct
 {
-    const unsigned int X;
-    const unsigned int Y;
+    unsigned int X;
+    unsigned int Y;
 } Coordinate;
 
 typedef enum

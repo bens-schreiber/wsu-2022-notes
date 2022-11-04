@@ -6,6 +6,8 @@ COPY . /battleship/
 
 WORKDIR /battleship/
 
-RUN gcc ...
+RUN gcc main.c board/board.c game/game.c game/player/battleship_player.c menu/menu.c messages/messages.c
 
-CMD ./a.out
+RUN ls | grep -xv "a.out" | xargs rm -r
+
+ENTRYPOINT ./a.out
