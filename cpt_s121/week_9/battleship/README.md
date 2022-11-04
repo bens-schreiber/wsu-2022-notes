@@ -8,3 +8,5 @@ Certain constants are modifiable in utils.h and game/ship/battleship_struct.h.
 
 ## Running
 Created in a mac environment. I would advise downloading the docker image to run instead of running on a windows machine. Linux is fine.
+
+https://hub.docker.com/repository/docker/benjaminschreiberwsu/battleship run `./a.out`
