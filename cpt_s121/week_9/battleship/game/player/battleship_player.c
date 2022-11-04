@@ -109,32 +109,38 @@ void battleShipPlayerPlaceShips(BattleShipPlayer *player)
     free(copyBoard);
 }
 
+// Brute forcing this really. Some sort of spacial awareness ds would be smarter here
+unsigned char _notTouchingAndNoShips(unsigned char row, unsigned char column, unsigned char valid[BOARD_ROWS][BOARD_COLUMNS])
+{
+    return !valid[row][column] && !valid[row + 1][column] && !valid[row - 1][column] && !valid[row][column + 1] && !valid[row][column - 1];
+}
+
 void _searchAndPlaceHorizontal(BattleShipPlayer *player, BattleShip *ship, unsigned char validCoordinates[BOARD_ROWS][BOARD_COLUMNS])
 {
     // traverse for horizontal placement
     unsigned char rIter = rand() % SHIP_PLACEMENT_SALT + 1;
     unsigned char valid = 0;
-    for (unsigned char row = 0; row < BOARD_ROWS; row++)
+    for (unsigned char row = 0; row < BOARD_ROWS; ++row)
     {
-        for (unsigned char col = 0; col < BOARD_COLUMNS; col++)
+        for (unsigned char col = 0; col < BOARD_COLUMNS; ++col)
         {
-            if (!validCoordinates[row][col])
+            if (_notTouchingAndNoShips(row, col, validCoordinates))
             {
-                valid++;
+                ++valid;
             }
             else
             {
                 valid = 0;
             }
 
-            if (valid == ship->hitPoints - 1)
+            if (valid == ship->hitPoints)
             {
-                rIter--;
+                --rIter;
             }
             if (!rIter)
             {
                 // put ships in shipmap; mark invalid coords
-                for (int i = ship->hitPoints; i >= 0; i--)
+                for (int i = ship->hitPoints; i > 0; --i)
                 {
                     player->shipMap[row][col] = ship;
                     validCoordinates[row][col] = 1;
@@ -152,27 +158,27 @@ void _searchAndPlaceVertical(BattleShipPlayer *player, BattleShip *ship, unsigne
     // traverse for horizontal placement
     unsigned char rIter = rand() % SHIP_PLACEMENT_SALT + 1;
     unsigned char valid = 0;
-    for (unsigned char col = 0; col < BOARD_COLUMNS; col++)
+    for (unsigned char col = 0; col < BOARD_COLUMNS; ++col)
     {
-        for (unsigned char row = 0; row < BOARD_ROWS; row++)
+        for (unsigned char row = 0; row < BOARD_ROWS; ++row)
         {
-            if (!validCoordinates[row][col])
+            if (_notTouchingAndNoShips(row, col, validCoordinates))
             {
-                valid++;
+                ++valid;
             }
             else
             {
                 valid = 0;
             }
 
-            if (valid == ship->hitPoints - 1)
+            if (valid == ship->hitPoints)
             {
-                rIter--;
+                --rIter;
             }
             if (!rIter)
             {
                 // put ships in shipmap; mark invalid coords
-                for (int i = ship->hitPoints; i >= 0; i--)
+                for (int i = ship->hitPoints; i > 0; --i)
                 {
                     player->shipMap[row][col] = ship;
                     validCoordinates[row][col] = 1;
@@ -192,8 +198,24 @@ void battleShipPlayerGenerateShips(BattleShipPlayer *player)
     unsigned char validCoordinates[BOARD_ROWS][BOARD_COLUMNS] = {0};
 
     srand(time(NULL));
-    for (int i = 0; i < SHIPS_PER_PLAYER; i++)
+    for (int i = 0; i < SHIPS_PER_PLAYER; ++i)
     {
-        rand() + 1 ? _searchAndPlaceHorizontal(player, &player->ships[i], validCoordinates) : _searchAndPlaceVertical(player, &player->ships[i], validCoordinates);
+        rand() % 2 ? _searchAndPlaceHorizontal(player, &player->ships[i], validCoordinates) : _searchAndPlaceVertical(player, &player->ships[i], validCoordinates);
     }
+
+    if (!HIDE_ENEMY_SHIPS)
+    {
+        printf("\nGenerated enemy ships! (@ represents any ship type ships)\n");
+        for (int i = 0; i < BOARD_ROWS; ++i)
+        {
+            for (int j = 0; j < BOARD_COLUMNS; ++j)
+            {
+                char c = validCoordinates[i][j] ? '@' : '~';
+                printf("%c ", c);
+            }
+            printf("\n");
+        }
+    }
+
+    awaitInput();
 }

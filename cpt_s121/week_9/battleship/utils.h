@@ -11,6 +11,9 @@
 #define SHIPS {BATTLE_SHIP_CARRIER, BATTLE_SHIP_BATTLESHIP, BATTLE_SHIP_CRUISER, BATTLE_SHIP_SUBMARINE, BATTLE_SHIP_DESTROYER}
 #define WINNING_SCORE 17
 
+// Change to 0 if you want to see the generated ship locations
+#define HIDE_ENEMY_SHIPS 0
+
 // should probabluy keep this low
 #define SHIP_PLACEMENT_SALT 3
 

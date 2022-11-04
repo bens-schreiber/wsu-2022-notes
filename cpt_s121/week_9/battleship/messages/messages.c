@@ -1,5 +1,5 @@
 #include "messages.h"
-#define TITLE "Battleship by Benjamin Schreiber\n\n"
+#define TITLE "BATTLESHIP by Benjamin Schreiber\n\n"
 void printMenu()
 {
     printf(
@@ -60,7 +60,7 @@ void printGameBoard(GameBoard *gameBoard, const char *titleMessage)
     char bottomChars[BOARD_COLUMNS] = {};
     char bottomCharLetter = 'A';
     for (int row = 0; row < BOARD_ROWS; row++) {
-        printf("%d   ", row);
+        printf("%d   ", (BOARD_ROWS - 1) - row);
         for (int col = 0; col < BOARD_COLUMNS; col++) {
             printf("%c ", gameBoard->board[row][col]);
         }

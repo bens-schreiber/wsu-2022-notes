@@ -22,3 +22,5 @@ void battleShipPlayerPlaceShips(BattleShipPlayer *player);
 
 // Fill shipMap with SHIPS_PER_PLAYER ships
 void battleShipPlayerGenerateShips(BattleShipPlayer *player);
+
+unsigned char _notTouchingAndNoShips(unsigned char row, unsigned char column, unsigned char valid[BOARD_ROWS][BOARD_COLUMNS]);
