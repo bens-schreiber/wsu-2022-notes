@@ -1,2 +1,2 @@
 # BattleShip by Benjamin Schreiber
-Modify certain values of the game in utils.h
+Certain constants are modifiable in utils.h and game/ship/battleship_struct.h

@@ -51,8 +51,9 @@ void _battleShipGameDoPlayerRound(BattleShipGame *game)
 
     // Game board to print the movement of the attack. We don't want to write over our actual game board.
     GameBoard *copyBoard = malloc(sizeof(GameBoard));
+    *copyBoard = *game->computer->gameBoard;
     gameBoardPlaceValue(copyBoard, 'O', (Coordinate){x, y});
-    printGameBoard(game->computer->gameBoard, ATTACK_INSTRUCTIONS);
+    printGameBoard(copyBoard, ATTACK_INSTRUCTIONS);
 
     // Move attack using WASD. Y to confirm attack placement. Check if going out of bounds with each input.
     while ((input = getCharInput("")))
@@ -105,7 +106,14 @@ void _battleShipGameDoPlayerRound(BattleShipGame *game)
     }
 
     // Attack the computer with the given coordinates
-    unsigned char sank = _processAttackResult(battleShipGameAttack(game->computer, game->player, (Coordinate){x, y}), game->computer, (Coordinate){x, y});
+    unsigned char sank = _processAttackResult(
+        battleShipGameAttack(
+                game->computer, 
+                game->player, 
+                (Coordinate){x, y}), 
+            game->computer, 
+            (Coordinate){x, y}
+    );
 
     // Print the board with the attack
     printGameBoard(game->computer->gameBoard, ATTACK_LAUNCHED);
@@ -145,18 +153,16 @@ AttackResult battleShipGameAttack(BattleShipPlayer *attack, BattleShipPlayer *pl
             return HIT;
         }
 
-        // If it is already 0, don't do anything
-        if (ship->hitPoints == 0)
-        {
-            return HIT;
-        }
-
+        // Lower the ships health, increase player score
         ship->hitPoints--;
         player->score++;
+
+        // 0 hitpoints means the ship has been sank
         if (ship->hitPoints == 0)
         {
             return SANK;
         }
+
         return HIT;
     }
     return MISS;
@@ -167,13 +173,13 @@ unsigned char _processAttackResult(AttackResult attackResult, BattleShipPlayer *
     switch (attackResult)
     {
     case MISS:
-        gameBoardPlaceValue(player->gameBoard, 'M', coordinate);
+        gameBoardPlaceValue(player->gameBoard, MISS_MARKER, coordinate);
         return 0;
     case HIT:
-        gameBoardPlaceValue(player->gameBoard, 'X', coordinate);
+        gameBoardPlaceValue(player->gameBoard, HIT_MARKER, coordinate);
         return 0;
     case SANK:
-        gameBoardPlaceValue(player->gameBoard, 'X', coordinate);
+        gameBoardPlaceValue(player->gameBoard, HIT_MARKER, coordinate);
         return 1;
         awaitInput();
     }
@@ -183,5 +189,5 @@ void printShipSank(BattleShipPlayer *player, Coordinate coordinate)
 {
     const char *ship = player->shipMap[coordinate.Y][coordinate.X]->name;
     printf("\n\n");
-    printf("HOLY MOLY! A %s WAS SUNK!\n", ship);
+    printf("HOLY MOLY! A FRIGGN %s WAS SUNK!\n", ship);
 }
