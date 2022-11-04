@@ -112,12 +112,18 @@ void battleShipPlayerPlaceShips(BattleShipPlayer *player)
 // Brute forcing this really. Some sort of spacial awareness ds would be smarter here
 unsigned char _notTouchingAndNoShips(unsigned char row, unsigned char column, unsigned char valid[BOARD_ROWS][BOARD_COLUMNS])
 {
-    return !valid[row][column] && !valid[row + 1][column] && !valid[row - 1][column] && !valid[row][column + 1] && !valid[row][column - 1];
+    return !valid[row][column] 
+    && !valid[row + 1][column] 
+    && !valid[row - 1][column] 
+    && !valid[row][column + 1] 
+    && !valid[row][column - 1];
 }
 
 void _searchAndPlaceHorizontal(BattleShipPlayer *player, BattleShip *ship, unsigned char validCoordinates[BOARD_ROWS][BOARD_COLUMNS])
 {
-    // traverse for horizontal placement
+    // Randomly place horizontal ships
+    // Search for a valid placement area (at least the size of ship hitpoints). Then, search rIter amount of times again until a
+    // random valid spot is found.
     unsigned char rIter = rand() % SHIP_PLACEMENT_SALT + 1;
     unsigned char valid = 0;
     for (unsigned char row = 0; row < BOARD_ROWS; ++row)
@@ -155,7 +161,9 @@ void _searchAndPlaceHorizontal(BattleShipPlayer *player, BattleShip *ship, unsig
 
 void _searchAndPlaceVertical(BattleShipPlayer *player, BattleShip *ship, unsigned char validCoordinates[BOARD_ROWS][BOARD_COLUMNS])
 {
-    // traverse for horizontal placement
+    // Randomly place vertical ships.
+    // Search for a valid placement area (at least the size of ship hitpoints). Then, search rIter amount of times again until a
+    // random valid spot is found.
     unsigned char rIter = rand() % SHIP_PLACEMENT_SALT + 1;
     unsigned char valid = 0;
     for (unsigned char col = 0; col < BOARD_COLUMNS; ++col)
@@ -193,16 +201,17 @@ void _searchAndPlaceVertical(BattleShipPlayer *player, BattleShip *ship, unsigne
 
 void battleShipPlayerGenerateShips(BattleShipPlayer *player)
 {
-
     // Any coordinate that is 0 is valid to place on
     unsigned char validCoordinates[BOARD_ROWS][BOARD_COLUMNS] = {0};
 
+    // Randomly place ships horizontally and vertically on the board.
     srand(time(NULL));
     for (int i = 0; i < SHIPS_PER_PLAYER; ++i)
     {
         rand() % 2 ? _searchAndPlaceHorizontal(player, &player->ships[i], validCoordinates) : _searchAndPlaceVertical(player, &player->ships[i], validCoordinates);
     }
 
+    // Output ships if this flag is disabled
     if (!HIDE_ENEMY_SHIPS)
     {
         printf("\nGenerated enemy ships! (@ represents any ship type ships)\n");

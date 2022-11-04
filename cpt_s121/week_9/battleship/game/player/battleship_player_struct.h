@@ -7,8 +7,10 @@
 #include <string.h>
 #include <stdlib.h>
 
-// A player contains the locations of their ships
-// and the score relative to how many ships they hit
+// [ships] - An array of all the ships that will be placed on [shipMap]
+// [shipMap] - An array of pointers to the ships in [ships]. Used to attack a battleship in constant time.
+// [gameBoard] - A physical representation of the 2d board
+// [score] - Players score, incremenets with every successful hit
 typedef struct
 {
     BattleShip ships[SHIPS_PER_PLAYER];
@@ -22,5 +24,3 @@ void battleShipPlayerPlaceShips(BattleShipPlayer *player);
 
 // Fill shipMap with SHIPS_PER_PLAYER ships
 void battleShipPlayerGenerateShips(BattleShipPlayer *player);
-
-unsigned char _notTouchingAndNoShips(unsigned char row, unsigned char column, unsigned char valid[BOARD_ROWS][BOARD_COLUMNS]);

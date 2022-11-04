@@ -1,5 +1,8 @@
 #pragma once
 
+// [hitPoints] - Initial size of a battleship, and the health that is remaining
+// [graphic] - What the ship displays as
+// [name] - The name of the ship
 typedef struct
 {
     unsigned int hitPoints;
@@ -7,7 +10,8 @@ typedef struct
     const char *name;
 } BattleShip;
 
-// Different battleship possibilities
+// Different types of battleships. You can create your own here.
+
 #define BATTLE_SHIP_CARRIER \
     (BattleShip)            \
     {                       \
