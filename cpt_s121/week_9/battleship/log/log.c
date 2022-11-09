@@ -5,7 +5,7 @@ static FILE *_getLogFile()
     static FILE *file;
     if (file == NULL)
     {
-        file = fopen("../log.txt", "rw");
+        file = fopen("../log.txt", "w");
     }
     return file;
 }
