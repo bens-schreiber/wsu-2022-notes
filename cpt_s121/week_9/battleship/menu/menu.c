@@ -1,6 +1,6 @@
 #include "menu.h"
 #include "../messages/messages.h"
-#include "../game/game_struct.h"
+#include "../game/game.h"
 
 int displayMenu()
 {

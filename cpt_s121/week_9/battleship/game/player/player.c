@@ -1,4 +1,4 @@
-#include "battleship_player_struct.h"
+#include "player.h"
 
 void battleShipPlayerPlaceShips(BattleShipPlayer *player)
 {

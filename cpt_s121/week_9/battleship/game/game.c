@@ -1,4 +1,4 @@
-#include "./game_struct.h"
+#include "./game.h"
 
 void battleShipGameStart()
 {
@@ -40,6 +40,7 @@ void battleShipGameStart()
         game->round++;
     }
 
+    logStats(game);
     free(game);
 }
 
@@ -170,6 +171,7 @@ AttackResult battleShipGameAttack(BattleShipPlayer *attack, BattleShipPlayer *pl
 
 unsigned char _processAttackResult(AttackResult attackResult, BattleShipPlayer *player, Coordinate coordinate)
 {
+    logAttack(coordinate, attackResult);
     switch (attackResult)
     {
     case MISS:
@@ -181,7 +183,6 @@ unsigned char _processAttackResult(AttackResult attackResult, BattleShipPlayer *
     case SANK:
         gameBoardPlaceValue(player->gameBoard, HIT_MARKER, coordinate);
         return 1;
-        awaitInput();
     }
 }
 

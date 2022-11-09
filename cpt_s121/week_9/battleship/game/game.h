@@ -1,20 +1,10 @@
 #pragma once
+#include "game_types.h"
+#include "./player/player.h"
 #include "../utils.h"
 #include "../board/board_struct.h"
-#include "./player/battleship_player_struct.h"
-#include "./ship/battleship_struct.h"
 #include "../messages/messages.h"
-
-// [player] - The main player of the game
-// [computer] - The enemy. Has a blank gameBoard that is the board the player sees.
-// [round] - Keeps track of how many rounds the game has gone through
-typedef struct
-{
-    BattleShipPlayer *player;
-    BattleShipPlayer *computer;
-    unsigned char round;
-} BattleShipGame;
-
+#include "../log/log.h"
 
 // Begins a game of battleship
 // Loops round until the sum of all battleship sizes in consants.h is reached in a Player.score
@@ -25,14 +15,6 @@ void _battleShipGameDoPlayerRound(BattleShipGame *game);
 
 // Does a single round for the computer
 void _battleShipGameDoComputerRound(BattleShipGame *game);
-
-// Outcomes of an attack
-typedef enum
-{
-    MISS,
-    HIT,
-    SANK
-} AttackResult;
 
 // Fires an attack to a coordinate
 // Returns an AttackResult (MISS, HIT, SANK)

@@ -1,5 +1,5 @@
 #pragma once
-#include "../ship/battleship_struct.h"
+#include "../ship/ship_types.h"
 #include "../../utils.h"
 #include "../../board/board_struct.h"
 #include "../../messages/messages.h"

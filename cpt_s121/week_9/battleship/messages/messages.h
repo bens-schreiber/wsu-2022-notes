@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../board/board_struct.h"
-#include "../game/ship/battleship_struct.h"
+#include "../game/ship/ship_types.h"
 
 #define ATTACK_INSTRUCTIONS "Select a tile to attack! (WASD to move, Y to place) (X: HIT) (M: MISS) (O: CURSOR)"
 #define ATTACK_LAUNCHED "Attack Launched (X: HIT) (M: MISS) (O: CURSOR)"
