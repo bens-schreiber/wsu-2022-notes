@@ -108,7 +108,7 @@ void _battleShipGameDoPlayerRound(BattleShipGame *game)
 
     // Attack the computer with the given coordinates
     unsigned char sank = _processAttackResult(
-        battleShipGameAttack(
+        _battleShipGameAttack(
                 game->computer, 
                 game->player, 
                 (Coordinate){x, y}), 
@@ -131,7 +131,7 @@ void _battleShipGameDoComputerRound(BattleShipGame *game)
         rand() % BOARD_COLUMNS,
         rand() % BOARD_ROWS};
 
-    unsigned char sank = _processAttackResult(battleShipGameAttack(game->player, game->computer, coordinate), game->player, coordinate);
+    unsigned char sank = _processAttackResult(_battleShipGameAttack(game->player, game->computer, coordinate), game->player, coordinate);
 
     printGameBoard(game->player->gameBoard, "Computer Attack");
     if (sank)
@@ -140,7 +140,7 @@ void _battleShipGameDoComputerRound(BattleShipGame *game)
     }
 }
 
-AttackResult battleShipGameAttack(BattleShipPlayer *attack, BattleShipPlayer *player, Coordinate coordinate)
+AttackResult _battleShipGameAttack(BattleShipPlayer *attack, BattleShipPlayer *player, Coordinate coordinate)
 {
 
     BattleShip *ship = attack->shipMap[coordinate.Y][coordinate.X];

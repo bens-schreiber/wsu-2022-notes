@@ -11,21 +11,18 @@
 void battleShipGameStart();
 
 // Does a single round of the game for the player
-void _battleShipGameDoPlayerRound(BattleShipGame *game);
+static void _battleShipGameDoPlayerRound(BattleShipGame *game);
 
 // Does a single round for the computer
-void _battleShipGameDoComputerRound(BattleShipGame *game);
+static void _battleShipGameDoComputerRound(BattleShipGame *game);
 
 // Fires an attack to a coordinate
 // Returns an AttackResult (MISS, HIT, SANK)
-AttackResult battleShipGameAttack(BattleShipPlayer *attack, BattleShipPlayer *player, Coordinate coordinate);
+static AttackResult _battleShipGameAttack(BattleShipPlayer *attack, BattleShipPlayer *player, Coordinate coordinate);
 
-// Processes what to do with an AttackResult
-// Returns 1 if sank 0 if hit or miss.
-unsigned char _processAttackResult(AttackResult attackResult, BattleShipPlayer *player, Coordinate coordinate);
+static unsigned char _processAttackResult(AttackResult attackResult, BattleShipPlayer *player, Coordinate coordinate);
 
 // MESSAGES
-
 // prints the score, and what ships are remaining
 void printScoreBoard(BattleShipGame *game);
 
