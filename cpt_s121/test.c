@@ -80,8 +80,13 @@ int hash_two_uint8s(unsigned char x, unsigned char y) {
     return (( x*137 ) + y) % 100;
 }
 
+int factorial(int n) {
+    if (n == 1) return n;
+    return n * factorial(n - 1);
+}
+
 
 int main(int argc, char const *argv[])
 {
-    printf("%d", hash_two_uint8s(12,13));
+    printf("%d", factorial(4));
 }

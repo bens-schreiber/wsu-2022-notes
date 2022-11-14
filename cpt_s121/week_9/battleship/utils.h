@@ -2,7 +2,7 @@
 #include "./game/ship/ship_types.h"
 
 // max val 15 x 15 (uint8 range but 256,256 is saved for NULL)
-// display gets wonky over 10 though
+// display gets wonky over 10 thoughw
 #define BOARD_ROWS 10
 #define BOARD_COLUMNS 10
 

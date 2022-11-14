@@ -18,9 +18,3 @@ typedef struct
     GameBoard *gameBoard;
     unsigned char score;
 } BattleShipPlayer;
-
-// Fill shipMap with SHIPS_PER_PLAYER ships
-void battleShipPlayerPlaceShips(BattleShipPlayer *player);
-
-// Fill shipMap with SHIPS_PER_PLAYER ships
-void battleShipPlayerGenerateShips(BattleShipPlayer *player);
