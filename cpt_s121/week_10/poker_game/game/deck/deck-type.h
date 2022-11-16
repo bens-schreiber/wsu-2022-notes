@@ -1,4 +1,5 @@
-#include "../utils/constants.h"
+#pragma once
+#include "../../utils/constants.h"
 #include "../card/card-type.h"
 
 typedef struct {
@@ -6,3 +7,5 @@ typedef struct {
 } Deck;
 
 void deckInit(Deck *deck);
+
+void deckShuffle(Deck *deck);

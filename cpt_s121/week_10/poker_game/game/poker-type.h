@@ -1,5 +1,7 @@
+#pragma once
 #include "../utils/constants.h"
 #include "./card/card-type.h"
+#include "./deck/deck-type.h"
 
 typedef struct {
     Card hand[POKER_CARD_AMOUNT];
@@ -9,5 +11,5 @@ typedef struct {
 typedef struct {
     PokerPlayer player[POKER_PLAYER_AMOUNT];
     PokerPlayer dealer;
-    Card deck[POKER_DECK_AMOUNT];
+    Deck deck;
 } PokerGame;

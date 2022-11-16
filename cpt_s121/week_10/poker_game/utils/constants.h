@@ -1,3 +1,4 @@
+#pragma once
 #define POKER_CARD_AMOUNT 5
 #define POKER_PLAYER_AMOUNT 1
 #define POKER_REPLACE_AMOUNT 3

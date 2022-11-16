@@ -1,3 +1,4 @@
+#pragma once
 #include "../log/log.h"
 
 // displays the menu

@@ -1,3 +1,4 @@
+#pragma once
 #include "poker-type.h"
 #include "../log/log.h"
 #include "deck/deck-type.h"

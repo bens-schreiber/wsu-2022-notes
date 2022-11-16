@@ -9,7 +9,7 @@ void startPokerGame() {
         .deck = {0}
     };
 
-    initDeck(&game);
+    deckInit(&game.deck);
     return;
 
 }
