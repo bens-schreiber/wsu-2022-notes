@@ -31,6 +31,6 @@ void pokerGameDeal(PokerGame *game) {
 
     // deal to each player
     for (int i = 0; i < POKER_PLAYER_AMOUNT; ++i) {
-        dealPlayer(&game->player[i], &game->deck, deckIndex);
+        dealPlayer(&game->player[i], &game->deck, &deckIndex);
     }
 }
