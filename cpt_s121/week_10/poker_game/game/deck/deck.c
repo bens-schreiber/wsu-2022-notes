@@ -13,5 +13,19 @@ void deckInit(Deck *deck)
 
 void deckShuffle(Deck *deck)
 {
-	
+	srand(time(NULL));
+    int iterations = POKER_SHUFFLE_AMOUNT;
+    int index1 = 0;
+    int index2 = 0;
+    while (--iterations) {
+
+        // generate indexes
+        index1 = rand() % POKER_DECK_AMOUNT;
+        index2 = rand() % POKER_DECK_AMOUNT;
+
+        // swap index 1 with index 2
+        Card tmp = deck->deck[index1];
+        deck->deck[index1] = deck->deck[index2];
+        deck->deck[index2] = tmp;
+    }
 }

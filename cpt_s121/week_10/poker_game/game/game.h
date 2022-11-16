@@ -4,3 +4,5 @@
 #include "deck/deck-type.h"
 
 void startPokerGame();
+
+void pokerGameDeal(PokerGame *game);
