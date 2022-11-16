@@ -15,14 +15,16 @@ typedef enum
     KING
 } CardValue;
 
-typedef enum {
+typedef enum
+{
     HEART,
     DIAMOND,
     CLUB,
     SPADE
 } CardFace;
 
-typedef struct {
+typedef struct
+{
     CardValue value;
     CardFace face;
 } Card;

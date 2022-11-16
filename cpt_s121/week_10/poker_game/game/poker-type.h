@@ -11,5 +11,3 @@ typedef struct {
     PokerPlayer dealer;
     Card deck[POKER_DECK_AMOUNT];
 } PokerGame;
-
-void pokerGameInitDeck(PokerGame *game);

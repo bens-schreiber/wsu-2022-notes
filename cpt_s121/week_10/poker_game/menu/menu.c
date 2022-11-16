@@ -1,4 +1,5 @@
 #include "menu.h"
+#include "../game/game.h"
 
 int displayMenu() {
 
@@ -11,6 +12,7 @@ int displayMenu() {
             break;
         case 2:
             // start game
+            startPokerGame();
             break;
         case 3:
             // exit

@@ -6,6 +6,14 @@ int getIntInput() {
     return input;
 }
 
+void getInput() {
+    printf("\nPress ENTER to continue!\n");
+    char input = 0;
+    fflush(stdin);
+    getchar();
+    system("clear");
+}
+
 void logMenu() {
     system("clear");
     printf(
