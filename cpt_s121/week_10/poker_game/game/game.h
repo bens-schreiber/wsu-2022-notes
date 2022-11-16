@@ -1,5 +1,5 @@
 #include "poker-type.h"
 #include "../log/log.h"
-void startPokerGame();
+#include "deck/deck-type.h"
 
-void pokerGameInitDeck(PokerGame *game);
+void startPokerGame();
