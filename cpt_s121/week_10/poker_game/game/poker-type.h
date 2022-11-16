@@ -6,6 +6,7 @@
 typedef struct {
     Card hand[POKER_CARD_AMOUNT];
     unsigned int money;
+    unsigned int bet;
 } PokerPlayer;
 
 typedef struct {

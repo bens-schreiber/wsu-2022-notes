@@ -4,16 +4,32 @@ void startPokerGame() {
 
     // malloc this
     PokerGame game = {
-        .player = (PokerPlayer) {.money = POKER_STARTING_MONEY_AMOUNT},
-        .dealer = (PokerPlayer) {.money = POKER_STARTING_MONEY_AMOUNT},
+        .player = (PokerPlayer) {.money = POKER_STARTING_MONEY_AMOUNT, .bet = 0},
+        .dealer = (PokerPlayer) {.money = POKER_STARTING_MONEY_AMOUNT, .bet = 0},
         .deck = {0}
     };
 
+    // Prepare the deck and deal
     deckInit(&game.deck);
     deckShuffle(&game.deck);
     pokerGameDeal(&game);
-    return;
 
+    // place bets
+    int input = 0;
+    for (int i = 0; i < POKER_PLAYER_AMOUNT; ++i) {
+
+        while (1) {
+            logAskBet(i, game.player[i].money);
+            input = getIntInput();
+            if (input <= game.player[i].money) {
+                game.player[i].bet = input;
+                break;
+            }
+        }
+
+    }
+
+    return;
 }
 
 static void dealPlayer(PokerPlayer *player, Deck *deck, int *deckIndex) {

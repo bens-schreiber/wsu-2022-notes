@@ -27,3 +27,7 @@ void logMenu() {
 void logRules() {
     printf("these are the roools....\n");
 }
+
+void logAskBet(int player, int balance) {
+    printf("[Player %d] place your bet! (your balance is %d)", player, balance);
+}
