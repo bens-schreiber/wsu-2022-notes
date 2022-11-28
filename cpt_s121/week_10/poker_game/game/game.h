@@ -5,4 +5,7 @@
 
 void startPokerGame();
 
+void pokerGamePlaceBets(PokerGame *game);
+
 void pokerGameDeal(PokerGame *game);
+

@@ -1,4 +1,9 @@
 #include "log.h"
+
+void logClear() {
+    system("clear");
+}
+
 int getIntInput() {
     int input = 0;
     printf("\nEnter a value: ");
@@ -11,11 +16,11 @@ void getInput() {
     char input = 0;
     fflush(stdin);
     getchar();
-    system("clear");
+    logClear();
 }
 
 void logMenu() {
-    system("clear");
+    logClear();
     printf(
         "Poker by Benjamin Schreiber \n\n"
         "# Press 1 to view the rules \n"

@@ -2,6 +2,8 @@
 
 void startPokerGame() {
 
+    logClear();
+
     PokerGame *game = malloc(sizeof(PokerGame));
     *game = (PokerGame) {
         .dealer = (PokerPlayer) {.money = POKER_STARTING_MONEY_AMOUNT, .bet = 0},
@@ -25,10 +27,10 @@ void startPokerGame() {
                 break;
             }
         }
+        logClear();
     }
 
-    
-
+    free(game);
     return;
 }
 

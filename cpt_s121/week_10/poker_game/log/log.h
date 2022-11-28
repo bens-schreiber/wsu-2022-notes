@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// clears the output
+void logClear();
+
 // returns integer input
 int getIntInput();
 
