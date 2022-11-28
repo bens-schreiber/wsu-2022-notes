@@ -1,5 +1,4 @@
 #include "menu.h"
-#include "../game/game.h"
 
 int displayMenu() {
 
@@ -9,6 +8,7 @@ int displayMenu() {
         case 1: 
             // display rules
             logRules();
+            getInput();
             break;
         case 2:
             // start game

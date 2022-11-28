@@ -2,32 +2,32 @@
 
 void startPokerGame() {
 
-    // malloc this
-    PokerGame game = {
-        .player = (PokerPlayer) {.money = POKER_STARTING_MONEY_AMOUNT, .bet = 0},
+    PokerGame *game = malloc(sizeof(PokerGame));
+    *game = (PokerGame) {
         .dealer = (PokerPlayer) {.money = POKER_STARTING_MONEY_AMOUNT, .bet = 0},
         .deck = {0}
     };
 
     // Prepare the deck and deal
-    deckInit(&game.deck);
-    deckShuffle(&game.deck);
-    pokerGameDeal(&game);
+    deckInit(&game->deck);
+    deckShuffle(&game->deck);
+    pokerGameDeal(game);
 
     // place bets
     int input = 0;
     for (int i = 0; i < POKER_PLAYER_AMOUNT; ++i) {
-
+        game->player[i].money = POKER_STARTING_MONEY_AMOUNT;
         while (1) {
-            logAskBet(i, game.player[i].money);
+            logAskBet(i, game->player[i].money);
             input = getIntInput();
-            if (input <= game.player[i].money) {
-                game.player[i].bet = input;
+            if (input <= game->player[i].money) {
+                game->player[i].bet = input;
                 break;
             }
         }
-
     }
+
+    
 
     return;
 }
