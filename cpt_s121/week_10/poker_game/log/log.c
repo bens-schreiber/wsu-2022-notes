@@ -37,6 +37,10 @@ void logAskBet(int player, int balance) {
     printf("[Player %d] place your bet! (your balance is %d)", player, balance);
 }
 
+void logAskDiscardAmount(int player) {
+    printf("[Player %d] how many cards would you like to discard? (0-%d)", player, POKER_CARD_AMOUNT);
+}
+
 
 #define CARD_HEIGHT 7
 #define CARD_WIDTH 9

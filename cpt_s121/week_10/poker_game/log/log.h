@@ -21,3 +21,5 @@ void logRules();
 void logAskBet(int player, int balance);
 
 void logPlayerHand(PokerPlayer *player);
+
+void logAskDiscardAmount(int player);
