@@ -5,6 +5,15 @@
         "craps_struct.h": "c",
         "battleship_struct.h": "c",
         "stdlib.h": "c",
-        "card-type.h": "c"
+        "card-type.h": "c",
+        "__hash_table": "c",
+        "__split_buffer": "c",
+        "array": "c",
+        "bitset": "c",
+        "initializer_list": "c",
+        "string": "c",
+        "string_view": "c",
+        "unordered_map": "c",
+        "vector": "c"
     }
 }

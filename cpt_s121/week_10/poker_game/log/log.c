@@ -11,6 +11,21 @@ int getIntInput() {
     return input;
 }
 
+int *getIntInputs(int maxSize, int *actualSize) {
+    char s[maxSize * 2];
+    scanf("%s", s);
+    if (!strcasecmp(s, "N")) return NULL;
+    int *ret = malloc(sizeof(int) * maxSize);
+    char *sp = strtok(s, ",");
+    for (int i = 0; i < maxSize; ++i) {
+        if (sp == NULL) break;
+        ret[i] = atoi(sp);
+        sp = strtok(NULL, ",");
+        (*actualSize)++;
+    }
+    return ret;
+}
+
 void getInput() {
     printf("\nPress ENTER to continue!\n");
     char input = 0;
@@ -38,7 +53,8 @@ void logAskBet(int player, int balance) {
 }
 
 void logAskDiscardAmount(int player) {
-    printf("[Player %d] how many cards would you like to discard? (0-%d)", player, POKER_CARD_AMOUNT);
+    printf("\n");
+    printf("[Player %d] enter the indexes you want to discard (a,b,c or N): ", player);
 }
 
 

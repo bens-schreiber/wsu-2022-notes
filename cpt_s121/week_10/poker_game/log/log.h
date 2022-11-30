@@ -3,12 +3,15 @@
 #include <stdlib.h>
 #include "../game/poker-type.h"
 #include "../game/card/card-type.h"
+#include <string.h>
 
 // clears the output
 void logClear();
 
 // returns integer input
 int getIntInput();
+
+int *getIntInputs(int size, int *actualSize);
 
 void getInput();
 

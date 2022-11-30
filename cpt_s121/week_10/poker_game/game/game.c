@@ -46,14 +46,29 @@ static void dealPlayer(PokerPlayer *player, Deck *deck, int *deckIndex) {
     }
 }
 
-void pokerPlayerReplaceCards(PokerPlayer *player, int player, int *deckIndex) {
+void pokerPlayerReplaceCards(PokerGame *game, int playerIndex, int *deckIndex) {
     // show player their cards
-    logPlayerHand(player);
+    logPlayerHand(&game->player[playerIndex]);
 
     // let player select cards to discard and draw
-    logAskDiscardAmount(player)
+    logAskDiscardAmount(playerIndex);
+    int size = 0;
+    int *inputs = getIntInputs(POKER_CARD_AMOUNT, &size);
+    if (size == 0) {
+        return;
+    }
+    for (int i = 0; i < size; ++i) {
+        game->player[playerIndex].hand[inputs[i]] = game->deck.deck[*deckIndex];
+        (*deckIndex)++;
+    }
 
-    // replace up to 5 cards
+    logPlayerHand(&game->player[playerIndex]);
+    
+
+    free(inputs);
+
+    // replace
+
 }
 
 void pokerGameDeal(PokerGame *game) {
@@ -65,7 +80,7 @@ void pokerGameDeal(PokerGame *game) {
     // deal to each player
     for (int i = 0; i < POKER_PLAYER_AMOUNT; ++i) {
         dealPlayer(&game->player[i], &game->deck, &deckIndex);
-        pokerPlayerReplaceCards(&game->player[i], i, &deckIndex);
+        pokerPlayerReplaceCards(game, i, &deckIndex);
         getInput();
     }
 }
