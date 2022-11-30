@@ -1,6 +1,8 @@
 #pragma once
 #include <stdio.h>
 #include <stdlib.h>
+#include "../game/poker-type.h"
+#include "../game/card/card-type.h"
 
 // clears the output
 void logClear();
@@ -17,3 +19,5 @@ void logRules();
 
 // ask the player to input a bet
 void logAskBet(int player, int balance);
+
+void logPlayerHand(PokerPlayer *player);

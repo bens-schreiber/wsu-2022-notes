@@ -9,3 +9,5 @@ void pokerGamePlaceBets(PokerGame *game);
 
 void pokerGameDeal(PokerGame *game);
 
+void pokerPlayerReplaceCards(PokerPlayer *player, int *deckIndex);
+

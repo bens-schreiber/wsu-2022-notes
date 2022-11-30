@@ -10,11 +10,19 @@ void startPokerGame() {
         .deck = {0}
     };
 
+    // Place bets and deal
+    pokerGamePlaceBets(game);
+
     // Prepare the deck and deal
     deckInit(&game->deck);
     deckShuffle(&game->deck);
     pokerGameDeal(game);
 
+    free(game);
+    return;
+}
+
+void pokerGamePlaceBets(PokerGame *game) {
     // place bets
     int input = 0;
     for (int i = 0; i < POKER_PLAYER_AMOUNT; ++i) {
@@ -29,9 +37,6 @@ void startPokerGame() {
         }
         logClear();
     }
-
-    free(game);
-    return;
 }
 
 static void dealPlayer(PokerPlayer *player, Deck *deck, int *deckIndex) {
@@ -39,6 +44,16 @@ static void dealPlayer(PokerPlayer *player, Deck *deck, int *deckIndex) {
         player->hand[i] = deck->deck[*deckIndex];
         (*deckIndex)++;
     }
+}
+
+void pokerPlayerReplaceCards(PokerPlayer *player, int *deckIndex) {
+    // show player their cards
+    logPlayerHand(player);
+
+
+
+    // let player select cards to discard and draw
+    // replace up to 5 cards
 }
 
 void pokerGameDeal(PokerGame *game) {
@@ -50,5 +65,7 @@ void pokerGameDeal(PokerGame *game) {
     // deal to each player
     for (int i = 0; i < POKER_PLAYER_AMOUNT; ++i) {
         dealPlayer(&game->player[i], &game->deck, &deckIndex);
+        logPlayerHand(&game->player[i]);
+        getInput();
     }
 }
