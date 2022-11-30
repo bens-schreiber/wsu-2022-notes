@@ -38,18 +38,33 @@ void logAskBet(int player, int balance) {
 }
 
 
-#define DISPLAY_WIDTH 6
-#define DISPLAY_HEIGHT 9
+#define CARD_HEIGHT 7
+#define CARD_WIDTH 9
 #define DISPLAY_SPACING 2
 
-static void placeCardInHand(char handDisplay[][DISPLAY_HEIGHT*POKER_CARD_AMOUNT], Card card, int cardNum) {
-    char cardDisplay[DISPLAY_WIDTH][DISPLAY_HEIGHT] = {
+// A players hand always consists of POKER_CARD_AMOUNT number of cards.
+// Cards will always be laid out in this manner (F = face, V = value, I = index):
+//  _____   1
+// |     |  2
+// |  F  |  3
+// |  V  |  4
+// |     |  5
+//  -----   6
+//    I     7
+// 1234567
+// 7x7 in size
+// After each card, there will be 2 units of spacing
+// 9x7 in size
+// Therefore, the final size to display POKER_CARD_AMOUNT of cards is (9*POKER_CARD_AMOUNT)x7
+static void placeCardInHand(char handDisplay[][CARD_WIDTH*POKER_CARD_AMOUNT], Card card, int cardNum) {
+    char cardDisplay[CARD_HEIGHT][CARD_WIDTH] = {
         {' ', '_', '_', '_', '_', '_', ' ', ' ', ' '},
         {'|', ' ', ' ', ' ', ' ', ' ', '|', ' ', ' '},
         {'|', ' ', ' ', 'F', ' ', ' ', '|', ' ', ' '},
         {'|', ' ', ' ', 'V', ' ', ' ', '|', ' ', ' '},
-        {'|', ' ', ' ', ' ', ' ', ' ', '|', ' ', ' '},
-        {' ', '_', '_', '_', '_', '_', ' ', ' ', ' '},
+        {'|', '_', '_', '_', '_', '_', '|', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', 'I', ' ', ' ', ' ', ' ', ' '}
     };
 
     char F;
@@ -91,35 +106,23 @@ static void placeCardInHand(char handDisplay[][DISPLAY_HEIGHT*POKER_CARD_AMOUNT]
 
     cardDisplay[2][3] = F;
     cardDisplay[3][3] = V == '\0' ? '0' + (card.value + 1) : V;
+    cardDisplay[6][3] = '0' + cardNum;
 
-    for (int row = 0; row < 6; ++row) {
-        for (int col = 0; col < 9; ++col) {
-            handDisplay[row][col + (cardNum * 9)] = cardDisplay[row][col];
+    for (int row = 0; row < CARD_HEIGHT; ++row) {
+        for (int col = 0; col < CARD_WIDTH; ++col) {
+            handDisplay[row][col + (cardNum * CARD_WIDTH)] = cardDisplay[row][col];
         }
     }
 }
 
 void logPlayerHand(PokerPlayer *player) {
-    // A players hand always consists of POKER_CARD_AMOUNT number of cards.
-    // Cards will always be laid out in this manner (F = face, V = value):
-    //  _____   1
-    // |     |  2
-    // |  F  |  3
-    // |  V  |  4
-    // |     |  5
-    //  -----   6
-    // 1234567
-    // 7x6 in size
-    // After each card, there will be 2 units of spacing
-    // 9x6 in size
-    // Therefore, the final size to display POKER_CARD_AMOUNT of cards is (9*POKER_CARD_AMOUNT)x6
-    char handDisplay[DISPLAY_WIDTH][DISPLAY_HEIGHT*POKER_CARD_AMOUNT] = {};
+    char handDisplay[CARD_HEIGHT][CARD_WIDTH*POKER_CARD_AMOUNT] = {};
     for (int i = 0; i < POKER_CARD_AMOUNT; ++i) {
         placeCardInHand(handDisplay, player->hand[i], i);
     }
 
-    for (int row = 0; row < DISPLAY_WIDTH; ++row) {
-        for (int col = 0; col < DISPLAY_HEIGHT*POKER_CARD_AMOUNT; ++col) {
+    for (int row = 0; row < CARD_HEIGHT; ++row) {
+        for (int col = 0; col < CARD_WIDTH*POKER_CARD_AMOUNT; ++col) {
             printf("%c", handDisplay[row][col]);
         }
         printf("\n");
