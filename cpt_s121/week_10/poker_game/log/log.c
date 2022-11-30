@@ -76,7 +76,7 @@ void logAskDiscardAmount(int player) {
 // After each card, there will be 2 units of spacing
 // 9x7 in size
 // Therefore, the final size to display POKER_CARD_AMOUNT of cards is (9*POKER_CARD_AMOUNT)x7
-static void placeCardInHand(char handDisplay[][CARD_WIDTH*POKER_CARD_AMOUNT], Card card, int cardNum) {
+static void placeCardInHand(char handDisplay[][CARD_WIDTH*POKER_HAND_AMOUNT], Card card, int cardNum) {
     char cardDisplay[CARD_HEIGHT][CARD_WIDTH] = {
         {' ', '_', '_', '_', '_', '_', ' ', ' ', ' '},
         {'|', ' ', ' ', ' ', ' ', ' ', '|', ' ', ' '},
@@ -136,13 +136,13 @@ static void placeCardInHand(char handDisplay[][CARD_WIDTH*POKER_CARD_AMOUNT], Ca
 }
 
 void logPlayerHand(PokerPlayer *player) {
-    char handDisplay[CARD_HEIGHT][CARD_WIDTH*POKER_CARD_AMOUNT] = {};
-    for (int i = 0; i < POKER_CARD_AMOUNT; ++i) {
+    char handDisplay[CARD_HEIGHT][CARD_WIDTH*POKER_HAND_AMOUNT] = {};
+    for (int i = 0; i < POKER_HAND_AMOUNT; ++i) {
         placeCardInHand(handDisplay, player->hand[i], i);
     }
 
     for (int row = 0; row < CARD_HEIGHT; ++row) {
-        for (int col = 0; col < CARD_WIDTH*POKER_CARD_AMOUNT; ++col) {
+        for (int col = 0; col < CARD_WIDTH*POKER_HAND_AMOUNT; ++col) {
             printf("%c", handDisplay[row][col]);
         }
         printf("\n");

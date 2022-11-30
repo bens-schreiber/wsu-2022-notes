@@ -40,20 +40,20 @@ void pokerGamePlaceBets(PokerGame *game) {
 }
 
 static void dealPlayer(PokerPlayer *player, Deck *deck, int *deckIndex) {
-    for (int i = 0; i < POKER_CARD_AMOUNT; i++) {
+    for (int i = 0; i < POKER_HAND_AMOUNT; i++) {
         player->hand[i] = deck->deck[*deckIndex];
         (*deckIndex)++;
     }
 }
 
-void pokerPlayerReplaceCards(PokerGame *game, int playerIndex, int *deckIndex) {
+void pokerGameReplacePlayerCards(PokerGame *game, int playerIndex, int *deckIndex) {
     // show player their cards
     logPlayerHand(&game->player[playerIndex]);
 
     // let player select cards to discard and draw
     logAskDiscardAmount(playerIndex);
     int size = 0;
-    int *inputs = getIntInputs(POKER_CARD_AMOUNT, &size);
+    int *inputs = getIntInputs(POKER_HAND_AMOUNT, &size);
     if (size == 0) {
         return;
     }
@@ -80,7 +80,69 @@ void pokerGameDeal(PokerGame *game) {
     // deal to each player
     for (int i = 0; i < POKER_PLAYER_AMOUNT; ++i) {
         dealPlayer(&game->player[i], &game->deck, &deckIndex);
-        pokerPlayerReplaceCards(game, i, &deckIndex);
+        pokerGameReplacePlayerCards(game, i, &deckIndex);
         getInput();
     }
+}
+
+void pokerPlayerEvaluateHand(PokerPlayer *player) {
+    CardValue valueMap[CARD_VALUE_AMOUNT] = {};
+    int handSum = 0;
+    for (int i = 0; i < POKER_HAND_AMOUNT; ++i) {
+        handSum += player->hand->value;
+        valueMap[player->hand->value]++;
+    }
+
+    PokerEvalHand highest = {.hand = 0, .value = 0};
+
+    // Find straights
+    int straightCounter = 0;
+    
+    for (int i = 0; i < CARD_VALUE_AMOUNT; ++i) {
+        CardValue value = i;
+        int frequency = valueMap[i];
+
+        // Skip 0 frequencies
+        if (frequency == 0) {
+            straightCounter = 0;
+            continue;
+        }
+
+        // set the working highest as a high card, and increment the straight counter
+        PokerEvalHand workingHighest = (PokerEvalHand) {.hand = HIGH_CARD, .value = value };
+
+        // check for straight
+        if (++straightCounter == 5) {
+            workingHighest = (PokerEvalHand) {.hand = STRAIGHT, .value = value};
+        }
+
+        // Check for flush. At this time, flush is the highest, so just return the flush.
+        if (frequency == 3 && valueMap[(handSum - 3 * value) / 2] == 2) {
+            return (PokerEvalHand) {.hand = FLUSH, .value = value};
+        }
+
+        // pair, three of a kind, four of a kind
+        switch (frequency) {
+            case 2:
+                workingHighest = (PokerEvalHand) {.hand = PAIR, .value = value};
+                break;
+            case 3:
+                workingHighest = (PokerEvalHand) {.hand = THREE_OF_A_KIND, .value = value};
+                break;
+            case 4:
+                workingHighest = (PokerEvalHand) {.hand = FOUR_OF_A_KIND, .value = value};
+                break;
+        }
+
+        // Replace highing hand;
+        if (workingHighest.hand > highest.hand) {
+            highest = workingHighest;
+            continue;
+        }
+        if (workingHighest.hand == highest.hand && workingHighest.value > highest.value) {
+            highest = workingHighest;
+            continue;
+        }
+    }
+    return highest;
 }

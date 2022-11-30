@@ -1,7 +1,6 @@
 #pragma once
 typedef enum
 {
-    ACE,
     TWO,
     THREE,
     FOUR,
@@ -13,7 +12,8 @@ typedef enum
     TEN,
     JACK,
     QUEEN,
-    KING
+    KING,
+    ACE
 } CardValue;
 
 typedef enum

@@ -9,5 +9,7 @@ void pokerGamePlaceBets(PokerGame *game);
 
 void pokerGameDeal(PokerGame *game);
 
-void pokerPlayerReplaceCards(PokerGame *game, int playerIndex, int *deckIndex);
+void pokerGameReplacePlayerCards(PokerGame *game, int playerIndex, int *deckIndex);
+
+void pokerPlayerEvaluateHand(PokerPlayer *player);
 
