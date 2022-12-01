@@ -122,13 +122,13 @@ PokerEvalHand pokerPlayerEvaluateHand(PokerPlayer *player) {
         }
 
         // check for straight
-        if (++straightCounter == 5) {
+        if (++straightCounter == POKER_HAND_AMOUNT) {
             return (PokerEvalHand) {.hand = STRAIGHT, .value = value};
         }
 
         // Only a straight is higher than a flush
         // Only check for straights if we know there is a flush.
-        if (flushCounter == 5) {
+        if (flushCounter == POKER_HAND_AMOUNT) {
             highest = (PokerEvalHand) {.hand = FLUSH, .value = value};
             continue;
         }

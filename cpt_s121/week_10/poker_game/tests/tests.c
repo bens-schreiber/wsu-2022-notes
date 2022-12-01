@@ -9,7 +9,7 @@ void runTests() {
             (Card) {.face = HEART, .value = THREE},
             (Card) {.face = HEART, .value = FOUR},
             (Card) {.face = HEART, .value = FIVE},
-            (Card) {.face = HEART, .value = SIX},
+            (Card) {.face = HEART, .value = TWO},
         }
         };
     

@@ -40,7 +40,7 @@ void logMenu() {
         "Poker by Benjamin Schreiber \n\n"
         "# Press 1 to view the rules \n"
         "# Press 2 to start Poker \n"
-        "# Press 3 to run poker hand evaluation tests (define in constants.h) \n"
+        "# Press 3 to run poker hand evaluation tests (set in tests/tests.c) \n"
         "# Press 4 to exit \n"
     );
 }
