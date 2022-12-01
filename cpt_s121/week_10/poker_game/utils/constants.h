@@ -10,15 +10,3 @@
 #define CARD_FACE_AMOUNT 4
 #define POKER_STARTING_MONEY_AMOUNT 10000
 #define POKER_SHUFFLE_AMOUNT 100
-
-typedef enum {
-    HIGH_CARD,
-    PAIR,
-    TWO_PAIR,
-    THREE_OF_A_KIND,
-    STRAIGHT,
-    FLUSH,
-    FULL_HOUSE,
-    FOUR_OF_A_KIND,
-    ROYAL_FLUSH
-} PokerHand;

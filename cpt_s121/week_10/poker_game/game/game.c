@@ -119,16 +119,14 @@ PokerEvalHand pokerPlayerEvaluateHand(PokerPlayer *player) {
         // set the working highest as a high card, and increment the straight counter
         PokerEvalHand workingHighest = (PokerEvalHand) {.hand = HIGH_CARD, .value = value };
 
-        // Check for flush. At this time, flush is the highest, so just return the flush.
-        if (frequency == 3 && valueMap[(handSum - 3 * value) / 2] == 2) {
-            return (PokerEvalHand) {.hand = FLUSH, .value = value};
+        // check for straight
+        if (++straightCounter == 5) {
+            return (PokerEvalHand) {.hand = STRAIGHT, .value = value};
         }
 
-        // check for straight
-        // Straight is the highest aside from flush, so we can just continue
-        if (++straightCounter == 5) {
-            workingHighest = (PokerEvalHand) {.hand = STRAIGHT, .value = value};
-            continue;
+        // Check for flush
+        if (frequency == 3 && valueMap[(handSum - 3 * value) / 2] == 2) {
+            return (PokerEvalHand) {.hand = FULL_HOUSE, .value = value};
         }
 
         // pair, three of a kind, four of a kind

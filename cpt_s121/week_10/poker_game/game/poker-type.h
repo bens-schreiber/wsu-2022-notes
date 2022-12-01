@@ -15,6 +15,17 @@ typedef struct {
     Deck deck;
 } PokerGame;
 
+typedef enum {
+    HIGH_CARD,
+    PAIR,
+    TWO_PAIR,
+    THREE_OF_A_KIND,
+    FOUR_OF_A_KIND,
+    FULL_HOUSE,
+    FLUSH,
+    STRAIGHT,
+} PokerHand;
+
 typedef struct {
     PokerHand hand;
     int value;
