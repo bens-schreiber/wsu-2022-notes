@@ -94,19 +94,24 @@ void pokerGameDeal(PokerGame *game) {
 }
 
 PokerEvalHand pokerPlayerEvaluateHand(PokerPlayer *player) {
+
+    // Frequency table / hash map of values
     CardValue valueMap[CARD_VALUE_AMOUNT] = {0};
     int handSum = 0;
+    int flushCounter = 0;
     for (int i = 0; i < POKER_HAND_AMOUNT; ++i) {
         handSum += player->hand[i].value;
         valueMap[player->hand[i].value]++;
+
+        if (i == 0 || player->hand[i].face == player->hand[i - 1].face) {
+            ++flushCounter;
+        }
     }
 
     PokerEvalHand highest = {.hand = 0, .value = 0};
-
-    // Find straights
     int straightCounter = 0;
-    
     for (int i = 0; i < CARD_VALUE_AMOUNT; ++i) {
+        
         CardValue value = i;
         int frequency = valueMap[i];
 
@@ -116,18 +121,25 @@ PokerEvalHand pokerPlayerEvaluateHand(PokerPlayer *player) {
             continue;
         }
 
-        // set the working highest as a high card, and increment the straight counter
-        PokerEvalHand workingHighest = (PokerEvalHand) {.hand = HIGH_CARD, .value = value };
-
         // check for straight
         if (++straightCounter == 5) {
             return (PokerEvalHand) {.hand = STRAIGHT, .value = value};
         }
 
-        // Check for flush
+        // Only a straight is higher than a flush
+        // Only check for straights if we know there is a flush.
+        if (flushCounter == 5) {
+            highest = (PokerEvalHand) {.hand = FLUSH, .value = value};
+            continue;
+        }
+
+        // Check for full house
         if (frequency == 3 && valueMap[(handSum - 3 * value) / 2] == 2) {
             return (PokerEvalHand) {.hand = FULL_HOUSE, .value = value};
         }
+
+        // set the working highest as a high card, and increment the straight counter
+        PokerEvalHand workingHighest = (PokerEvalHand) {.hand = HIGH_CARD, .value = value };
 
         // pair, three of a kind, four of a kind
         switch (frequency) {
