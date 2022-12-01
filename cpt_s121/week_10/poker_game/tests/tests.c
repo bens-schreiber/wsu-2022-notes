@@ -3,7 +3,7 @@
 void runTests() {
     PokerPlayer testPlayer = {
         .bet = 0, 
-        .money = INT32_MAX,
+        .money = 10,
         .hand = {
             (Card) {.face = HEART, .value = TWO},
             (Card) {.face = HEART, .value = THREE},
