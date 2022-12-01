@@ -16,6 +16,7 @@ int displayMenu() {
             break;
         case 3:
             runTests();
+            break;
         case 4:
             // exit
             return 0;
