@@ -11,5 +11,5 @@ void pokerGameDeal(PokerGame *game);
 
 void pokerGameReplacePlayerCards(PokerGame *game, int playerIndex, int *deckIndex);
 
-void pokerPlayerEvaluateHand(PokerPlayer *player);
+PokerEvalHand pokerPlayerEvaluateHand(PokerPlayer *player);
 

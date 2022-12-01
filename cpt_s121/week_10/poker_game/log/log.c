@@ -149,3 +149,7 @@ void logPlayerHand(PokerPlayer *player) {
     }
 
 }
+
+void logPlayerWins(int player) {
+    printf("[Player %d] beat the dealer!", player);
+}
