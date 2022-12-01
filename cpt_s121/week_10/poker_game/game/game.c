@@ -1,44 +1,40 @@
 #include "game.h"
 
-void startPokerGame() {
-
-    logClear();
-
+PokerGame *pokerGame() {
     PokerGame *game = malloc(sizeof(PokerGame));
-    *game = (PokerGame) {
+     *game = (PokerGame) {
         .dealer = (PokerPlayer) {.money = POKER_STARTING_MONEY_AMOUNT, .bet = 0},
         .deck = {0}
     };
+    for (int i = 0; i < POKER_PLAYER_AMOUNT; ++i) {
+        game->player[i].money = POKER_STARTING_MONEY_AMOUNT;
+    }
+    return game;
+}
 
-    // Place bets and deal
-    // pokerGamePlaceBets(game);
+void startPokerGame(PokerGame *game) {
+
+    logClear();
+
+    pokerGamePlaceBets(game);
 
     // Prepare the deck and deal
     deckInit(&game->deck);
     deckShuffle(&game->deck);
     pokerGameDeal(game);
 
-    logPlayerHand(&game->dealer);
-    PokerEvalHand dealer = pokerPlayerEvaluateHand(&game->dealer);
-    PokerEvalHand comparator;
-    for (int i = 0; i < POKER_PLAYER_AMOUNT; ++i) {
-        comparator = pokerPlayerEvaluateHand(&game->player[i]);
-        if (comparator.hand > dealer.hand || (comparator.hand == dealer.hand) && comparator.value > dealer.value ) {
-            logPlayerWins(i);
-        }
+    if (DEBUG_SHOW_DEALER) {
+        logPlayerHand(&game->dealer);
     }
 
+    pokerGameFindWinner(game);
     getInput();
-
-    free(game);
-    return;
 }
 
 void pokerGamePlaceBets(PokerGame *game) {
     // place bets
     int input = 0;
     for (int i = 0; i < POKER_PLAYER_AMOUNT; ++i) {
-        game->player[i].money = POKER_STARTING_MONEY_AMOUNT;
         while (1) {
             logAskBet(i, game->player[i].money);
             input = getIntInput();
@@ -165,4 +161,27 @@ PokerEvalHand pokerPlayerEvaluateHand(PokerPlayer *player) {
         }
     }
     return highest;
+}
+
+void pokerGameFindWinner(PokerGame *game) {
+    PokerEvalHand dealer = pokerPlayerEvaluateHand(&game->dealer);
+    PokerEvalHand comparator;
+    char noWinners = 1;
+    for (int i = 0; i < POKER_PLAYER_AMOUNT; ++i) {
+        comparator = pokerPlayerEvaluateHand(&game->player[i]);
+        if (comparator.hand > dealer.hand || (comparator.hand == dealer.hand) && comparator.value > dealer.value ) {
+            logPlayerWins(i, game->player[i].bet);
+            game->player[i].money += game->player[i].bet;
+            game->dealer.money -= game->player[i].bet;
+            noWinners = 0;
+        } else {
+            logPlayerLost(i, game->player[i].bet);
+            game->player[i].money -= game->player[i].bet;
+            game->dealer.money += game->player[i].bet;
+        }
+    }
+
+    if (noWinners) {
+        logDealerWins();
+    }
 }

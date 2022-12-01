@@ -151,6 +151,18 @@ void logPlayerHand(PokerPlayer *player) {
 
 }
 
-void logPlayerWins(int player) {
-    printf("[Player %d] beat the dealer!", player);
+void logPlayerWins(int player, int bet) {
+    printf("[Player %d] beat the dealer and won $%d!!!\n", player, bet);
+}
+
+void logPlayerLost(int player, int bet) {
+    printf("[Player %d] you lost $%d\n", player, bet);
+}
+
+void logDealerWins() {
+    printf("The dealer wins!\n");
+}
+
+void logPlayAgain() {
+    printf("# Enter 0 to exit the game\n# Enter 1 to play again\n");
 }

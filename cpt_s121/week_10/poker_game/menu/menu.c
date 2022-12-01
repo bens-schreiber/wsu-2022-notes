@@ -1,5 +1,21 @@
 #include "menu.h"
 
+static void _gamePlayer() {
+    PokerGame *game = pokerGame();
+    startPokerGame(game);
+    while (1) {
+        logPlayAgain();
+        switch(getIntInput()) {
+        case 0:
+            free(game);
+            return;
+        case 1:
+            startPokerGame(game);
+            break;
+    }
+    }
+}
+
 int displayMenu() {
 
     logMenu();
@@ -12,7 +28,7 @@ int displayMenu() {
             break;
         case 2:
             // start game
-            startPokerGame();
+            _gamePlayer();
             break;
         case 3:
             runTests();

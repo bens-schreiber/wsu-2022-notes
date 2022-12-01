@@ -27,4 +27,10 @@ void logPlayerHand(PokerPlayer *player);
 
 void logAskDiscardAmount(int player);
 
-void logPlayerWins(int player);
+void logPlayerWins(int player, int bet);
+
+void logPlayerLost(int player, int bet);
+
+void logDealerWins();
+
+void logPlayAgain();
