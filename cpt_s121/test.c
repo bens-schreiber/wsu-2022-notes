@@ -154,8 +154,5 @@ char *rev_str(char *str) {
 
 int main(int argc, char const *argv[])
 {
-    char str[] = "abc";
-    // char str2[7] = {};
-    // recursive_string_copy(str, str2);
-    printf("%s", rev_str(str));
+    printf("%d", 10310 & 5510 |1310);
 }
