@@ -7,11 +7,16 @@ typedef struct {
 } FitbitResult;
 
 typedef struct {
-    unsigned int maxCaloriesBurned;
-    unsigned int maxDistanceWalked;
-    unsigned int maxFloorsWalked;
-    unsigned int maxStepsWalked;
-    double averageHeartrate;
+    char beginning[9];
+    char end[9];
+    unsigned int range;
+    unsigned int sum;
+} PoorSleep;
+
+typedef struct {
+    unsigned int totalCaloriesBurned, totalDistanceWalked, totalFloorsWalked, totalStepsTaken;
+    float averageHeartRate;
     unsigned int maxStepsTaken;
-    unsigned int maxPoorSleep;
+    PoorSleep poorSleep;
+
 } FitbitComputation;

@@ -14,3 +14,4 @@ unsigned int heartRate;
 unsigned int steps;
 Sleep sleepLevel;
 } FitbitData;
+

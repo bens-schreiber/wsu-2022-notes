@@ -1,0 +1,5 @@
+#define DATA_SIZE 1440
+#define TARGET_SIZE 10
+#define MINUTE_SIZE 9
+
+#define TARGET_DEPTH 1
