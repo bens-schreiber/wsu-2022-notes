@@ -1,10 +1,5 @@
 #include "../fitbit/fitbit_t.h"
 #include "../consts.h"
-typedef struct {
-    const FitbitData data[DATA_SIZE];
-    FitbitComputation computations;
-
-} FitbitResult;
 
 typedef struct {
     char beginning[9];
@@ -20,3 +15,9 @@ typedef struct {
     PoorSleep poorSleep;
 
 } FitbitComputation;
+
+typedef struct {
+    const FitbitData data[DATA_SIZE];
+    FitbitComputation computations;
+
+} FitbitResult;
