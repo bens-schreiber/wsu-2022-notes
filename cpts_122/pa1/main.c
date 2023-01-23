@@ -2,8 +2,6 @@
 #include "consts.h"
 #include <stdio.h>
 
-#define RUN_TESTS 1
-
 int main(int argc, char const *argv[])
 {
     FILE *f = fopen(CSV_LOCATION, "rw");

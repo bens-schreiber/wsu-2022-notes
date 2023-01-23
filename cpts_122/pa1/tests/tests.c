@@ -15,7 +15,6 @@ void runTests(const int runTests, FitbitResult *result) {
     // Manual reading
     int index = 0;
     while (index < TARGET_SIZE) {
-        printf("target: %s\n", result->data[index].patient);
         printf("minute: %s\n", result->data[index].minute);
         printf("calories: %lf\n", result->data[index].calories);
         printf("distance: %lf\n", result->data[index].distance);

@@ -4,3 +4,4 @@
 #define TARGET_DEPTH 2
 #define CSV_LOCATION "./assets/TestData.csv"
 #define FITBIT_ENTRY_POINT 3
+#define RUN_TESTS 1
