@@ -1,14 +1,17 @@
 #include "data_reader.h"
 
-static void _computeFitbitData(const FitbitData *data, FitbitResult *fitbitResult) {
+static void _computeFitbitData(const FitbitData *data, FitbitResult *result) {
     static PoorSleep sleep = {0};
-    FitbitComputation *v = &fitbitResult->computations;
+    FitbitComputation *v = &result->computations;
 
     // Totals
     v->totalCaloriesBurned += data->calories;
     v->totalDistanceWalked += data->distance;
     v->totalFloorsWalked += data->floors;
     v->totalStepsTaken += data->steps;
+
+    // averages
+    v->averageHeartRate = ((v->averageHeartRate * DATA_SIZE) + data->heartRate) / DATA_SIZE;
 
     // Max steps
     v->maxStepsTaken = data->steps > v->maxStepsTaken ? data->steps : v->maxStepsTaken;
@@ -106,6 +109,7 @@ FitbitResult *readAndComputeData(FILE *file) {
 
     // Begin result data
     FitbitResult *result = malloc(sizeof(FitbitResult));
+    result->computations = (FitbitComputation) {};
 
     // Skip the csv title desc line
     char buffer[DATA_SIZE];

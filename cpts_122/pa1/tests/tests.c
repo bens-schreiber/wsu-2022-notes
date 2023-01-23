@@ -12,13 +12,13 @@ static void awaitInput()
 void runTests(const int runTests, FitbitResult *result) {
     if (!runTests) {return;}
 
-    printf("avg heart: %f", result->computations.averageHeartRate);
-    printf("max steps: %d", result->computations.maxStepsTaken);
-    printf("poor sleep sum: %d", result->computations.poorSleep.sum);
-    printf("total calories: %d", result->computations.totalCaloriesBurned);
-    printf("total distance: %d", result->computations.totalDistanceWalked);
-    printf("total floors: %d", result->computations.totalFloorsWalked);
-    printf("avg total steps: %d", result->computations.totalStepsTaken);
+    printf("avg heart: %f\n", result->computations.averageHeartRate);
+    printf("max steps: %d\n", result->computations.maxStepsTaken);
+    printf("poor sleep sum: %d\n", result->computations.poorSleep.sum);
+    printf("total calories: %lf\n", result->computations.totalCaloriesBurned);
+    printf("total distance: %lf\n", result->computations.totalDistanceWalked);
+    printf("total floors: %d\n", result->computations.totalFloorsWalked);
+    printf("total steps: %d\n", result->computations.totalStepsTaken);
 
     awaitInput();
 

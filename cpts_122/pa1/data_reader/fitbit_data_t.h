@@ -9,7 +9,10 @@ typedef struct {
 } PoorSleep;
 
 typedef struct {
-    unsigned int totalCaloriesBurned, totalDistanceWalked, totalFloorsWalked, totalStepsTaken;
+    double totalCaloriesBurned;
+    double totalDistanceWalked;
+    int totalFloorsWalked;
+    int totalStepsTaken;
     float averageHeartRate;
     unsigned int maxStepsTaken;
     PoorSleep poorSleep;
