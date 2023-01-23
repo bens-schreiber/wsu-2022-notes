@@ -17,7 +17,7 @@ typedef struct {
 } FitbitComputation;
 
 typedef struct {
-    const FitbitData data[DATA_SIZE];
+    FitbitData data[DATA_SIZE];
     FitbitComputation computations;
 
 } FitbitResult;

@@ -3,4 +3,4 @@
 #include <stdio.h>
 #include <string.h>
 
-const FitbitResult readAndComputeData(FILE *file);
+FitbitResult *readAndComputeData(FILE *file);
