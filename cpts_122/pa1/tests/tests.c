@@ -12,6 +12,7 @@ static void awaitInput()
 void runTests(const int runTests, FitbitResult *result) {
     if (!runTests) {return;}
 
+    // Manual reading
     int index = 0;
     while (index < TARGET_SIZE) {
         printf("target: %s\n", result->data[index].patient);
