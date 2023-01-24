@@ -12,7 +12,7 @@ static void awaitInput()
 void runTests(const int runTests, FitbitResult *result) {
     if (!runTests) {return;}
 
-    printf("avg heart: %f\n", result->computations.averageHeartRate);
+    printf("\n\navg heart: %f\n", result->computations.averageHeartRate);
     printf("max steps: %d\n", result->computations.maxStepsTaken);
     printf("poor sleep sum: %d\n", result->computations.poorSleep.sum);
     printf("total calories: %lf\n", result->computations.totalCaloriesBurned);
@@ -21,7 +21,6 @@ void runTests(const int runTests, FitbitResult *result) {
     printf("total steps: %d\n", result->computations.totalStepsTaken);
 
     awaitInput();
-
 
     // Manual reading
     int index = 0;

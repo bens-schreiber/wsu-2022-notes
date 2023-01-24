@@ -52,23 +52,36 @@ static void _findTarget(FILE *file, char target[TARGET_SIZE]) {
     strcpy(target, strToken);
 }
 
+static int _validateLine(char *strToken, char *target) {
+
+    // Check target
+    // If target isn't the required target, return null
+    if (strcmp(target, strtok(strToken, ",")) != 0) {
+        return 0;
+    }
+
+    // There should be REQUIRED_COLUMNS amount of columns. Return false if otherwise
+    int count = 1;
+    while (strtok(NULL, ",") && ++count);
+    return count == REQUIRED_COLUMNS;
+}
+
 static void _readLine(FILE *file, char buffer[DATA_SIZE], char *target, FitbitData *data) {
 
     // Get the raw line
     char *row;
     row = fgets(buffer, DATA_SIZE, file);
 
-    char *strToken;
-
-    // Check target
-    // If target isn't the required target, return null
-    if (strcmp(target, strtok(row, ",")) != 0) {
+    // Copy the row so when it is validated with strTok it isn't lossy
+    char rowCopy[DATA_SIZE];
+    if (!_validateLine(strcpy(rowCopy, row), target)) {
         data = NULL;
         return;
     }
 
     // MINUTES
-    strToken = strtok(NULL, ",");
+    char *strToken;
+    strToken = strtok(row, ",");
     for (int i = 0; i < MINUTE_SIZE; ++i) {
         data->minute[i] = strToken[i];
     }
