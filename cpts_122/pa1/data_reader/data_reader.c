@@ -79,9 +79,14 @@ static void _readLine(FILE *file, char buffer[DATA_SIZE], char *target, FitbitDa
         return;
     }
 
+    // TARGET / PATIENT
+    char *strToken =  strtok(row, ",");
+    for (int i = 0; i < TARGET_SIZE; ++i) {
+        data->patient[i] = strToken[i];
+    }
+
     // MINUTES
-    char *strToken;
-    strToken = strtok(row, ",");
+    strToken = strtok(NULL, ",");
     for (int i = 0; i < MINUTE_SIZE; ++i) {
         data->minute[i] = strToken[i];
     }
@@ -108,7 +113,7 @@ static void _readLine(FILE *file, char buffer[DATA_SIZE], char *target, FitbitDa
 
     // SLEEP LEVEL
     strToken = strtok(NULL, ",");
-    data->sleepLevel = (Sleep) atoi(strToken);
+    data->sleepLevel = atoi(strToken);
     
 }
 

@@ -3,7 +3,7 @@
 
 typedef struct {
     char beginning[9];
-    char end[9];
+    char end[9]; 
     unsigned int range;
     unsigned int sum;
 } PoorSleep;
@@ -11,8 +11,8 @@ typedef struct {
 typedef struct {
     double totalCaloriesBurned;
     double totalDistanceWalked;
-    int totalFloorsWalked;
-    int totalStepsTaken;
+    unsigned int totalFloorsWalked;
+    unsigned int totalStepsTaken;
     float averageHeartRate;
     unsigned int maxStepsTaken;
     PoorSleep poorSleep;
