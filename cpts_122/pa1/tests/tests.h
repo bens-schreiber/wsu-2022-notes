@@ -1,2 +1,2 @@
-#include "../fitbit/data_reader/data_reader.h"
+#include "../fitbit/reader/reader.h"
 void runTests(const int runTests, FitbitResult *result);
