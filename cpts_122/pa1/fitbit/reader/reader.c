@@ -117,9 +117,13 @@ static void _readLine(FILE *file, char buffer[DATA_SIZE], char *target, FitbitDa
     
 }
 
+static void _writeDataStringLine(FitbitData *data, FitbitResult *result) {
+    char buffer[DATA_SIZE];
+    snprintf(buffer, sizeof(buffer), "%s,%s,%lf,%lf,%d,%d,%d,%d\n", data->patient, data->minute, data->calories, data->distance, data->floors, data->heartRate, data->steps, data->sleepLevel);
+    strncat(result->cleansedDataString, buffer, DATA_SIZE);
+}
 
-// TODO: deduping? what even do they want
-FitbitResult *readAndComputeData(FILE *file) {
+FitbitResult *readAndComputeFitbitData(FILE *file) {
 
     // Find target patient
     char target[TARGET_SIZE];
@@ -144,9 +148,10 @@ FitbitResult *readAndComputeData(FILE *file) {
 
         // Compute data
         _computeFitbitData(data, result);
+        _writeDataStringLine(data, result);
 
         // Store data
-        result->data[index++] = *data;
+        result->cleansedData[index++] = *data;
     }
 
     return result;

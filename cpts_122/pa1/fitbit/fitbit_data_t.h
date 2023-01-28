@@ -1,4 +1,6 @@
+#pragma once
 #include "../fitbit/fitbit_t.h"
+
 #include "../consts.h"
 
 typedef struct {
@@ -20,7 +22,8 @@ typedef struct {
 } FitbitComputation;
 
 typedef struct {
-    FitbitData data[DATA_SIZE];
+    FitbitData cleansedData[DATA_SIZE];
+    char cleansedDataString[0xFFFF]; // arbitrarily large
     FitbitComputation computations;
 
 } FitbitResult;

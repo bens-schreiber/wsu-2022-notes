@@ -25,13 +25,13 @@ void runTests(const int runTests, FitbitResult *result) {
     // Manual reading
     int index = 0;
     while (index < DATA_SIZE) {
-        printf("minute: %s\n", result->data[index].minute);
-        printf("calories: %lf\n", result->data[index].calories);
-        printf("distance: %lf\n", result->data[index].distance);
-        printf("floors: %d\n", result->data[index].floors);
-        printf("heart: %d\n", result->data[index].heartRate);
-        printf("steps: %d\n", result->data[index].steps);
-        printf("sleep: %d\n", result->data[index].sleepLevel);
+        printf("minute: %s\n", result->cleansedData[index].minute);
+        printf("calories: %lf\n", result->cleansedData[index].calories);
+        printf("distance: %lf\n", result->cleansedData[index].distance);
+        printf("floors: %d\n", result->cleansedData[index].floors);
+        printf("heart: %d\n", result->cleansedData[index].heartRate);
+        printf("steps: %d\n", result->cleansedData[index].steps);
+        printf("sleep: %d\n", result->cleansedData[index].sleepLevel);
         awaitInput();
     ++index;
     }
