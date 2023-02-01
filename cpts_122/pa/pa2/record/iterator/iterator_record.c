@@ -18,12 +18,14 @@ unsigned char hasPrevious_IteratorRecord(QueueRecord *queue) {
     return queue->iterator.index > 0;
 }
 
-void next_IteratorRecord(QueueRecord *queue) {
+NodeRecord *next_IteratorRecord(QueueRecord *queue) {
     queue->iterator.index++;
     queue->iterator.node = queue->iterator.node->next;
+    return queue->iterator.node;
 }
 
-void previous_IteratorRecord(QueueRecord *queue) {
+NodeRecord *previous_IteratorRecord(QueueRecord *queue) {
     queue->iterator.index--;
     queue->iterator.node = queue->iterator.node->previous;
+    return queue->iterator.node;
 }
