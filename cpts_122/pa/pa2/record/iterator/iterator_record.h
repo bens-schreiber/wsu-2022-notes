@@ -17,8 +17,10 @@ unsigned char hasPrevious_IteratorRecord(QueueRecord *queue);
 
 // .next()
 // goes to the next node
+// Be careful to put the iterator at either the head or tail initially
 NodeRecord *next_IteratorRecord(QueueRecord *queue);
 
 // .previous()
 // Goes to the previous node
+// Be careful to put the iterator at either the head or tail initially
 NodeRecord *previous_IteratorRecord(QueueRecord *queue);
