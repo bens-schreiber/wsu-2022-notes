@@ -19,8 +19,8 @@ QueueRecord *new_QueueRecord() {
     // Set head to tail
     queue->tail = queue->head;
 
-    // Iterate from index 0 at the head
-    queue->iterator = (IteratorNodeRecord) {.index = 0, .node = queue->head};
+    // Iterate from index -1 at the null head
+    queue->iterator = (IteratorNodeRecord) {.index = -1, .node = queue->head};
 
     // Length is currently 1 (disregard null head)
     queue->length = 0;
@@ -89,6 +89,13 @@ void insertIndex_QueueRecord(QueueRecord *queue, Record data, unsigned int index
     b->next = c;
 
     queue->length++;
+}
+
+void insert_QueueRecord(QueueRecord *queue, Record data) {
+    if (queue->length == 0) {
+        return headInsert_QueueRecord(queue, data);
+    }
+    tailInsert_QueueRecord(queue, data);
 }
 
 void popTail_QueueRecord(QueueRecord *queue) {

@@ -27,12 +27,10 @@ QueueRecord *readRecordsFromFile(FILE *input) {
     char buffer[0xFFF];
     Record record = {};
     QueueRecord *queue =  new_QueueRecord();
-    _readLine(&record, input, buffer);
-    headInsert_QueueRecord(queue, record);
 
     while(!feof(input)) {
         _readLine(&record, input, buffer);
-        tailInsert_QueueRecord(queue, record);
+        insert_QueueRecord(queue, record);
     }
 
     return queue;
