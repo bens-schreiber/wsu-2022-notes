@@ -1,11 +1,14 @@
 #include "menu.h"
 
-int displayMenu() {
+int displayMenu(QueueRecord *queue) {
     outMenuOptions();
     switch(getIntInput()) {
-        case 1:
-            // load
+        case 1: {
+            FILE *f = fopen(INPUT_FILE, "r");
+            queue = readRecordsFromFile(f);
+            fclose(f);
             break;
+        }
         case 2:
             // store
             break;

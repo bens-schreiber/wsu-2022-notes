@@ -14,7 +14,7 @@ typedef struct {
     char genre[STRING_SIZE];
     Duration length;
     unsigned int plays;
-    unsigned char rating; 
+    unsigned int rating; 
 } Record;
 
 // Node<Record>
