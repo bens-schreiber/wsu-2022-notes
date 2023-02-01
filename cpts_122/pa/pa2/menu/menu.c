@@ -44,6 +44,7 @@ int displayMenu() {
 }
 
 void outMenuOptions() {
+    system("clear");
     printf(
         "(1) load\n"
         "(2) store\n"
