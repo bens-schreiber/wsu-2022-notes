@@ -1,19 +1,17 @@
 #include "menu.h"
 
-int displayMenu(QueueRecord *queue) {
+int displayMenu(QueueRecord **queue) {
     outMenuOptions();
     switch(getIntInput()) {
         case 1: {
-            FILE *f = fopen(INPUT_FILE, "r");
-            queue = readRecordsFromFile(f);
-            fclose(f);
+            loadRecords(queue);
             break;
         }
         case 2:
             // store
             break;
         case 3:
-            // display
+            displayRecords(queue);
             break;
         case 4:
             // insert
@@ -40,9 +38,10 @@ int displayMenu(QueueRecord *queue) {
             // exit;
             return 0;
         default:
-            return 0;
+            break;
 
     }
+    getInput();
     return 1;
 }
 
@@ -68,4 +67,11 @@ int getIntInput() {
     printf("\nEnter a value: ");
     scanf("%d", &input);
     return input;
+}
+
+void getInput() {
+    printf("\nPress ENTER to continue!\n");
+    char input = 0;
+    fflush(stdin);
+    getchar();
 }

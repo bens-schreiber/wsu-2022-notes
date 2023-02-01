@@ -1,9 +1,11 @@
 #include "../record/record.h"
-#include "../reader/reader.h"
+#include "../commands/commands.h"
 #include <stdio.h>
 
-int displayMenu();
+int displayMenu(QueueRecord **queue);
 
 void outMenuOptions();
 
 int getIntInput();
+
+void getInput();

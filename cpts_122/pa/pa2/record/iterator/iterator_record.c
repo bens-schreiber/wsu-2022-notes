@@ -19,12 +19,18 @@ unsigned char hasPrevious_IteratorRecord(QueueRecord *queue) {
 }
 
 NodeRecord *next_IteratorRecord(QueueRecord *queue) {
+    if (!hasNext_IteratorRecord(queue)) {
+        return NULL;
+    }
     queue->iterator.index++;
     queue->iterator.node = queue->iterator.node->next;
     return queue->iterator.node;
 }
 
 NodeRecord *previous_IteratorRecord(QueueRecord *queue) {
+    if (!hasPrevious_IteratorRecord(queue)) {
+        return NULL;
+    }
     queue->iterator.index--;
     queue->iterator.node = queue->iterator.node->previous;
     return queue->iterator.node;

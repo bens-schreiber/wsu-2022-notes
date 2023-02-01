@@ -27,18 +27,12 @@ QueueRecord *readRecordsFromFile(FILE *input) {
     char buffer[0xFFF];
     Record record = {};
     _readLine(&record, input, buffer);
-    QueueRecord *queue = new_QueueRecord(record);
+    QueueRecord *queue =  new_QueueRecord(record);
 
     while(!feof(input)) {
         _readLine(&record, input, buffer);
-        headInsert_QueueRecord(queue, record);
+        tailInsert_QueueRecord(queue, record);
     }
-
-    toHead_IteratorRecord(queue);
-    while (hasNext_IteratorRecord(queue)) {
-        printf("%s\n", queue->iterator.node->data.artist);
-        next_IteratorRecord(queue);
-    };
 
     return queue;
 }
