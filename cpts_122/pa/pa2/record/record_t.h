@@ -30,7 +30,7 @@ struct Node {
 // doubly linked list implemented queue
 // Head always points to a null node before the beginning of data. 
 // Iterator should be used to grab any data
-// Initialize with new and insert first data with headInsert
+// Add data with insert
 typedef struct {
     Node* head;
     Node* tail;
@@ -38,8 +38,8 @@ typedef struct {
 } Queue;
 
 // Iterator<Queue<Node<Record>>>
-// Tracks a paticular index of a node, can iterate forwards/backwards from any point
-// EX: while (next_IteratorRecord(queue)) {queue->iterator ...}
+// Traverses a queue, tracking the index
+// EX: while (iter_next(&iter)) {iter.node ...}
 typedef struct {
     int index;
     Node* node;
