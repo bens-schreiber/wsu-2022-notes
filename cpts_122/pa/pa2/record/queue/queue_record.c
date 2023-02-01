@@ -9,39 +9,45 @@ static NodeRecord *_new_NodeRecord(Record data) {
 }
 
 QueueRecord *new_QueueRecord(Record data) {
-    QueueRecord *list = malloc(sizeof(QueueRecord));
-    list->head = _new_NodeRecord(data);
-    list->tail = list->head;
-    list->iterator = (IteratorNodeRecord) {.index = 0, .node = list->head};
-    list->length = 1;
-    return list;
+    QueueRecord *queue = malloc(sizeof(QueueRecord));
+    queue->head = _new_NodeRecord(data);
+    queue->tail = queue->head;
+    queue->iterator = (IteratorNodeRecord) {.index = 0, .node = queue->head};
+    queue->length = 1;
+    return queue;
 }
 
-void tailInsert_QueueRecord(QueueRecord *list, Record data) {
-    NodeRecord *n = _new_NodeRecord(data);
-    n->previous = list->tail;
-    list->tail->next = n;
-    list->tail = n;
-    list->length++;
+void *destruct_QueueRecord(QueueRecord *queue) {
+    while (queue->length > 0) {
+        popTail_QueueRecord(queue);
+    }
 }
 
-void headInsert_QueueRecord(QueueRecord *list, Record data) {
+void tailInsert_QueueRecord(QueueRecord *queue, Record data) {
     NodeRecord *n = _new_NodeRecord(data);
-    n->next = list->head;
-    list->head->previous = n;
-    list->head = n;
-    list->length++;
+    n->previous = queue->tail;
+    queue->tail->next = n;
+    queue->tail = n;
+    queue->length++;
+}
+
+void headInsert_QueueRecord(QueueRecord *queue, Record data) {
+    NodeRecord *n = _new_NodeRecord(data);
+    n->next = queue->head;
+    queue->head->previous = n;
+    queue->head = n;
+    queue->length++;
 }
 
 // could be smart here and based off index choose head or tail but i don't care
-void insertIndex_QueueRecord(QueueRecord *list, Record data, unsigned int index) {
-    iteratorResetToHead_QueueRecord(list);
+void insertIndex_QueueRecord(QueueRecord *queue, Record data, unsigned int index) {
+    iteratorResetToHead_QueueRecord(queue);
     unsigned char i = 0;
     while (i++ < index) {
-        iteratorNext_QueueRecord(list);
+        iteratorNext_QueueRecord(queue);
     }
-    NodeRecord *old = list->iterator.node;
-    NodeRecord *oldNext = list->iterator.node->next;
+    NodeRecord *old = queue->iterator.node;
+    NodeRecord *oldNext = queue->iterator.node->next;
     NodeRecord *new = _new_NodeRecord(data);
     oldNext->previous = new;
     old->next = new;
@@ -49,17 +55,18 @@ void insertIndex_QueueRecord(QueueRecord *list, Record data, unsigned int index)
     new->next = old->next;
 }
 
-void popTail_QueueRecord(QueueRecord *list) {
-    NodeRecord *n = list->tail->previous;
+void popTail_QueueRecord(QueueRecord *queue) {
+    NodeRecord *n = queue->tail->previous;
     n->next = NULL;
+    queue->tail = n;
     free(n);
-    list->length--;
+    queue->length--;
 }
 
-void popHead_QueueRecord(QueueRecord *list) {
-    NodeRecord *n = list;
+void popHead_QueueRecord(QueueRecord *queue) {
+    NodeRecord *n = queue;
 }
 
-void popIndex_QueueRecord(QueueRecord *list, unsigned int index) {
+void popIndex_QueueRecord(QueueRecord *queue, unsigned int index) {
 
 }

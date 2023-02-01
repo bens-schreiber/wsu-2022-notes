@@ -1,5 +1,6 @@
 #include "../consts.h"
 #include <stdio.h>
+#include <stdlib.h>
 typedef struct {
     unsigned int seconds;
     unsigned int minutes;
