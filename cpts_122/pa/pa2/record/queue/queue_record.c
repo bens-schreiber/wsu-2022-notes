@@ -68,7 +68,7 @@ void insertIndex_QueueRecord(QueueRecord *queue, Record data, unsigned int index
     // Iterate to index n
     toHead_IteratorRecord(queue);
     while (queue->iterator.index < index) {
-        iteratorNext_QueueRecord(queue);
+        next_IteratorRecord(queue);
     }
 
     // Consider the nodes [a,c] where we want to place [a,b,c] at index iterator.index
@@ -122,7 +122,7 @@ void popIndex_QueueRecord(QueueRecord *queue, unsigned int index) {
     // Iterate to index n
     toHead_IteratorRecord(queue);
     while (queue->iterator.index < index) {
-        iteratorNext_QueueRecord(queue);
+        next_IteratorRecord(queue);
     }
 
     // Consider the nodes [a,b,c] where b is being the node at index n
