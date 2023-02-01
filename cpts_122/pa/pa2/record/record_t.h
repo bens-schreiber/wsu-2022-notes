@@ -1,3 +1,4 @@
+#pragma once
 #include "../consts.h"
 #include <stdio.h>
 #include <stdlib.h>
