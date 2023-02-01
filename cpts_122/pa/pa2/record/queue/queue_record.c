@@ -71,14 +71,16 @@ void insertIndex_QueueRecord(QueueRecord *queue, Record data, unsigned int index
         iteratorNext_QueueRecord(queue);
     }
 
-    // Put node in between a and b
+    // Consider the nodes [a,c] where we want to place [a,b,c] at index iterator.index
     NodeRecord *a = queue->iterator.node;
-    NodeRecord *b = queue->iterator.node->next;
-    NodeRecord *new = _new_NodeRecord(data);
-    b->previous = new;
-    a->next = new;
-    new->previous = a;
-    new->next = a->next;
+    NodeRecord *c = queue->iterator.node->next;
+    NodeRecord *b = _new_NodeRecord(data);
+    c->previous = b;
+    a->next = b;
+    b->previous = a;
+    b->next = c;
+
+    queue->length++;
 }
 
 void popTail_QueueRecord(QueueRecord *queue) {
@@ -99,9 +101,39 @@ void popTail_QueueRecord(QueueRecord *queue) {
 }
 
 void popHead_QueueRecord(QueueRecord *queue) {
-    NodeRecord *n = queue;
+
+    // Get the node after the head
+    NodeRecord *n = queue->head->next;
+
+    // Set the node after the head to have no previous
+    n->previous = NULL;
+
+    // Destroy the head
+    free(queue->head);
+
+    // Set the node after the head to the new head
+    queue->head = n;
+    
+    queue->length--;
 }
 
 void popIndex_QueueRecord(QueueRecord *queue, unsigned int index) {
 
+    // Iterate to index n
+    toHead_IteratorRecord(queue);
+    while (queue->iterator.index < index) {
+        iteratorNext_QueueRecord(queue);
+    }
+
+    // Consider the nodes [a,b,c] where b is being the node at index n
+    NodeRecord *a = queue->iterator.node->previous;
+    NodeRecord *c = queue->iterator.node->next;
+
+    // Destroy b
+    free(queue->iterator.node);
+
+    a->next = c;
+    c->previous = a;
+
+    queue->length--;
 }
