@@ -8,8 +8,15 @@ void loadRecords(QueueRecord **queue)  {
 void store();
 
 void displayRecords(QueueRecord **queue) {
+    Record r;
     do {
-        printf("%s\n", (*queue)->iterator.node->data.artist);
+        r = (*queue)->iterator.node->data;
+        printf(
+            "Artist: %s, Album: %s, Genre: %s\n"
+            "Song: %s, Length: %d:%d\n"
+            "Rating: %d, Plays: %d\n\n",
+            r.artist, r.album, r.genre, r.song, r.length.minutes, r.length.seconds, r.rating, r.plays
+        );
     } while (next_IteratorRecord(*queue));
 }
 
