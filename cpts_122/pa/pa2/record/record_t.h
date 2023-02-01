@@ -11,6 +11,7 @@ typedef struct {
     char artist[STRING_SIZE];
     char album[STRING_SIZE];
     char song[STRING_SIZE];
+    char genre[STRING_SIZE];
     Duration length;
     unsigned int plays;
     unsigned char rating; 
