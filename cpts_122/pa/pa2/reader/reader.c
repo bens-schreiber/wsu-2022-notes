@@ -9,7 +9,7 @@ static Record _readLine(Record *record, FILE *file) {
     memcpy(record->album, strtok(NULL, ","), STRING_SIZE);
     memcpy(record->song, strtok(NULL, ","), STRING_SIZE);
     memcpy(record->genre, strtok(NULL, ","), STRING_SIZE);
-    Duration d = {.minutes = atoi(strtok(NULL, ":")), .seconds = atoi(strtok(NULL, ","))};
+    record->length = (Duration) {.minutes = atoi(strtok(NULL, ":")), .seconds = atoi(strtok(NULL, ","))};
     record->plays = atoi(strtok(NULL, ","));
     record->rating = atoi(atoi(strtok(NULL, ","))); 
 }
