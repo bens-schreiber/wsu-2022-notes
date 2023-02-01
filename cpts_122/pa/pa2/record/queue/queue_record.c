@@ -62,7 +62,7 @@ void headInsert_QueueRecord(QueueRecord *queue, Record data) {
     a->next = b;
     b->previous = a;
     b->next = c;
-    c->previous = b;
+    if (c) {c->previous = b;}
     queue->length++;
 }
 

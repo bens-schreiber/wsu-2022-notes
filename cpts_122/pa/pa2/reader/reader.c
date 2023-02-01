@@ -26,8 +26,9 @@ static void _readLine(Record *record, FILE *file, char buffer[0xFFF]) {
 QueueRecord *readRecordsFromFile(FILE *input) {
     char buffer[0xFFF];
     Record record = {};
+    QueueRecord *queue =  new_QueueRecord();
     _readLine(&record, input, buffer);
-    QueueRecord *queue =  new_QueueRecord(record);
+    headInsert_QueueRecord(queue, record);
 
     while(!feof(input)) {
         _readLine(&record, input, buffer);

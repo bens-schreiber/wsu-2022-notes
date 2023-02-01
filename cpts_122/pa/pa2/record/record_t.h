@@ -38,6 +38,7 @@ typedef struct {
 // doubly linked list implemented queue
 // Head always points to a null node before the beginning of data. 
 // Iterator should be used to grab any data
+// Initialize with new and insert first data with headInsert
 typedef struct {
     NodeRecord* head;
     NodeRecord* tail;
