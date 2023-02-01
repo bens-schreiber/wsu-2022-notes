@@ -6,5 +6,6 @@ int main(int argc, char const *argv[])
 {
     QueueRecord **queue = malloc(sizeof(QueueRecord*));
     while (displayMenu(queue));
+    destruct_QueueRecord(*queue);
     return 0;
 }
