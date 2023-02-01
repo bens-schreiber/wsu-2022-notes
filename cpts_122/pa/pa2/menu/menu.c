@@ -5,13 +5,15 @@ int displayMenu(QueueRecord **queue) {
     switch(getIntInput()) {
         case 1: {
             loadRecords(queue);
+            printf("\nRecords loaded!\n");
             break;
         }
         case 2:
             // store
             break;
         case 3:
-            displayRecords(queue);
+            printf(*queue ?  "Displaying records... \n\n" : "Records need to be loaded first\n");
+            if (*queue) {displayRecords(queue);}
             break;
         case 4:
             // insert
