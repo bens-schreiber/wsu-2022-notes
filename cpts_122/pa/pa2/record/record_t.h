@@ -28,13 +28,16 @@ struct NodeRecord {
 
 // Iterator<Node<Record>>
 // Tracks a paticular index of a node, can iterate forwards/backwards from any point
+// EX: while (next_IteratorRecord(queue)) {queue->iterator ...}
 typedef struct {
-    unsigned int index;
+    int index;
     NodeRecord* node;
 } IteratorNodeRecord;
 
 // Queue<Record>
 // doubly linked list implemented queue
+// Head always points to a null node before the beginning of data. 
+// Iterator should be used to grab any data
 typedef struct {
     NodeRecord* head;
     NodeRecord* tail;

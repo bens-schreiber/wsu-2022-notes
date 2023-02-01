@@ -5,19 +5,19 @@
 static NodeRecord *_new_NodeRecord(Record data);
 
 // new Queue<Record>
-// Create a new Queue with the head and tail pointing to a node made from [data]
-QueueRecord *new_QueueRecord(Record data);
+// Create a new Queue with the head and tail pointing to a null node
+QueueRecord *new_QueueRecord();
 
 // destructor
 // Frees the queue and all elements
 void destruct_QueueRecord(QueueRecord *queue);
 
 // .tailInsert()
-// Insert a node made from [data] at the tail
+// Insert a node made from [data] at the tail (last index of all elements)
 void tailInsert_QueueRecord(QueueRecord *queue, Record data);
 
 // .headInsert()
-// Insert a node made from [data] at the head
+// Insert a node made from [data] at the head (beginning of all elements, head->next)
 void headInsert_QueueRecord(QueueRecord *queue, Record data);
 
 // .insertIndex(index: n)

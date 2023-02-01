@@ -1,7 +1,7 @@
 #include "iterator_record.h"
 
 void toHead_IteratorRecord(QueueRecord *queue) {
-    queue->iterator.index = 0;
+    queue->iterator.index = -1;
     queue->iterator.node = queue->head;
 }
 

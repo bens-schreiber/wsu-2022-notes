@@ -1,4 +1,6 @@
 #include "commands.h"
+
+// Load all of the records into a queue
 void loadRecords(QueueRecord **queue)  {
     FILE *f = fopen(INPUT_FILE, "r");
     (*queue) = readRecordsFromFile(f);
@@ -7,6 +9,9 @@ void loadRecords(QueueRecord **queue)  {
 
 void store();
 
+// Display all records
+// OR
+// Display all records of an artist
 void displayRecords(QueueRecord **queue) {
     Record r;
     do {
