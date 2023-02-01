@@ -38,7 +38,7 @@ void destruct_QueueRecord(QueueRecord *queue) {
     free(queue);
 }
 
-void tailInsert_QueueRecord(QueueRecord *queue, Record data) {
+NodeRecord *tailInsert_QueueRecord(QueueRecord *queue, Record data) {
 
     // Create new node
     NodeRecord *n = _new_NodeRecord(data);
@@ -48,9 +48,10 @@ void tailInsert_QueueRecord(QueueRecord *queue, Record data) {
     queue->tail->next = n;
     queue->tail = n;
     queue->length++;
+    return n;
 }
 
-void headInsert_QueueRecord(QueueRecord *queue, Record data) {
+NodeRecord *headInsert_QueueRecord(QueueRecord *queue, Record data) {
 
     // Insert the node after the null head
     // Consider the list [a,c] where we 'a' is the null head, and we are inserting b at [a,b,c]
@@ -64,12 +65,13 @@ void headInsert_QueueRecord(QueueRecord *queue, Record data) {
     b->next = c;
     if (c) {c->previous = b;}
     queue->length++;
+    return b;
 }
 
-void insertIndex_QueueRecord(QueueRecord *queue, Record data, unsigned int index) {
+NodeRecord *insertIndex_QueueRecord(QueueRecord *queue, Record data, unsigned int index) {
 
     // Handle out of bounds and head/tail insertion
-    if (index > (queue->length - 1)) {return;}
+    if (index > (queue->length - 1)) {return NULL;}
     if (index == 0) {return headInsert_QueueRecord(queue, data);}
     if (index == queue->length - 1) {return tailInsert_QueueRecord(queue, data);}
 
@@ -89,13 +91,14 @@ void insertIndex_QueueRecord(QueueRecord *queue, Record data, unsigned int index
     b->next = c;
 
     queue->length++;
+    return b;
 }
 
-void insert_QueueRecord(QueueRecord *queue, Record data) {
+NodeRecord *insert_QueueRecord(QueueRecord *queue, Record data) {
     if (queue->length == 0) {
         return headInsert_QueueRecord(queue, data);
     }
-    tailInsert_QueueRecord(queue, data);
+    return tailInsert_QueueRecord(queue, data);
 }
 
 void popTail_QueueRecord(QueueRecord *queue) {

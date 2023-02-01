@@ -14,19 +14,19 @@ void destruct_QueueRecord(QueueRecord *queue);
 
 // .tailInsert()
 // Insert a node made from [data] at the tail (last index of all elements)
-void tailInsert_QueueRecord(QueueRecord *queue, Record data);
+NodeRecord *tailInsert_QueueRecord(QueueRecord *queue, Record data);
 
 // .headInsert()
 // Insert a node made from [data] at the head (beginning of all elements, head->next)
-void headInsert_QueueRecord(QueueRecord *queue, Record data);
+NodeRecord *headInsert_QueueRecord(QueueRecord *queue, Record data);
 
 // .insertIndex(index: n)
 // Insert a node made from [data] at index n
-void insertIndex_QueueRecord(QueueRecord *queue, Record data, unsigned int index);
+NodeRecord *insertIndex_QueueRecord(QueueRecord *queue, Record data, unsigned int index);
 
 // .insert()
 // Inserts at head if no data, defaults to tail otherwise
-void insert_QueueRecord(QueueRecord *queue, Record data);
+NodeRecord *insert_QueueRecord(QueueRecord *queue, Record data);
 
 // .popTail()
 // Pop the back of the queue
