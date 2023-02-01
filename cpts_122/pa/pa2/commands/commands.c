@@ -10,7 +10,9 @@ void store();
 
 void displayRecords(QueueRecord **queue) {
     Record r;
+    toHead_IteratorRecord(*queue);
     while (next_IteratorRecord(*queue)) {
+        printf("%d", (*queue)->iterator.index);
         r = (*queue)->iterator.node->data;
         printf(
             "Artist: %s, Album: %s, Genre: %s\n"

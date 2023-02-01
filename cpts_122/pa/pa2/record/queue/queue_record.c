@@ -64,6 +64,7 @@ NodeRecord *headInsert_QueueRecord(QueueRecord *queue, Record data) {
     b->previous = a;
     b->next = c;
     if (c) {c->previous = b;}
+    else {queue->tail = b;}
     queue->length++;
     return b;
 }
