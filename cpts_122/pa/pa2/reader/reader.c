@@ -19,10 +19,10 @@ QueueRecord *readRecordsFromFile(FILE *input) {
     _readLine(&record, input);
     QueueRecord *queue = new_QueueRecord(record);
 
-    while(!feof(input)) {
-        _readLine(&record, input);
-        tailInsert_QueueRecord(queue, record);
-    }
+    // while(!feof(input)) {
+    //     _readLine(&record, input);
+    //     tailInsert_QueueRecord(queue, record);
+    // }
 
     return queue;
 }
