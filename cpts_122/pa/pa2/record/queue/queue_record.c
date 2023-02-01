@@ -27,7 +27,7 @@ QueueRecord *new_QueueRecord(Record data) {
     return queue;
 }
 
-void *destruct_QueueRecord(QueueRecord *queue) {
+void destruct_QueueRecord(QueueRecord *queue) {
 
     // Free all node instances
     while (queue->length > 0) {

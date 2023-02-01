@@ -18,11 +18,12 @@ typedef struct {
 
 // Node<Record>
 // Nodes for a doubly linked list
-typedef struct {
+typedef struct NodeRecord NodeRecord;
+struct NodeRecord {
     NodeRecord *next;
     NodeRecord *previous;
     Record data;
-} NodeRecord;
+};
 
 // Iterator<Node<Record>>
 // Tracks a paticular index of a node, can iterate forwards/backwards from any point

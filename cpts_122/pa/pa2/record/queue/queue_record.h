@@ -10,7 +10,7 @@ QueueRecord *new_QueueRecord(Record data);
 
 // destructor
 // Frees the queue and all elements
-void *destruct_QueueRecord(QueueRecord *queue);
+void destruct_QueueRecord(QueueRecord *queue);
 
 // .tailInsert()
 // Insert a node made from [data] at the tail
