@@ -2,17 +2,17 @@
 #include "../reader/reader.h"
 
 // Load all of the records into a queue
-void loadRecords(QueueRecord **queue);
+void loadRecords(Queue **queue);
 
 void store();
 
 // Display all records
 // OR
 // Display all records of an artist
-void displayRecords(QueueRecord **queue);
+void displayRecords(Queue **queue);
 
-void edit(QueueRecord *queue);
+void edit(Queue *queue);
 
-void rate(QueueRecord *queue);
+void rate(Queue *queue);
 
-void play(QueueRecord *queue);
+void play(Queue *queue);

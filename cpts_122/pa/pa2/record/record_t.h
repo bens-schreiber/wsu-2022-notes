@@ -19,20 +19,12 @@ typedef struct {
 
 // Node<Record>
 // Nodes for a doubly linked list
-typedef struct NodeRecord NodeRecord;
-struct NodeRecord {
-    NodeRecord *next;
-    NodeRecord *previous;
+typedef struct Node Node;
+struct Node {
+    Node *next;
+    Node *previous;
     Record data;
 };
-
-// Iterator<Node<Record>>
-// Tracks a paticular index of a node, can iterate forwards/backwards from any point
-// EX: while (next_IteratorRecord(queue)) {queue->iterator ...}
-typedef struct {
-    int index;
-    NodeRecord* node;
-} IteratorNodeRecord;
 
 // Queue<Record>
 // doubly linked list implemented queue
@@ -40,8 +32,16 @@ typedef struct {
 // Iterator should be used to grab any data
 // Initialize with new and insert first data with headInsert
 typedef struct {
-    NodeRecord* head;
-    NodeRecord* tail;
-    IteratorNodeRecord iterator;
+    Node* head;
+    Node* tail;
     unsigned int length;
-} QueueRecord;
+} Queue;
+
+// Iterator<Queue<Node<Record>>>
+// Tracks a paticular index of a node, can iterate forwards/backwards from any point
+// EX: while (next_IteratorRecord(queue)) {queue->iterator ...}
+typedef struct {
+    int index;
+    Node* node;
+    Queue *queue;
+} Iterator;

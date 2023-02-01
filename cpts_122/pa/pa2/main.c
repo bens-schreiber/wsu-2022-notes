@@ -4,8 +4,8 @@
 // TODO: account for user errors in queue library
 int main(int argc, char const *argv[])
 {
-    QueueRecord **queue = malloc(sizeof(QueueRecord*));
+    Queue **queue = malloc(sizeof(Queue*));
     while (displayMenu(queue));
-    destruct_QueueRecord(*queue);
+    queue_destruct(*queue);
     return 0;
 }

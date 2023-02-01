@@ -1,6 +1,6 @@
 #include "menu.h"
 
-int displayMenu(QueueRecord **queue) {
+int displayMenu(Queue **queue) {
     outMenuOptions();
     switch(getIntInput()) {
         case 1: {

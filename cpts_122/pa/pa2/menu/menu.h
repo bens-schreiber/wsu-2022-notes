@@ -2,7 +2,7 @@
 #include "../commands/commands.h"
 #include <stdio.h>
 
-int displayMenu(QueueRecord **queue);
+int displayMenu(Queue **queue);
 
 void outMenuOptions();
 

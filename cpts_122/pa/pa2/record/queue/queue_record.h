@@ -2,40 +2,40 @@
 #include "../iterator/iterator_record.h"
 
 // Create a new node
-static NodeRecord *_new_NodeRecord(Record data);
+static Node *record_new(Record data);
 
 // new Queue<Record>
 // Create a new Queue with the head and tail pointing to a null node
-QueueRecord *new_QueueRecord();
+Queue *queue_new();
 
 // destructor
 // Frees the queue and all elements
-void destruct_QueueRecord(QueueRecord *queue);
+void queue_destruct(Queue *queue);
 
 // .tailInsert()
 // Insert a node made from [data] at the tail (last index of all elements)
-NodeRecord *tailInsert_QueueRecord(QueueRecord *queue, Record data);
+Node *queue_tailInsert(Queue *queue, Record data);
 
 // .headInsert()
 // Insert a node made from [data] at the head (beginning of all elements, head->next)
-NodeRecord *headInsert_QueueRecord(QueueRecord *queue, Record data);
+Node *queue_headInsert(Queue *queue, Record data);
 
 // .insertIndex(index: n)
 // Insert a node made from [data] at index n
-NodeRecord *insertIndex_QueueRecord(QueueRecord *queue, Record data, unsigned int index);
+Node *queue_insertIndex(Queue *queue, Record data, unsigned int index);
 
 // .insert()
 // Inserts at head if no data, defaults to tail otherwise
-NodeRecord *insert_QueueRecord(QueueRecord *queue, Record data);
+Node *queue_insert(Queue *queue, Record data);
 
 // .popTail()
 // Pop the back of the queue
-void popTail_QueueRecord(QueueRecord *queue);
+void queue_popTail(Queue *queue);
 
 // .popHead()
 // Pop the head of the queue
-void popHead_QueueRecord(QueueRecord *queue);
+void queue_popHead(Queue *queue);
 
 // .popIndex(index: n)
 // Pop a node at index n
-void popIndex_QueueRecord(QueueRecord *queue, unsigned int index);
+void queue_popIndex(Queue *queue, unsigned int index);

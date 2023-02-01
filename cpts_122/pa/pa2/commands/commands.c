@@ -1,6 +1,6 @@
 #include "commands.h"
 
-void loadRecords(QueueRecord **queue)  {
+void loadRecords(Queue **queue)  {
     FILE *f = fopen(INPUT_FILE, "r");
     (*queue) = readRecordsFromFile(f);
     fclose(f);
@@ -8,12 +8,11 @@ void loadRecords(QueueRecord **queue)  {
 
 void store();
 
-void displayRecords(QueueRecord **queue) {
+void displayRecords(Queue **queue) {
     Record r;
-    toHead_IteratorRecord(*queue);
-    while (next_IteratorRecord(*queue)) {
-        printf("%d", (*queue)->iterator.index);
-        r = (*queue)->iterator.node->data;
+    Iterator iter = iter_new(*queue);
+    while (iter_next(&iter)) {
+        r = iter.node->data;
         printf(
             "Artist: %s, Album: %s, Genre: %s\n"
             "Song: %s, Length: %d:%d\n"
@@ -23,8 +22,8 @@ void displayRecords(QueueRecord **queue) {
     };
 }
 
-void edit(QueueRecord *queue);
+void edit(Queue *queue);
 
-void rate(QueueRecord *queue);
+void rate(Queue *queue);
 
-void play(QueueRecord *queue);
+void play(Queue *queue);

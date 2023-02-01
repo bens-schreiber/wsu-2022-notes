@@ -1,37 +1,41 @@
 #include "iterator_record.h"
 
-void toHead_IteratorRecord(QueueRecord *queue) {
-    queue->iterator.index = -1;
-    queue->iterator.node = queue->head;
+Iterator iter_new(Queue *queue) {
+     return (Iterator) {.index = -1, .node = queue->head, .queue = queue};
 }
 
-void toTail_IteratorRecord(QueueRecord *queue) {
-    queue->iterator.index = queue->length - 1;
-    queue->iterator.node = queue->tail;
+void iter_toHead(Iterator *iterator) {
+    iterator->index = -1;
+    iterator->node = iterator->queue->head;
 }
 
-unsigned char hasNext_IteratorRecord(QueueRecord *queue) {
-    return queue->iterator.index != queue->length - 1;
+void iter_toTail(Iterator *iterator) {
+    iterator->index = iterator->queue->length - 1;
+    iterator->node = iterator->queue->tail;
 }
 
-unsigned char hasPrevious_IteratorRecord(QueueRecord *queue) {
-    return queue->iterator.index > 0;
+unsigned char iter_hasNext(Iterator *iterator) {
+    return iterator->index != iterator->queue->length - 1;
 }
 
-NodeRecord *next_IteratorRecord(QueueRecord *queue) {
-    if (!hasNext_IteratorRecord(queue)) {
+unsigned char iter_hasPrevious(Iterator *iterator) {
+    return iterator->index > 0;
+}
+
+Node *iter_next(Iterator *iterator) {
+    if (!iter_hasNext(iterator)) {
         return NULL;
     }
-    queue->iterator.index++;
-    queue->iterator.node = queue->iterator.node->next;
-    return queue->iterator.node;
+    iterator->index++;
+    iterator->node = iterator->node->next;
+    return iterator->node;
 }
 
-NodeRecord *previous_IteratorRecord(QueueRecord *queue) {
-    if (!hasPrevious_IteratorRecord(queue)) {
+Node *iter_previous(Iterator *iterator) {
+    if (!iter_hasPrevious(iterator)) {
         return NULL;
     }
-    queue->iterator.index--;
-    queue->iterator.node = queue->iterator.node->previous;
-    return queue->iterator.node;
+    iterator->index--;
+    iterator->node = iterator->node->previous;
+    return iterator->node;
 }

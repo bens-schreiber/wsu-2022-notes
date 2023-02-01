@@ -1,47 +1,44 @@
 #include "queue_record.h"
 
-static NodeRecord *_new_NodeRecord(Record data) {
-    NodeRecord *n = malloc(sizeof(NodeRecord));
+static Node *record_new(Record data) {
+    Node *n = malloc(sizeof(Node));
     n->data = data;
     n->next = NULL;
     n->previous = NULL;
     return n;
 }
 
-QueueRecord *new_QueueRecord() {
+Queue *queue_new() {
 
-    // Create a new QueueRecord instance
-    QueueRecord *queue = malloc(sizeof(QueueRecord));
+    // Create a new Queue instance
+    Queue *queue = malloc(sizeof(Queue));
 
     // Null beginning of queue
-    queue->head = _new_NodeRecord((Record) {});
+    queue->head = record_new((Record) {});
 
     // Set head to tail
     queue->tail = queue->head;
-
-    // Iterate from index -1 at the null head
-    queue->iterator = (IteratorNodeRecord) {.index = -1, .node = queue->head};
 
     // Length is currently 1 (disregard null head)
     queue->length = 0;
     return queue;
 }
 
-void destruct_QueueRecord(QueueRecord *queue) {
+void queue_destruct(Queue *queue) {
 
     // Free all node instances
     while (queue->length > 0) {
-        popTail_QueueRecord(queue);
+        queue_popTail(queue);
     }
 
     // Free queue instance
     free(queue);
 }
 
-NodeRecord *tailInsert_QueueRecord(QueueRecord *queue, Record data) {
+Node *queue_tailInsert(Queue *queue, Record data) {
 
     // Create new node
-    NodeRecord *n = _new_NodeRecord(data);
+    Node *n = record_new(data);
 
     // Insert the node at the end
     n->previous = queue->tail;
@@ -51,14 +48,14 @@ NodeRecord *tailInsert_QueueRecord(QueueRecord *queue, Record data) {
     return n;
 }
 
-NodeRecord *headInsert_QueueRecord(QueueRecord *queue, Record data) {
+Node *queue_headInsert(Queue *queue, Record data) {
 
     // Insert the node after the null head
     // Consider the list [a,c] where we 'a' is the null head, and we are inserting b at [a,b,c]
     // (C COULD BE NULL)
-    NodeRecord *a = queue->head; 
-    NodeRecord *b = _new_NodeRecord(data);  // New node
-    NodeRecord *c = a->next;
+    Node *a = queue->head; 
+    Node *b = record_new(data);  // New node
+    Node *c = a->next;
 
     a->next = b;
     b->previous = a;
@@ -69,22 +66,22 @@ NodeRecord *headInsert_QueueRecord(QueueRecord *queue, Record data) {
     return b;
 }
 
-NodeRecord *insertIndex_QueueRecord(QueueRecord *queue, Record data, unsigned int index) {
+Node *queue_insertIndex(Queue *queue, Record data, unsigned int index) {
 
     // Handle out of bounds and head/tail insertion
     if (index > (queue->length - 1)) {return NULL;}
-    if (index == 0) {return headInsert_QueueRecord(queue, data);}
-    if (index == queue->length - 1) {return tailInsert_QueueRecord(queue, data);}
+    if (index == 0) {return queue_headInsert(queue, data);}
+    if (index == queue->length - 1) {return queue_tailInsert(queue, data);}
 
     // Iterate to index from head
     // could be smart here and based off index choose head or tail
-    toHead_IteratorRecord(queue);
-    while (next_IteratorRecord(queue) && queue->iterator.index < index);
+    Iterator iter = iter_new(queue);
+    while (iter_next(&iter) && iter.index < index);
 
     // Consider the nodes [a,c] where we want to place [a,b,c] at index iterator.index
-    NodeRecord *a = queue->iterator.node;
-    NodeRecord *c = a->next;
-    NodeRecord *b = _new_NodeRecord(data);
+    Node *a = iter.node;
+    Node *c = a->next;
+    Node *b = record_new(data);
 
     c->previous = b;
     a->next = b;
@@ -95,19 +92,19 @@ NodeRecord *insertIndex_QueueRecord(QueueRecord *queue, Record data, unsigned in
     return b;
 }
 
-NodeRecord *insert_QueueRecord(QueueRecord *queue, Record data) {
+Node *queue_insert(Queue *queue, Record data) {
     if (queue->length == 0) {
-        return headInsert_QueueRecord(queue, data);
+        return queue_headInsert(queue, data);
     }
-    return tailInsert_QueueRecord(queue, data);
+    return queue_tailInsert(queue, data);
 }
 
-void popTail_QueueRecord(QueueRecord *queue) {
+void queue_popTail(Queue *queue) {
 
     if (queue->length == 0) {return;}
     
     // Get the node before the tail
-    NodeRecord *n = queue->tail->previous;
+    Node *n = queue->tail->previous;
 
     // Set the node before the tail to link forward to null
     n->next = NULL;
@@ -121,15 +118,15 @@ void popTail_QueueRecord(QueueRecord *queue) {
     queue->length--;
 }
 
-void popHead_QueueRecord(QueueRecord *queue) {
+void queue_popHead(Queue *queue) {
 
     if (queue->length == 0) {return;}
 
     // We want to pop the node after the null head
     // Consider the nodes [a,b,c] where 'a' is the null head and 'b' is what we want to delete
-    NodeRecord *a = queue->head;
-    NodeRecord *b = a->next;
-    NodeRecord *c = b->next;
+    Node *a = queue->head;
+    Node *b = a->next;
+    Node *c = b->next;
 
     a->next = c;
     c->previous = a;
@@ -138,22 +135,22 @@ void popHead_QueueRecord(QueueRecord *queue) {
     queue->length--;
 }
 
-void popIndex_QueueRecord(QueueRecord *queue, unsigned int index) {
+void queue_popIndex(Queue *queue, unsigned int index) {
 
     // Handle out of bounds and head/tail deletion
     if (index > (queue->length - 1)) {return;}
     if (queue->length == 0) {return;}
-    if (index == 0) {return popHead_QueueRecord(queue);}
-    if (index == queue->length - 1) {return popTail_QueueRecord(queue);}
+    if (index == 0) {return queue_popHead(queue);}
+    if (index == queue->length - 1) {return queue_popTail(queue);}
 
     // Iterate to index n
-    toHead_IteratorRecord(queue);
-    while (next_IteratorRecord(queue) && queue->iterator.index < index);
+    Iterator iter = iter_new(queue);
+    while (iter_next(&iter) && iter.index < index);
 
     // Consider the nodes [a,b,c] where b is being the node at index n
-    NodeRecord *a = queue->iterator.node->previous;
-    NodeRecord *b = queue->iterator.node;
-    NodeRecord *c = queue->iterator.node->next;
+    Node *a = iter.node->previous;
+    Node *b =iter.node;
+    Node *c = iter.node->next;
 
     // Destroy b
     free(b);

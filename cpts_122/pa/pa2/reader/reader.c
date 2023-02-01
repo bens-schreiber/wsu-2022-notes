@@ -23,14 +23,14 @@ static void _readLine(Record *record, FILE *file, char buffer[0xFFF]) {
     record->rating = atoi(strtok(NULL, ",")); 
 }
 
-QueueRecord *readRecordsFromFile(FILE *input) {
+Queue *readRecordsFromFile(FILE *input) {
     char buffer[0xFFF];
     Record record = {};
-    QueueRecord *queue =  new_QueueRecord();
+    Queue *queue =  queue_new();
 
     while(!feof(input)) {
         _readLine(&record, input, buffer);
-        insert_QueueRecord(queue, record);
+        queue_insert(queue, record);
     }
 
     return queue;
