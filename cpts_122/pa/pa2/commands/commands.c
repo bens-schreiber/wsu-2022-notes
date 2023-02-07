@@ -8,11 +8,29 @@ void loadRecords(Queue **queue)  {
 
 void store();
 
-void displayRecords(Queue **queue) {
+void displayAllRecords(Queue **queue) {
     Record r;
     Iterator iter = iter_new(*queue);
     while (iter_next(&iter)) {
         r = iter.node->data;
+        printf(
+            "Artist: %s, Album: %s, Genre: %s\n"
+            "Song: %s, Length: %d:%d\n"
+            "Rating: %d, Plays: %d\n\n",
+            r.artist, r.album, r.genre, r.song, r.length.minutes, r.length.seconds, r.rating, r.plays
+        );
+    };
+}
+
+void displayAllArtistRecords(Queue **queue, const char *artist) {
+    Record r;
+    Iterator iter = iter_new(*queue);
+    while (iter_next(&iter)) {
+        r = iter.node->data;
+
+        // Only output those associated with some artist
+        if (strcmp(r.artist, artist) != 0) {return;}
+
         printf(
             "Artist: %s, Album: %s, Genre: %s\n"
             "Song: %s, Length: %d:%d\n"

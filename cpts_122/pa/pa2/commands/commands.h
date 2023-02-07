@@ -6,10 +6,11 @@ void loadRecords(Queue **queue);
 
 void store();
 
-// Display all records
-// OR
-// Display all records of an artist
-void displayRecords(Queue **queue);
+// Display all records loaded
+void displayAllRecords(Queue **queue);
+
+// Display all records associated with an artist
+void displayAllArtistRecords(Queue **queue, const char *artist);
 
 void edit(Queue *queue);
 

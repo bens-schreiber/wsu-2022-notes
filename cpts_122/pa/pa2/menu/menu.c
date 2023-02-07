@@ -1,20 +1,43 @@
 #include "menu.h"
 
+static void _loadRecords(Queue **queue) {
+    loadRecords(queue);
+    printf("\nRecords loaded!\n");
+}
+
+static void _displayRecords(Queue **queue) {
+    printf(*queue ?  "Display all records (1) or display all artists records (2)   \n\n" : "Records need to be loaded first\n");
+    if (*queue) {
+        switch (displayOption("")) {
+            case 1: {
+                displayAllRecords(queue);
+                break;
+            }
+            case 2: {
+                printf("Enter an artists name: ");
+                char buffer[STRING_SIZE];
+                scanf("%s", buffer);
+                displayAllArtistRecords(queue, buffer);
+                break;
+            }
+        }
+    }
+}
+
 int displayMenu(Queue **queue) {
     outMenuOptions();
     switch(getIntInput()) {
         case 1: {
-            loadRecords(queue);
-            printf("\nRecords loaded!\n");
+            _loadRecords(queue);
             break;
         }
         case 2:
             // store
             break;
-        case 3:
-            printf(*queue ?  "Displaying records... \n\n" : "Records need to be loaded first\n");
-            if (*queue) {displayRecords(queue);}
+        case 3: {
+            _displayRecords(queue);
             break;
+        }
         case 4:
             // insert
             break;
@@ -76,4 +99,11 @@ void getInput() {
     char input = 0;
     fflush(stdin);
     getchar();
+}
+
+int displayOption(const char *prompt) {
+    printf("%s", prompt);
+    int input = 0;
+    scanf("%d", &input);
+    return input;
 }

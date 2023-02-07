@@ -9,3 +9,5 @@ void outMenuOptions();
 int getIntInput();
 
 void getInput();
+
+int displayOption(const char *prompt);
