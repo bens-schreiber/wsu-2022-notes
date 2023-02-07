@@ -1,27 +1,45 @@
 #include "menu.h"
 
+void clear() {
+    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+}
+
 static void _loadRecords(Queue **queue) {
     loadRecords(queue);
-    printf("\nRecords loaded!\n");
+    clear();
+    printf("Records loaded!\n\n");
 }
 
 static void _displayRecords(Queue **queue) {
-    printf(*queue ?  "Display all records (1) or display all artists records (2)   \n\n" : "Records need to be loaded first\n");
-    if (*queue) {
-        switch (displayOption("")) {
-            case 1: {
-                displayAllRecords(queue);
-                break;
-            }
-            case 2: {
-                printf("Enter an artists name: ");
-                char buffer[STRING_SIZE];
-                scanf("%s", buffer);
-                displayAllArtistRecords(queue, buffer);
-                break;
-            }
+    if (!*queue) {
+        clear();
+        printf("Records need to be loaded first\n\n");
+        return;
+    }
+    
+    clear();
+    printf(
+        "(1) Display all records \n"
+        "(2) Display all artists records\n"
+        "Enter a value: "
+    );
+    switch (displayOption("")) {
+        case 1: {
+            clear();
+            displayAllRecords(queue);
+            break;
+        }
+        case 2: {
+            printf("Enter an artists name: ");
+            char buffer[STRING_SIZE];
+            scanf("%s", buffer);
+            clear();
+            displayAllArtistRecords(queue, buffer);
+            break;
         }
     }
+    getInput();
+    clear();
 }
 
 int displayMenu(Queue **queue) {
@@ -66,12 +84,10 @@ int displayMenu(Queue **queue) {
             break;
 
     }
-    getInput();
     return 1;
 }
 
 void outMenuOptions() {
-    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     printf(
         "(1) load\n"
         "(2) store\n"
