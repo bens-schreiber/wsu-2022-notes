@@ -24,3 +24,10 @@ int displayOption(const char *prompt) {
 void clear() {
     printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 }
+
+void getStrInput(const char *prompt, char *str) {
+    printf("%s: ", prompt);
+    fflush(stdin);
+    fgets(str, STRING_SIZE, stdin);
+    str[strcspn(str, "\n")] = 0;
+}

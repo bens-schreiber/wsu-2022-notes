@@ -4,7 +4,7 @@ static int _findAllInstancesOfArtist(Queue **queue, const char *artist, Node *bu
     Iterator iter = iter_new(*queue);
     int i = 0;
     while (iter_next(&iter)) {
-        if (strcmp(iter.node->data.artist, artist)) {buffer[i++] =  iter.node;}
+        if (strcmp(iter.node->data.artist, artist) == 0) {buffer[i++] =  iter.node;}
     };
     return i;
 }

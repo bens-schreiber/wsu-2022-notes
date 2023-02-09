@@ -26,13 +26,10 @@ static void _displayRecords(Queue **queue) {
             break;
         }
         case 2: {
-            printf("Enter an artists name: ");
-            char buffer[STRING_SIZE];
-            fflush(stdin);
-            fgets(buffer, STRING_SIZE, stdin);
-            buffer[strcspn(buffer, "\n")] = 0;
+            char str[STRING_SIZE];
+            getStrInput("Enter an artists name", str);
             clear();
-            displayAllArtistRecords(queue, buffer);
+            displayAllArtistRecords(queue, str);
             break;
         }
     }
