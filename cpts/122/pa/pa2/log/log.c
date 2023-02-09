@@ -1,9 +1,12 @@
 #include "log.h"
 
-int getIntInput() {
-    int input = 0;
-    printf("\nEnter a value: ");
-    scanf("%d", &input);
+int getIntInput(const char *prompt, int min, int max) {
+    printf("%s", prompt);
+    int input = -1;
+    while (input < min || input > max ) {
+        printf("Enter a value: ");
+        scanf("%d", &input);
+    }
     return input;
 }
 
@@ -25,9 +28,10 @@ void clear() {
     printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 }
 
-void getStrInput(const char *prompt, char *str) {
+char *getStrInput(const char *prompt, char *str) {
     printf("%s: ", prompt);
     fflush(stdin);
     fgets(str, STRING_SIZE, stdin);
     str[strcspn(str, "\n")] = 0;
+    return str;
 }

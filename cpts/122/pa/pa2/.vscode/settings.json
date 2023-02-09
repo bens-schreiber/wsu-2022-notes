@@ -5,6 +5,11 @@
         "stdio.h": "c",
         "reader.h": "c",
         "commands.h": "c",
-        "__config": "c"
+        "__config": "c",
+        "record.h": "c",
+        "__string": "c",
+        "algorithm": "c",
+        "string": "c",
+        "concepts": "c"
     }
 }

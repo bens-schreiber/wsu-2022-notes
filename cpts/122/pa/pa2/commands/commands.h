@@ -1,4 +1,5 @@
 #pragma once
+#include "../log/log.h"
 #include "../record/record.h"
 #include "../reader/reader.h"
 

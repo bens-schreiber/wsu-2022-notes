@@ -3,11 +3,11 @@
 #include <string.h>
 #include <stdio.h>
 
-int getIntInput();
+int getIntInput(const char *prompt, int min, int max);
 
 void getInput();
 
-void getStrInput(const char *prompt, char *str);
+char *getStrInput(const char *prompt, char *str);
 
 void clear();
 
