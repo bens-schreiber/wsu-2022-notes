@@ -1,6 +1,6 @@
 #pragma once
-#include "../record_t.h"
-#include "../iterator/iterator_record.h"
+#include "src/framework/record/record_t.h"
+#include "src/framework/record/iterator/iterator_record.h"
 
 // Create a new node
 static Node *record_new(Record data);

@@ -10,6 +10,7 @@
         "__string": "c",
         "algorithm": "c",
         "string": "c",
-        "concepts": "c"
+        "concepts": "c",
+        "log.h": "c"
     }
 }

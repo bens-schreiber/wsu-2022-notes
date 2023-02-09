@@ -1,5 +1,5 @@
 #pragma once
-#include "../consts.h"
+#include "consts.h"
 #include <stdio.h>
 #include <stdlib.h>
 typedef struct {
