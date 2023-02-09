@@ -1,3 +1,4 @@
+#pragma once
 #include "../record_t.h"
 
 Iterator iter_new(Queue *queue);

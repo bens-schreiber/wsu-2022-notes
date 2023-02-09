@@ -1,3 +1,4 @@
+#pragma once
 #include "../record/record.h"
 #include <stdio.h>
 #include <stdlib.h>

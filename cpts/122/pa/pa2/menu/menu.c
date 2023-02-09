@@ -37,6 +37,13 @@ static void _displayRecords(Queue **queue) {
     clear();
 }
 
+static void _editRecords(Queue **queue) {
+    char str[STRING_SIZE];
+    getStrInput("Enter an artists name", str);
+    edit(queue, str);
+}
+
+
 int displayMenu(Queue **queue) {
     outMenuOptions();
     switch(getIntInput()) {
@@ -59,6 +66,7 @@ int displayMenu(Queue **queue) {
             break;
         case 6:
             // edit
+            _editRecords(queue);
             break;
         case 7:
             // sort
