@@ -12,7 +12,7 @@ void displayAllRecords(Queue **queue);
 // Display all records associated with an artist
 void displayAllArtistRecords(Queue **queue, const char *artist);
 
-void edit(Queue *queue);
+void edit(Queue **queue, const char *artist);
 
 void rate(Queue *queue);
 

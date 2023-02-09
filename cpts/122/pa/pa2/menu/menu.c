@@ -1,9 +1,5 @@
 #include "menu.h"
 
-void clear() {
-    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-}
-
 static void _loadRecords(Queue **queue) {
     loadRecords(queue);
     clear();
@@ -103,25 +99,4 @@ void outMenuOptions() {
         "(10) shuffle\n"
         "(11) exit\n"
     );
-}
-
-int getIntInput() {
-    int input = 0;
-    printf("\nEnter a value: ");
-    scanf("%d", &input);
-    return input;
-}
-
-void getInput() {
-    printf("\nPress ENTER to continue!\n");
-    char input = 0;
-    fflush(stdin);
-    getchar();
-}
-
-int displayOption(const char *prompt) {
-    printf("%s", prompt);
-    int input = 0;
-    scanf("%d", &input);
-    return input;
 }
