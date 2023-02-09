@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "consts.h": "c",
+        "record_t.h": "c",
+        "stdio.h": "c",
+        "reader.h": "c",
+        "commands.h": "c",
+        "__config": "c"
+    }
+}
