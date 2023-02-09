@@ -32,7 +32,9 @@ static void _displayRecords(Queue **queue) {
         case 2: {
             printf("Enter an artists name: ");
             char buffer[STRING_SIZE];
-            scanf("%s", buffer);
+            fflush(stdin);
+            fgets(buffer, STRING_SIZE, stdin);
+            buffer[strcspn(buffer, "\n")] = 0;
             clear();
             displayAllArtistRecords(queue, buffer);
             break;

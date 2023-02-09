@@ -29,7 +29,7 @@ void displayAllArtistRecords(Queue **queue, const char *artist) {
         r = iter.node->data;
 
         // Only output those associated with some artist
-        if (strcmp(r.artist, artist) != 0) {return;}
+        if (strcmp(artist, r.artist) != 0) {continue;}
 
         printf(
             "Artist: %s, Album: %s, Genre: %s\n"
