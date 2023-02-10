@@ -75,7 +75,7 @@ static void _storeRecords(Queue **queue) {
     if (!_recordsLoaded(queue)) { return; }
     store(queue);
     clear();
-    printf("Records saved!");
+    printf("Records saved!\n");
 }
 
 int displayMenu(Queue **queue) {

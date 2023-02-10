@@ -2,7 +2,7 @@
 
 static void _replaceStrWithInput(char a[STRING_SIZE]) {
         char str[STRING_SIZE];
-        memcpy(a, getStrInput("Enter a value: ", str), STRING_SIZE);
+        memcpy(a, getStrInput("Enter a new value", str), STRING_SIZE);
 }
 
 static int _findAllInstancesOfArtist(Queue **queue, const char *artist, Node *buffer[]) {
@@ -21,7 +21,9 @@ void loadRecords(Queue **queue)  {
 }
 
 void store(Queue **queue) {
-    saveRecordsToFile(fopen(OUTPUT_FILE, "w"), queue);
+    FILE *f = fopen(OUTPUT_FILE, "w");
+    saveRecordsToFile(f, queue);
+    fclose(f);
 }
 
 void displayAllRecords(Queue **queue) {
