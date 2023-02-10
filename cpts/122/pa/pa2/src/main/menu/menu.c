@@ -94,6 +94,18 @@ static void _deleteRecord(Queue **queue) {
     printf("Song deleted.\n");
 }
 
+static void _sortRecords(Queue **queue) {
+    clear();
+    sort(queue, getIntInput(
+        "(1) Artist\n"
+        "(2) Album\n"
+        "(3) Rating\n"
+        "(4) Plays\n", 1, 4
+    ) - 1);
+    clear();
+    printf("Sorted!");
+}
+
 int displayMenu(Queue **queue) {
     switch(
         getIntInput(
@@ -128,14 +140,12 @@ int displayMenu(Queue **queue) {
             _deleteRecord(queue);
             break;
         case 6:
-            // edit
             _editRecords(queue);
             break;
         case 7:
-            // sort
+            _sortRecords(queue);
             break;
         case 8:
-            // rate
             _rateSong(queue);
             break;
         case 9:

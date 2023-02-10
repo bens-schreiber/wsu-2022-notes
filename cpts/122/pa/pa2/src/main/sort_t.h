@@ -1,3 +1,4 @@
+#pragma once
 typedef enum {
     ARTIST, // A-Z
     ALBUM, // A-Z

@@ -176,11 +176,11 @@ static int _cmpr(Node *a, Node *b, const Sort sortType) {
 
 // Bubble sorts
 void sort(Queue **queue, const Sort sortType) {
-    Iterator iterA = iter_new(queue);
+    Iterator iterA = iter_new(*queue);
     Iterator iterB;
-    while (iter_next(&iterA)) {
+    while (iter_next(&iterA) && iter_hasNext(&iterA)) {
         iterB = iterA;
-        while (iter_next(&iterB)) {
+        while (iter_next(&iterB) && iter_hasNext(&iterB)) {
             if (_cmpr(iterB.node, iterB.node->next, sortType)) {
                 queue_swap(iterB.node, iterB.node->next);
             }
