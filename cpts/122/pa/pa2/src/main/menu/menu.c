@@ -50,11 +50,16 @@ static void _editRecords(Queue **queue) {
     }
     clear();
     char str[STRING_SIZE];
-    getStrInput("Enter an artists name", str);
-    edit(queue, str);
+    edit(queue, getStrInput("Enter an artists name", str));
     clear();
 }
 
+static void _rateSong(Queue **queue) {
+    clear();
+    char str[STRING_SIZE];
+    rate(queue, getStrInput("Enter a song name", str));
+    clear();
+}
 
 int displayMenu(Queue **queue) {
     switch(
@@ -98,6 +103,7 @@ int displayMenu(Queue **queue) {
             break;
         case 8:
             // rate
+            _rateSong(queue);
             break;
         case 9:
             // play

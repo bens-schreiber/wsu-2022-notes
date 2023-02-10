@@ -113,6 +113,19 @@ void edit(Queue **queue, const char *artist) {
     }
 }
 
-void rate(Queue *queue);
+void rate(Queue **queue, const char *song) {
+    Iterator iter = iter_new(*queue);
+    Node *n = NULL;
+    while (iter_next(&iter)) {
+        if (strcmp(iter.node->data.song, song) == 0) {n = iter.node; break;}
+    }
 
-void play(Queue *queue);
+    if (n == NULL) {
+        printf("No song found.");
+        return;
+    }
+
+    n->data.rating = getIntInput("Rating Value (1-5)", 1,5);
+}
+
+void play(Queue **queue);

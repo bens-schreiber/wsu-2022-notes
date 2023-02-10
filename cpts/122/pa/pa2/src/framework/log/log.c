@@ -1,7 +1,7 @@
 #include "log.h"
 
 int getIntInput(const char *prompt, int min, int max) {
-    printf("%s", prompt);
+    printf("%s\n", prompt);
     int input = -1;
     while (input < min || input > max ) {
         printf("Enter a value: ");

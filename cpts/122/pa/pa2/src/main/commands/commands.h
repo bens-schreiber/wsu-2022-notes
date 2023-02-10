@@ -16,6 +16,6 @@ void displayAllArtistRecords(Queue **queue, const char *artist);
 
 void edit(Queue **queue, const char *artist);
 
-void rate(Queue *queue);
+void rate(Queue **queue, const char *song);
 
-void play(Queue *queue);
+void play(Queue **queue);
