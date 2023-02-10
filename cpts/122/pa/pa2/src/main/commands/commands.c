@@ -170,7 +170,7 @@ static int _cmpr(Node *a, Node *b, const Sort sortType) {
         case RATING:
             return a->data.rating > b->data.rating;
         case PLAYS:
-            return a->data.plays > b->data.plays;
+            return a->data.plays < b->data.plays;
     }
 }
 
