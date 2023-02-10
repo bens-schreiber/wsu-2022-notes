@@ -129,7 +129,7 @@ int displayMenu(Queue **queue) {
             // shuffle
             break;
         case 11:
-            // exit;
+            if (*queue) {_storeRecords(queue);}
             return 0;
         default:
             break;
