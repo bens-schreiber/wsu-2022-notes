@@ -1,4 +1,5 @@
 #pragma once
+#include <unistd.h>
 #include "src/framework/log/log.h"
 #include "src/framework/record/record.h"
 #include "src/framework/reader/reader.h"

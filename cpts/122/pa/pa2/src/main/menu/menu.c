@@ -55,9 +55,19 @@ static void _editRecords(Queue **queue) {
 }
 
 static void _rateSong(Queue **queue) {
+    if (!_recordsLoaded(queue)) {
+        return;
+    }
     clear();
     char str[STRING_SIZE];
     rate(queue, getStrInput("Enter a song name", str));
+    clear();
+}
+
+static void _play(Queue **queue) {
+    if (!_recordsLoaded(queue)) { return; }
+    clear();
+    play(queue);
     clear();
 }
 
@@ -106,7 +116,7 @@ int displayMenu(Queue **queue) {
             _rateSong(queue);
             break;
         case 9:
-            // play
+            _play(queue);
             break;
         case 10:
             // shuffle

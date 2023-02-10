@@ -128,4 +128,10 @@ void rate(Queue **queue, const char *song) {
     n->data.rating = getIntInput("Rating Value (1-5)", 1,5);
 }
 
-void play(Queue **queue);
+void play(Queue **queue) {
+    Iterator iter = iter_new(*queue);
+    while (iter_next(&iter)) {
+        printf("Now playing - %s by %s\n", iter.node->data.song, iter.node->data.artist);
+        sleep(3);
+    }
+}
