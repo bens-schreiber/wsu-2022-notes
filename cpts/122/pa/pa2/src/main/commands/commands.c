@@ -158,7 +158,7 @@ void delete(Queue **queue, const char *song) {
     while (iter_next(&iter)) {
         if (strcmp(iter.node->data.song, song) == 0) {break;}
     }
-    queue_popIndex(*queue, iter.index);
+    queue_pop(*queue, iter.node);
 }
 
 static int _cmpr(Node *a, Node *b, const Sort sortType) {
