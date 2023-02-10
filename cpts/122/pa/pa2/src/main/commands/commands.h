@@ -1,5 +1,6 @@
 #pragma once
 #include <unistd.h>
+#include "sort_t.h"
 #include "src/framework/log/log.h"
 #include "src/framework/record/record.h"
 #include "src/framework/file/reader/reader.h"

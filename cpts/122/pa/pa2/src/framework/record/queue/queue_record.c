@@ -147,3 +147,20 @@ void queue_popIndex(Queue *queue, unsigned int index) {
 
     queue_pop(queue, iter.node);
 }
+
+void queue_swap(Node *n1, Node *n2) {
+    if (n1 == NULL) {return;}
+    if (n2 == NULL) {return;}
+    // Consider the nodes [a,B,c,d,E,f] where we want to swap B and E
+    Node *B = n1;
+    Node *E = n2;
+    Node *a = B->previous; // COULD BE NULL
+    Node *c = B->next; // COULD BE NULL
+    Node *d = E->previous; // COULD BE NULL
+    Node *f = E->next; // COULD BE NULL
+
+    B->next = f;
+    B->previous = d;
+    E->next = c;
+    E->previous = a;
+}

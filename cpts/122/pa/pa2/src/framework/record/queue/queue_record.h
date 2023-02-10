@@ -44,3 +44,7 @@ void queue_popHead(Queue *queue);
 // .popIndex(index: n)
 // Pop a node at index n
 void queue_popIndex(Queue *queue, unsigned int index);
+
+// .swap(a,b)
+// Swaps a with b and b with a
+void queue_swap(Node *a, Node *b);

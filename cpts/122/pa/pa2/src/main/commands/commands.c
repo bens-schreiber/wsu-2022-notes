@@ -153,10 +153,37 @@ void insert(Queue **queue) {
     queue_headInsert(*queue, r);
 }
 
-void delete (Queue **queue, const char *song) {
+void delete(Queue **queue, const char *song) {
     Iterator iter = iter_new(*queue);
     while (iter_next(&iter)) {
         if (strcmp(iter.node->data.song, song) == 0) {break;}
     }
     queue_popIndex(*queue, iter.index);
+}
+
+static int _cmpr(Node *a, Node *b, const Sort sortType) {
+    switch (sortType) {
+        case ALBUM:
+            return strcmp(a->data.album, b->data.album);
+        case ARTIST:
+            return strcmp(a->data.artist, b->data.artist);
+        case RATING:
+            return a->data.rating > b->data.rating;
+        case PLAYS:
+            return a->data.plays > b->data.plays;
+    }
+}
+
+// Bubble sorts
+void sort(Queue **queue, const Sort sortType) {
+    Iterator iterA = iter_new(queue);
+    Iterator iterB;
+    while (iter_next(&iterA)) {
+        iterB = iterA;
+        while (iter_next(&iterB)) {
+            if (_cmpr(iterB.node, iterB.node->next, sortType)) {
+                queue_swap(iterB.node, iterB.node->next);
+            }
+        }
+    }
 }
