@@ -23,3 +23,5 @@ void rate(Queue **queue, const char *song);
 void play(Queue **queue);
 
 void insert(Queue **queue);
+
+void delete (Queue **queue, const char *song);

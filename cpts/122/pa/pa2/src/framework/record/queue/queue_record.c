@@ -99,6 +99,22 @@ Node *queue_insert(Queue *queue, Record data) {
     return queue_tailInsert(queue, data);
 }
 
+
+void queue_pop(Queue *queue, Node *n) {
+    // Consider the nodes [a,b,c] where b is being the node at index n
+    Node *a = n->previous;
+    Node *b = n;
+    Node *c = n->next;
+
+    // Destroy b
+    free(b);
+
+    a->next = c;
+    c->previous = a;
+
+    queue->length--;
+}
+
 void queue_popTail(Queue *queue) {
 
     if (queue->length == 0) {return;}
@@ -106,33 +122,15 @@ void queue_popTail(Queue *queue) {
     // Get the node before the tail
     Node *n = queue->tail->previous;
 
-    // Set the node before the tail to link forward to null
-    n->next = NULL;
-
-    // Destroy the tail
-    free(queue->tail);
-
-    // Set the node before the tail to the new tail
-    queue->tail = n;
-    
-    queue->length--;
+    queue_pop(queue, n);
 }
 
 void queue_popHead(Queue *queue) {
 
     if (queue->length == 0) {return;}
 
-    // We want to pop the node after the null head
-    // Consider the nodes [a,b,c] where 'a' is the null head and 'b' is what we want to delete
-    Node *a = queue->head;
-    Node *b = a->next;
-    Node *c = b->next;
-
-    a->next = c;
-    c->previous = a;
-    free(b);
-    
-    queue->length--;
+    // Head is the null head, so delete the actual head at head->next
+    queue_pop(queue, queue->head->next);
 }
 
 void queue_popIndex(Queue *queue, unsigned int index) {
@@ -147,16 +145,5 @@ void queue_popIndex(Queue *queue, unsigned int index) {
     Iterator iter = iter_new(queue);
     while (iter_next(&iter) && iter.index < index);
 
-    // Consider the nodes [a,b,c] where b is being the node at index n
-    Node *a = iter.node->previous;
-    Node *b =iter.node;
-    Node *c = iter.node->next;
-
-    // Destroy b
-    free(b);
-
-    a->next = c;
-    c->previous = a;
-
-    queue->length--;
+    queue_pop(queue, iter.node);
 }

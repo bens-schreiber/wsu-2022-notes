@@ -152,3 +152,11 @@ void insert(Queue **queue) {
     r.length.seconds = getIntInput("Seconds", 0, 60);
     queue_headInsert(*queue, r);
 }
+
+void delete (Queue **queue, const char *song) {
+    Iterator iter = iter_new(*queue);
+    while (iter_next(&iter)) {
+        if (strcmp(iter.node->data.song, song) == 0) {break;}
+    }
+    queue_popIndex(*queue, iter.index);
+}

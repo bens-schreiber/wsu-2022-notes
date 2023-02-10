@@ -85,6 +85,14 @@ static void _insertRecord(Queue **queue) {
     printf("Inserted new song.\n");
 }
 
+static void _deleteRecord(Queue **queue) {
+    if (!_recordsLoaded(queue)) { return; }
+    char str[STRING_SIZE];
+    getStrInput("Enter a song name to delete", str);
+    delete(queue, str);
+    clear();
+    printf("Song deleted.\n");
+}
 
 int displayMenu(Queue **queue) {
     switch(

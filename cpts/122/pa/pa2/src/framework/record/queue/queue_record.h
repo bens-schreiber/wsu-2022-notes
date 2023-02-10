@@ -29,6 +29,10 @@ Node *queue_insertIndex(Queue *queue, Record data, unsigned int index);
 // Inserts at head if no data, defaults to tail otherwise
 Node *queue_insert(Queue *queue, Record data);
 
+// .pop(node)
+// Pops a specific node.
+void queue_pop(Queue *queue, Node *n);
+
 // .popTail()
 // Pop the back of the queue
 void queue_popTail(Queue *queue);
