@@ -3,8 +3,8 @@ static void saveToFile(Node *node, FILE *output) {
     Record r = node->data;
     fprintf(
         output,
-        "\"%s\", %s, %s, %s, %d:%d,%d,%d%c", 
-        r.artist, r.album, r.song, r.genre, r.length.minutes, r.length.seconds, r.plays, r.rating, node->next == NULL ? '\0' : '\n'
+        "\"%s\",%s,%s,%s,%d:%d,%d,%d%c", 
+        r.artist, r.album, r.song, r.genre, r.length.minutes, r.length.seconds, r.plays, r.rating, node->next == NULL ? ' ' : '\n'
     );
 }
 

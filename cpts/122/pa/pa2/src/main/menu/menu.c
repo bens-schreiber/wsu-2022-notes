@@ -125,7 +125,7 @@ int displayMenu(Queue **queue) {
             _insertRecord(queue);
             break;
         case 5:
-            // delete
+            _deleteRecord(queue);
             break;
         case 6:
             // edit
