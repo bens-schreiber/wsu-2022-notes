@@ -162,6 +162,7 @@ void delete(Queue **queue, const char *song) {
 }
 
 static int _cmpr(Node *a, Node *b, const Sort sortType) {
+    if (a == NULL || b == NULL) {return 0;}
     switch (sortType) {
         case ALBUM:
             return strcmp(a->data.album, b->data.album);
@@ -178,11 +179,12 @@ static int _cmpr(Node *a, Node *b, const Sort sortType) {
 void sort(Queue **queue, const Sort sortType) {
     Iterator iterA = iter_new(*queue);
     Iterator iterB;
-    while (iter_next(&iterA) && iter_hasNext(&iterA)) {
+    while (iter_next(&iterA)) {
         iterB = iterA;
-        while (iter_next(&iterB) && iter_hasNext(&iterB)) {
+        while (iter_next(&iterB)) {
             if (_cmpr(iterB.node, iterB.node->next, sortType)) {
-                queue_swap(iterB.node, iterB.node->next);
+                queue_swap_adjacent(iterB.node);
+                iterB.index++;
             }
         }
     }
