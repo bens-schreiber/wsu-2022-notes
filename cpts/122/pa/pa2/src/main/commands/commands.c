@@ -20,7 +20,10 @@ void loadRecords(Queue **queue)  {
     fclose(f);
 }
 
-void store();
+void store(Queue **queue) {
+    saveRecordsToFile(fopen(OUTPUT_FILE, "w"), queue);
+    printf("Records saved!");
+}
 
 void displayAllRecords(Queue **queue) {
     Record r;

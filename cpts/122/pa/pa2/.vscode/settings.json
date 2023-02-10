@@ -11,6 +11,7 @@
         "algorithm": "c",
         "string": "c",
         "concepts": "c",
-        "log.h": "c"
+        "log.h": "c",
+        "string.h": "c"
     }
 }

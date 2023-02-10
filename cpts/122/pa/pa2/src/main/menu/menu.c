@@ -71,6 +71,13 @@ static void _play(Queue **queue) {
     clear();
 }
 
+static void _store(Queue **queue) {
+    if (!_recordsLoaded(queue)) { return; }
+    store(queue);
+    clear();
+    printf("Records saved!");
+}
+
 int displayMenu(Queue **queue) {
     switch(
         getIntInput(
@@ -92,7 +99,7 @@ int displayMenu(Queue **queue) {
             break;
         }
         case 2:
-            // store
+            _store(queue);
             break;
         case 3: {
             _displayRecords(queue);
