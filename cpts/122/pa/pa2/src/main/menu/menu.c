@@ -12,7 +12,7 @@ static unsigned char _recordsLoaded(Queue **queue) {
 static void _loadRecords(Queue **queue) {
     loadRecords(queue);
     clear();
-    printf("Records loaded!\n\n");
+    printf("Records loaded!\n");
 }
 
 static void _displayRecords(Queue **queue) {
@@ -78,6 +78,14 @@ static void _storeRecords(Queue **queue) {
     printf("Records saved!\n");
 }
 
+static void _insertRecord(Queue **queue) {
+    if (!_recordsLoaded(queue)) { return; }
+    insert(queue);
+    clear();
+    printf("Inserted new song.\n");
+}
+
+
 int displayMenu(Queue **queue) {
     switch(
         getIntInput(
@@ -106,7 +114,7 @@ int displayMenu(Queue **queue) {
             break;
         }
         case 4:
-            // insert
+            _insertRecord(queue);
             break;
         case 5:
             // delete

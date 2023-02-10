@@ -21,3 +21,5 @@ void edit(Queue **queue, const char *artist);
 void rate(Queue **queue, const char *song);
 
 void play(Queue **queue);
+
+void insert(Queue **queue);

@@ -139,3 +139,16 @@ void play(Queue **queue) {
         sleep(3);
     }
 }
+
+void insert(Queue **queue) {
+    Record r = (Record) {};
+    getStrInput("Enter artist name", r.artist);
+    getStrInput("Enter album name", r.album);
+    getStrInput("Enter song name", r.song);
+    getStrInput("Enter genre name", r.genre);
+    r.rating = getIntInput("Rating",1, 5);
+    r.plays = getIntInput("Plays", 0,999);
+    r.length.minutes = getIntInput("Minutes", 0, 60);
+    r.length.seconds = getIntInput("Seconds", 0, 60);
+    queue_headInsert(*queue, r);
+}
