@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include "src/framework/log/log.h"
 #include "src/framework/record/record.h"
-#include "src/framework/reader/reader.h"
+#include "src/framework/file/reader/reader.h"
 
 // Load all of the records into a queue
 void loadRecords(Queue **queue);
