@@ -22,7 +22,6 @@ void loadRecords(Queue **queue)  {
 
 void store(Queue **queue) {
     saveRecordsToFile(fopen(OUTPUT_FILE, "w"), queue);
-    printf("Records saved!");
 }
 
 void displayAllRecords(Queue **queue) {

@@ -64,14 +64,14 @@ static void _rateSong(Queue **queue) {
     clear();
 }
 
-static void _play(Queue **queue) {
+static void _playSongs(Queue **queue) {
     if (!_recordsLoaded(queue)) { return; }
     clear();
     play(queue);
     clear();
 }
 
-static void _store(Queue **queue) {
+static void _storeRecords(Queue **queue) {
     if (!_recordsLoaded(queue)) { return; }
     store(queue);
     clear();
@@ -99,7 +99,7 @@ int displayMenu(Queue **queue) {
             break;
         }
         case 2:
-            _store(queue);
+            _storeRecords(queue);
             break;
         case 3: {
             _displayRecords(queue);
@@ -123,7 +123,7 @@ int displayMenu(Queue **queue) {
             _rateSong(queue);
             break;
         case 9:
-            _play(queue);
+            _playSongs(queue);
             break;
         case 10:
             // shuffle
