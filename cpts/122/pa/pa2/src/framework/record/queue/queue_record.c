@@ -148,15 +148,28 @@ void queue_popIndex(Queue *queue, unsigned int index) {
     queue_pop(queue, iter.node);
 }
 
-void queue_swap_adjacent(Node *n) {
+void queue_swap_next(Node *n) {
     if (n == NULL || n->next == NULL) {return;}
-    // Consider the nodes [a,B,C,d] where we want to swap B and C
+    // Consider the nodes [a,B,C,d] where we want to swap B and C to [a,C,B,d]
     Node *B = n;
     Node *C = n->next;
-    Node *a = B->previous;
-    Node *d = C->next;
-    B->next = d;
-    B->previous = C;
+    Node *a = B->previous; // COULD BE NULL
+    Node *d = C->next; // COULD BE NULL
+
+    // Null check
+    if (a) {
+       a->next = C; 
+    }
+
     C->previous = a;
     C->next = B;
+    B->previous = C;
+
+    // Null check
+    if (d) {
+        d->previous = B;
+    }
+
+    B->next = d;
+    
 }

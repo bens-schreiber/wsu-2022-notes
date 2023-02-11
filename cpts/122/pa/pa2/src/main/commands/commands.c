@@ -14,6 +14,20 @@ static int _findAllInstancesOfArtist(Queue **queue, const char *artist, Node *bu
     return i;
 }
 
+static int _cmpr(Node *a, Node *b, const Sort sortType) {
+    if (a == NULL || b == NULL) {return 0;}
+    switch (sortType) {
+        case ALBUM:
+            return strcmp(a->data.album, b->data.album) > 0;
+        case ARTIST:
+            return strcmp(a->data.artist, b->data.artist) > 0;
+        case RATING:
+            return a->data.rating > b->data.rating;
+        case PLAYS:
+            return a->data.plays < b->data.plays;
+    }
+}
+
 void loadRecords(Queue **queue)  {
     FILE *f = fopen(INPUT_FILE, "r");
     (*queue) = readRecordsFromFile(f);
@@ -161,31 +175,19 @@ void delete(Queue **queue, const char *song) {
     queue_pop(*queue, iter.node);
 }
 
-static int _cmpr(Node *a, Node *b, const Sort sortType) {
-    if (a == NULL || b == NULL) {return 0;}
-    switch (sortType) {
-        case ALBUM:
-            return strcmp(a->data.album, b->data.album);
-        case ARTIST:
-            return strcmp(a->data.artist, b->data.artist);
-        case RATING:
-            return a->data.rating > b->data.rating;
-        case PLAYS:
-            return a->data.plays < b->data.plays;
-    }
-}
-
-// Bubble sorts
+// Bubble sort
+// awful algorithm
 void sort(Queue **queue, const Sort sortType) {
-    Iterator iterA = iter_new(*queue);
-    Iterator iterB;
-    while (iter_next(&iterA)) {
-        iterB = iterA;
-        while (iter_next(&iterB)) {
-            if (_cmpr(iterB.node, iterB.node->next, sortType)) {
-                queue_swap_adjacent(iterB.node);
-                iterB.index++;
-            }
+    Iterator iter = iter_new(*queue);
+    int i = 0;
+    while (iter_next(&iter)) {
+        i = iter.index;
+        while (_cmpr(iter.node, iter.node->next, sortType)) {
+            queue_swap_next(iter.node);
+            iter.index++;
+        }
+        if (i != iter.index) {
+            iter = iter_new(*queue);
         }
     }
 }

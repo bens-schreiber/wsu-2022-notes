@@ -47,4 +47,4 @@ void queue_popIndex(Queue *queue, unsigned int index);
 
 // .swap(a,b)
 // Swaps a with b and b with a
-void queue_swap_adjacent(Node *n);
+void queue_swap_next(Node *n);
