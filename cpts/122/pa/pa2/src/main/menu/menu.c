@@ -106,6 +106,13 @@ static void _sortRecords(Queue **queue) {
     printf("Sorted!");
 }
 
+static void _shuffle(Queue **queue) {
+    if (!_recordsLoaded(queue)) { return; }
+    clear();
+    shuffle(queue);
+    clear();
+}
+
 int displayMenu(Queue **queue) {
     switch(
         getIntInput(

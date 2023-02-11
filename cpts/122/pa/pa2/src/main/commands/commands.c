@@ -191,3 +191,36 @@ void sort(Queue **queue, const Sort sortType) {
         }
     }
 }
+
+void shuffle(Queue **queue) {
+
+    // Fill an order array
+    int order[(*queue)->length - 1];
+    for (int i = 0; i < (*queue)->length; ++i) {
+        order[i] = i;
+    }
+
+    // Swap randomly
+    int temp, randomIndex1, randomIndex2;
+    for (int i = 0; i < RANDOM_HASH; ++i) {
+        randomIndex1 = rand() % (*queue)->length;
+        randomIndex2 = rand() % (*queue)->length;
+        temp = order[randomIndex1];
+        order[randomIndex1] = order[randomIndex2];
+        order[randomIndex2] = temp;
+    }
+
+    int index;
+    Iterator iter = iter_new(*queue);
+    for (int i = 0; i < (*queue)->length - 1; ++i) {
+        index = order[i];
+        while (iter.index < index) {
+            iter_next(&iter);
+        }
+        while (iter.index > index) {
+            iter_previous(&iter);
+        }
+        printf("Now playing - %s by %s\n", iter.node->data.song, iter.node->data.artist);
+        sleep(3);
+    }
+}

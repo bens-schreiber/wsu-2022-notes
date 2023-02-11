@@ -1,5 +1,7 @@
 #pragma once
 #include <unistd.h>
+#include <time.h>
+#include <stdlib.h>
 #include "../sort_t.h"
 #include "src/framework/log/log.h"
 #include "src/framework/record/record.h"
@@ -28,3 +30,5 @@ void insert(Queue **queue);
 void delete (Queue **queue, const char *song);
 
 void sort(Queue **queue, const Sort sortType);
+
+void shuffle(Queue **queue);
