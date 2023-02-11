@@ -4,7 +4,6 @@
 
 static void _insertTest() {
     Queue **queue = malloc(sizeof(Queue*));
-    loadRecords(queue);
     queue_insert(*queue,
         (Record) {
             .artist = "Perry, Katy",
@@ -21,7 +20,6 @@ static void _insertTest() {
 
 static void _deleteTest() {
     Queue **queue = malloc(sizeof(Queue*));
-    loadRecords(queue);
     queue_insert(*queue,
         (Record) {
             .artist = "Perry, Katy",
@@ -37,10 +35,14 @@ static void _deleteTest() {
     displayAllRecords(queue);
 }
 
+static void _shuffleTest() {
+    Queue **queue = malloc(sizeof(Queue*));
+    loadRecords(queue);
+    shuffle(queue);
+}
+
 int main(int argc, char const *argv[])
 {
     srand(time(NULL));
-    
-
     return 0;
 }
