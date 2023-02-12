@@ -1,11 +1,13 @@
 #include "log.h"
 
 int getIntInput(const char *prompt, int min, int max) {
-    printf("%s ", prompt);
     int input = -1;
     while (input < min || input > max ) {
-        printf("Enter a value: ");
+        printf("%s", prompt);
+        printf("\n%s", "Enter a value: ");
+        fflush(stdout);
         scanf("%d", &input);
+        clear();
     }
     return input;
 }
@@ -13,6 +15,7 @@ int getIntInput(const char *prompt, int min, int max) {
 void getInput() {
     printf("\nPress ENTER to continue!\n");
     char input = 0;
+    fflush(stdout);
     fflush(stdin);
     getchar();
 }
@@ -20,6 +23,7 @@ void getInput() {
 int displayOption(const char *prompt) {
     printf("%s", prompt);
     int input = 0;
+    fflush(stdout);
     scanf("%d", &input);
     return input;
 }
@@ -31,6 +35,7 @@ void clear() {
 char *getStrInput(const char *prompt, char *str) {
     printf("%s: ", prompt);
     fflush(stdin);
+    fflush(stdout);
     fgets(str, STRING_SIZE, stdin);
     str[strcspn(str, "\n")] = 0;
     return str;

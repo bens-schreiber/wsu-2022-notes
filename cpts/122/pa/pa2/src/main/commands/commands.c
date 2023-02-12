@@ -175,7 +175,6 @@ void delete(Queue **queue, const char *song) {
     queue_pop(*queue, iter.node);
 }
 
-// Bubble sort
 // awful algorithm
 void sort(Queue **queue, const Sort sortType) {
     Iterator iter = iter_new(*queue);
