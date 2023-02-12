@@ -1,0 +1,34 @@
+#pragma once
+#include <unistd.h>
+#include <time.h>
+#include <stdlib.h>
+#include "../sort_t.h"
+#include "src/framework/log/log.h"
+#include "src/framework/record/record.h"
+#include "src/framework/file/reader/reader.h"
+#include "src/framework/file/saver/saver.h"
+
+// Load all of the records into a queue
+void loadRecords(Queue **queue);
+
+void store(Queue **queue);
+
+// Display all records loaded
+void displayAllRecords(Queue **queue);
+
+// Display all records associated with an artist
+void displayAllArtistRecords(Queue **queue, const char *artist);
+
+void edit(Queue **queue, const char *artist);
+
+void rate(Queue **queue, const char *song);
+
+void play(Queue **queue);
+
+void insert(Queue **queue);
+
+void delete (Queue **queue, const char *song);
+
+void sort(Queue **queue, const Sort sortType);
+
+void shuffle(Queue **queue);

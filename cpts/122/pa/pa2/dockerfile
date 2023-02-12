@@ -1,0 +1,11 @@
+FROM alpine:3.16
+
+RUN apk add --no-cache gcc musl-dev
+
+COPY . /pa2/
+
+WORKDIR /pa2/
+
+RUN gcc main.c src/framework/record/iterator/iterator_record.c src/framework/record/queue/queue_record.c src/framework/file/reader/reader.c src/framework/file/saver/saver.c src/framework/log/log.c src/main/menu/menu.c src/main/commands/commands.c -o .build/a.out -I .
+
+ENTRYPOINT ./.build/a.out
