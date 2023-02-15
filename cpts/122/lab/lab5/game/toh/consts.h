@@ -1,0 +1,2 @@
+#define TOWER_AMOUNT 3
+#define TOWER_DIAMETER 5

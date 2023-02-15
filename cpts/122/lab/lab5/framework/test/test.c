@@ -45,6 +45,6 @@ int main(int argc, char const *argv[])
     test_isEmpty(stack);
     test_push(stack);
     test_peek(stack);
-    
+    stack_destruct(stack);
     return 0;
 }

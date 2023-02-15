@@ -31,6 +31,13 @@ Node *stack_push(Stack *stack, char data) {
     return node;
 }
 
+Node *stack_pushN(Stack *stack, Node *node) {
+    node->next = stack->head;
+    stack->head = node;
+    stack->length++;
+    return node;
+}
+
 unsigned char stack_isEmpty(Stack *stack) {
     return stack->length == 0;
 }
