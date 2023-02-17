@@ -1,9 +1,13 @@
 #include "FitnessApp.hpp"
-class FitnessAppWrapper {
+class Application {
     private:
-        static FitnessApp *fitnessApp = nullptr;
+        static FitnessApp *m_fitnessApp = nullptr;
     public:
-        static void initialize() { fitnessApp = new FitnessApp(); }
+        static void initialize() { 
+            fitnessApp = new FitnessApp(); 
+        }
 
-        static void destroy() { delete fitnessApp; }
+        static void destroy() { delete m_fitnessApp; }
+
+        const FitnessApp &instance() {return m_fitnessApp;}
 }
