@@ -1,6 +1,6 @@
 #include <string>
 #include "FitnessPlan.hpp"
-class ExcercisePlan : FitnessPlan {
+class ExcercisePlan : public FitnessPlan {
 
     private: 
         unsigned int m_steps{0};

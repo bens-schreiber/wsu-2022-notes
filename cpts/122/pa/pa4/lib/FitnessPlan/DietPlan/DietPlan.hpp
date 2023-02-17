@@ -1,6 +1,6 @@
 #include <string>
 #include "FitnessPlan.hpp"
-class DietPlan : FitnessPlan {
+class DietPlan : public FitnessPlan {
 
     private: 
         unsigned int m_totalCalories{0};
