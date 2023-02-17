@@ -1,6 +1,6 @@
 #include <string>
 
-// Abstract class for future FitnessPlans
+// Private base class 
 class FitnessPlan {
 
     protected:

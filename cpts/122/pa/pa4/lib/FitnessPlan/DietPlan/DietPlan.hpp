@@ -24,7 +24,7 @@ class DietPlan : FitnessPlan {
         }
 
         // Prompt the user for all new values
-        void editGoal();
+        void editGoal() override;
 
         // Getters
         int getTotalCalories() const { return m_totalCalories;}

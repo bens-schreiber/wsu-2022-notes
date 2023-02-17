@@ -24,7 +24,7 @@ class ExcercisePlan : FitnessPlan {
         }
 
         // Prompt the user for all new values
-        void editGoal();
+        void editGoal() override;
 
         // Getters
         int getSteps() const { return m_steps;}
