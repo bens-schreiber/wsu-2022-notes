@@ -13,6 +13,7 @@ namespace Utils {
             ListNode<T> *m_tail{nullptr};
             unsigned int m_length{0};
         public:
+            SinglyLinkedList();
             SinglyLinkedList(T &data);
             ~SinglyLinkedList();
 

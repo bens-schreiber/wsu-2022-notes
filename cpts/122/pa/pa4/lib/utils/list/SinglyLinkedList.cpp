@@ -1,6 +1,7 @@
 #include "SinglyLinkedList.hpp"
 
 namespace Utils {
+
     template <typename T>
     SinglyLinkedList<T>::SinglyLinkedList(T &data) {
         auto node = new ListNode<>(data);
@@ -19,6 +20,12 @@ namespace Utils {
 
     template <typename T>
     ListNode<T> &SinglyLinkedList<T>::addToFront(T &data) {
+
+        if (m_length == 0 ) {
+            SinglyLinkedList::SinglyLinkedList(data);
+            return m_head;
+        }
+
         auto n = new ListNode<T>(data);
         n->next = m_head;
         m_head = n;
@@ -28,6 +35,12 @@ namespace Utils {
 
     template <typename T>
     ListNode<T> &SinglyLinkedList<T>::addToBack(T &data) {
+
+        if (m_length == 0 ) {
+            SinglyLinkedList::SinglyLinkedList(data);
+            return m_tail;
+        }
+
         auto n = new ListNode<T>(data);
         m_tail->next = n;
         m_tail = n;
