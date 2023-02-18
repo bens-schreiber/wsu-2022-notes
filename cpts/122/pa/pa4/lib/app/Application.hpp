@@ -23,7 +23,7 @@ class Application {
                     new FitnessApp(FILE_DIET_PLAN, FILE_EXCERCISE_PLAN)
                 );
             }
-        return *m_singleton;
+            return *m_singleton;
         }
 
         static FitnessApp &getFitnessApp() {return *instance().m_fitnessApp;}
