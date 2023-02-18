@@ -1,5 +1,6 @@
+#include "lib/app/Menu/Menu.hpp"
 int main(int argc, char const *argv[])
 {
-    /* code */
+    while(Menu::display());
     return 0;
 }

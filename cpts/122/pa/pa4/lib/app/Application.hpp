@@ -1,7 +1,7 @@
 #include "lib/app/FitnessApp/FitnessApp.hpp"
 #include "consts.hpp"
 
-// Singleton for the fitness app
+// Singleton wrapper for the fitness app
 class Application {
     private:
 

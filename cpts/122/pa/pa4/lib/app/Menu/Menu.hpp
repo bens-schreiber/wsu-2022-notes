@@ -1,0 +1,3 @@
+namespace Menu {
+    bool display();
+}
