@@ -1,0 +1,330 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A42A787A29B07C9B006A94D1 /* FitnessApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4407F8329AF00FC00E0A2B2 /* FitnessApp.cpp */; };
+		A492229F29B08011007CDC1F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4407F6A29AEEF1E00E0A2B2 /* main.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A4407F5D29AEEDF200E0A2B2 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A42A787129B076A3006A94D1 /* dietplan.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = dietplan.txt; sourceTree = "<group>"; };
+		A42A787329B076C1006A94D1 /* excerciseplan.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = excerciseplan.txt; sourceTree = "<group>"; };
+		A4407F5F29AEEDF200E0A2B2 /* PA4-xcode */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "PA4-xcode"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4407F6A29AEEF1E00E0A2B2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		A4407F7529AEF26400E0A2B2 /* FitnessPlan.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FitnessPlan.hpp; sourceTree = "<group>"; };
+		A4407F7929AEF7B200E0A2B2 /* DietPlan.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DietPlan.hpp; sourceTree = "<group>"; };
+		A4407F7C29AEF9C600E0A2B2 /* ExcercisePlan.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ExcercisePlan.hpp; sourceTree = "<group>"; };
+		A4407F8329AF00FC00E0A2B2 /* FitnessApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FitnessApp.cpp; sourceTree = "<group>"; };
+		A4407F8429AF00FC00E0A2B2 /* FitnessApp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FitnessApp.hpp; sourceTree = "<group>"; };
+		A4407F8A29AF062100E0A2B2 /* consts.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = consts.hpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A4407F5C29AEEDF200E0A2B2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A42A787229B076AB006A94D1 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				A42A787129B076A3006A94D1 /* dietplan.txt */,
+				A42A787329B076C1006A94D1 /* excerciseplan.txt */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
+		A4407F5629AEEDF200E0A2B2 = {
+			isa = PBXGroup;
+			children = (
+				A4407F6129AEEDF200E0A2B2 /* PA4-xcode */,
+				A4407F6029AEEDF200E0A2B2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A4407F6029AEEDF200E0A2B2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A4407F5F29AEEDF200E0A2B2 /* PA4-xcode */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A4407F6129AEEDF200E0A2B2 /* PA4-xcode */ = {
+			isa = PBXGroup;
+			children = (
+				A42A787229B076AB006A94D1 /* assets */,
+				A4407F7029AEF0D800E0A2B2 /* FitnessPlan */,
+				A4407F7E29AEFF9300E0A2B2 /* App */,
+				A4407F8A29AF062100E0A2B2 /* consts.hpp */,
+				A4407F6A29AEEF1E00E0A2B2 /* main.cpp */,
+			);
+			path = "PA4-xcode";
+			sourceTree = "<group>";
+		};
+		A4407F7029AEF0D800E0A2B2 /* FitnessPlan */ = {
+			isa = PBXGroup;
+			children = (
+				A4407F7729AEF79F00E0A2B2 /* Plans */,
+				A4407F7529AEF26400E0A2B2 /* FitnessPlan.hpp */,
+			);
+			path = FitnessPlan;
+			sourceTree = "<group>";
+		};
+		A4407F7729AEF79F00E0A2B2 /* Plans */ = {
+			isa = PBXGroup;
+			children = (
+				A4407F7929AEF7B200E0A2B2 /* DietPlan.hpp */,
+				A4407F7C29AEF9C600E0A2B2 /* ExcercisePlan.hpp */,
+			);
+			path = Plans;
+			sourceTree = "<group>";
+		};
+		A4407F7E29AEFF9300E0A2B2 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A4407F8329AF00FC00E0A2B2 /* FitnessApp.cpp */,
+				A4407F8429AF00FC00E0A2B2 /* FitnessApp.hpp */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A4407F5E29AEEDF200E0A2B2 /* PA4-xcode */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A4407F6629AEEDF200E0A2B2 /* Build configuration list for PBXNativeTarget "PA4-xcode" */;
+			buildPhases = (
+				A4407F5C29AEEDF200E0A2B2 /* Frameworks */,
+				A4407F5D29AEEDF200E0A2B2 /* CopyFiles */,
+				A42A787629B0794D006A94D1 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PA4-xcode";
+			productName = "PA4-xcode";
+			productReference = A4407F5F29AEEDF200E0A2B2 /* PA4-xcode */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A4407F5729AEEDF200E0A2B2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					A4407F5E29AEEDF200E0A2B2 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = A4407F5A29AEEDF200E0A2B2 /* Build configuration list for PBXProject "PA4-xcode" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A4407F5629AEEDF200E0A2B2;
+			productRefGroup = A4407F6029AEEDF200E0A2B2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A4407F5E29AEEDF200E0A2B2 /* PA4-xcode */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A42A787629B0794D006A94D1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A492229F29B08011007CDC1F /* main.cpp in Sources */,
+				A42A787A29B07C9B006A94D1 /* FitnessApp.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A4407F6429AEEDF200E0A2B2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		A4407F6529AEEDF200E0A2B2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		A4407F6729AEEDF200E0A2B2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				GCC_NO_COMMON_BLOCKS = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A4407F6829AEEDF200E0A2B2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				GCC_NO_COMMON_BLOCKS = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A4407F5A29AEEDF200E0A2B2 /* Build configuration list for PBXProject "PA4-xcode" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A4407F6429AEEDF200E0A2B2 /* Debug */,
+				A4407F6529AEEDF200E0A2B2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A4407F6629AEEDF200E0A2B2 /* Build configuration list for PBXNativeTarget "PA4-xcode" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A4407F6729AEEDF200E0A2B2 /* Debug */,
+				A4407F6829AEEDF200E0A2B2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A4407F5729AEEDF200E0A2B2 /* Project object */;
+}

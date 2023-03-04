@@ -17,7 +17,7 @@ static void _computeFitbitData(const FitbitData *data, FitbitResult *result) {
     v->maxStepsTaken = data->steps > v->maxStepsTaken ? data->steps : v->maxStepsTaken;
 
     // Sleep
-    if (data->sleepLevel < 1) {
+    if (data->sleepLevel < 2) {
         sleep = (PoorSleep) {.beginning = '\0', .end = '\0', 0};
         return;
     }

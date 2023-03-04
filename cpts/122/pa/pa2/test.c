@@ -44,8 +44,8 @@ static void _shuffleTest() {
 int main(int argc, char const *argv[])
 {
     srand(time(NULL));
-    FILE *f = fopen(INPUT_FILE_DOCKER, "r");
-    printf("%d", f == NULL);
+    _insertTest();
+    _deleteTest();
     getInput();
     return 0;
 }

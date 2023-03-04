@@ -1,46 +1,63 @@
-# 2.1
+# Proof
 
-22\)
+For the given statement, $P(n)$ is
 
-| p | q | r | q v r | p & (q v r) | p & q | p & r | (p & q) v (p & r) |
-|---|---|---|-------|-------------|-------|-------|-------------------|
-| T | T | T | T     | T           | T     | T     | T                 |
-| T | T | F | T     | T           | T     | F     | T                 |
-| T | F | T | T     | T           | F     | T     | T                 |
-| T | F | F | F     | F           | F     | F     | F                 |
-| F | T | T | T     | F           | F     | F     | F                 |
-| F | T | F | T     | F           | F     | F     | F                 |
-| F | F | T | T     | F           | F     | F     | F                 |
-| F | F | F | F     | F           | F     | F     | F                 |
+$$
+1+6+11+16+\dots 5n-4 = \frac{n(5n-3)}{2}
+$$
 
-29\) The computer program does not have a logical error in the first ten lines and it is not being ran with an incomplete data set
+&nbsp;
+&nbsp;
+&nbsp;
 
-# 2.2
+## [Show that $P(1)$ is true]
 
-14a) When $p$ and $q$ are false, all of the statements are false, and are otherwise true.
+$$ 
+\begin{align}
+1 \dots + 5n-4 = 1
 
-14b) n is prime and n is not odd if n is 2, n is prime and not 2 if n is odd
+\\ \frac{1(5(1) - 3)}{2} = 1
+\end{align}
+$$
 
-20e) x is nonnegative and x is not positive and not 0
+Thus, $P(1)$ is true.
 
-22e) If x is not positive and not 0 then x is negative
+&nbsp;
+&nbsp;
+&nbsp;
 
-23e) Converse: If x is positive or x is 0, x is nonnegative. Inverse: If x is positive then x is not positive and not 0
+## [Show that $P(k)$ is true]
 
-# 2.3
+Let $k$ be any integer, $k \ge 1$. Suppose $P(k)$ is true. That is, suppose
 
-5\) They did not call
+$$
+1+6+11+16+\dots 5k-4 = \frac{k(5k-3)}{2}
+$$
 
-10\) false
-| p | q | r | q v r | p -> q v r | ~q | ~r | ~q v ~r | ~p | ~p v ~r |
-|---|---|---|-------|------------|----|----|---------|----|---------|
-| T | T | T | T     | T          | F  | F  | F       | F  | F       |
-| T | T | F | T     | T          | F  | T  | T       | F  | T       |
-| T | F | T | T     | T          | T  | F  | T       | F  | F       |
-| T | F | F | F     | F          | T  | T  | T       | F  | T       |
-| F | T | T | T     | T          | F  | F  | F       | T  | T       |
-| F | T | F | T     | T          | F  | T  | T       | T  | T       |
-| F | F | T | T     | T          | T  | F  | T       | T  | T       |
-| F | F | F | F     | T          | T  | T  | T       | T  | T       |
+&nbsp;
+&nbsp;
+&nbsp;
 
-28\) $p\rightarrow q$, $q$, $\therefore p$ is invalid because of converse error
+## [Show that $P(k+1)$ is true]
+
+We must show that P(k+1) is true. That is,
+$$
+\begin{align}
+1+6+11+16+\dots 5(k+1)-4 &= \frac{(k+1)(5(k+1)-3)}{2}
+\\&= \frac{5k^2+7k+2}{2}
+\end{align}
+$$
+
+
+The left hand side of $P(k+1)$ is
+$$
+1+6+11+16+\dots 5(k+1)-4 = 1+6+11+16+\dots 5k - 4 + 5(k+1)-4
+$$
+
+By substituting the inductive hypothesis, $P(k+1)$ is equivalent to
+$$
+\begin{align}
+1+6+11+16+\dots 5(k+1)-4 &= 1+6+11+16+\dots \frac{k(5k-3)}{2} + 5(k+1)-4
+\\ &= \frac{5k^2+7k+2}{2}
+\end{align}
+$$

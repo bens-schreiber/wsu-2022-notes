@@ -5,6 +5,6 @@
 #define CSV_IN_LOCATION "./assets/FitbitData-1.csv"
 #define CSV_OUT_LOCATION "./out/Results.csv"
 #define FITBIT_ENTRY_POINT 3
-#define RUN_TESTS 0
+#define RUN_TESTS 1
 #define REQUIRED_COLUMNS 8
 #define MAX_LINE_SIZE 40

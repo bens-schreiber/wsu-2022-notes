@@ -161,6 +161,7 @@ int displayMenu(Queue **queue) {
             break;
         case 10:
             // shuffle
+            _shuffle(queue);
             break;
         case 11:
             if (*queue) {_storeRecords(queue);}

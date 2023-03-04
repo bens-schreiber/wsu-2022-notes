@@ -1,19 +1,20 @@
-typedef struct Node Node;
-struct Node {
-    Node *next;
-    char data;
-};
-
-Node **reverse(Node **head) {
-    if ((*head)->next == 0) {return head;}
-    (*head) = (*head)->next;
-    printf("%c", (*reverse(head))->data);
-}
-
-
-
-int main(int argc, char const *argv[])
+#include <stdio.h>
+int main()
 {
-    /* code */
+    int inputNumber = 54321;
+    int numberCount = 0;
+    int sum = 0;
+    int lastDigit = 0;
+    while (inputNumber > 0) {
+        numberCount++;
+        lastDigit = inputNumber % 10;
+        sum += lastDigit;
+        inputNumber = inputNumber / 10;
+    }
+
+    printf("%d\n", numberCount);
+    printf("%d", sum);
+    
+
     return 0;
 }

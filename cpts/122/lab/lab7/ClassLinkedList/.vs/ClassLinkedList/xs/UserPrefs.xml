@@ -1,0 +1,26 @@
+﻿<Properties>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x64" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="ClassLinkedList/main.cpp">
+    <Files>
+      <File FileName="ClassLinkedList/List.cpp" Line="29" Column="28" />
+      <File FileName="ClassLinkedList/List.h" Line="41" Column="1" />
+      <File FileName="ClassLinkedList/main.cpp" Line="20" Column="10" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="ClassLinkedList" expanded="True">
+            <Node name="ClassLinkedList" expanded="True">
+              <Node name="main.cpp" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>
